@@ -1,3 +1,30 @@
-<div>
-
+<div id="loginModal" class="easy-ebay-modal container">
+    <form class="easy-ebay-modal-content modal-content" name="loginForm">
+        <div class="easy-ebay-modal-header">
+            <div>
+                <span class="easy-ebay-close" title="Close" ng-click="closeLoginModal()">&times;</span>
+            </div>
+            <div class="page-header text-center">
+                <h2 class="">eBay Login</h2>
+            </div>
+        </div>
+        <div class="easy-ebay-modal-body">
+            <div class="row text-center">
+                <div class="form-group easy-ebay-login-input center-block">
+                    <input name="username" ng-model="userId" type="text" class="form-control" placeholder="Email or username" required>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="form-group easy-ebay-login-input center-block">
+                    <input name="password" ng-model="userPass" type="text" class="form-control" placeholder="Password" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group text-center">
+                    <input ng-disabled="!loginForm.username.$valid || !loginForm.password.$valid"
+                           class="btn btn-primary easy-ebay-login-input" type="submit" value="Sign in">
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
