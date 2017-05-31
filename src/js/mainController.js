@@ -7,6 +7,7 @@ app.controller('mainCtrl', function($scope) {
     /* Initialize form control variables */
     $scope.updateShippingInfo = false;
     $scope.updateShippingText = "Change";
+    $scope.formSectionIndex = 1;
 
     /* Initialize current listing */
     $scope.currentListing = {
@@ -34,6 +35,13 @@ app.controller('mainCtrl', function($scope) {
     };
 
     /* angularJS functions*/
+    $scope.nextSection = function(){
+        $scope.formSectionIndex++;
+        setTimeout(function(){
+            window.scrollTo(0,document.body.scrollHeight);
+        }, 100);
+    };
+
     $scope.allPaymentMenthodsChecked = function() {
         if(!$scope.currentListing.paymentMethods.pm_payPal ||
             !$scope.currentListing.paymentMethods.pm_visaMaster ||
