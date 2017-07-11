@@ -1,0 +1,24 @@
+{
+  "name": "ebayeasylisting",
+  "version": "1.0.0",
+  "description": "ebay listing application",
+  "main": "nodeServer.js",
+  "scripts": {
+    "start": "node nodeServer.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/couturmi/eBayEasyListing.git"
+  },
+  "author": "Mitchell Couturier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/couturmi/eBayEasyListing/issues"
+  },
+  "homepage": "https://github.com/couturmi/eBayEasyListing#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "express-http-proxy": "^1.0.5",
+    "http-proxy": "^1.16.2"
+  }
+}
