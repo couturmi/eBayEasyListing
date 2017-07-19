@@ -1,0 +1,21 @@
+{
+  "listingConditions":
+    [
+      {
+        "key":1000,
+        "value":"New"
+      },
+      {
+        "key":2500,
+        "value":"Seller refurbished"
+      },
+      {
+        "key":3000,
+        "value":"Used"
+      },
+      {
+        "key":7000,
+        "value":"For parts or not working"
+      }
+    ]
+}

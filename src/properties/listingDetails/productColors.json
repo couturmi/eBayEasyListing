@@ -1,0 +1,81 @@
+{
+  "product_colors":
+  [
+    {
+      "key":"gray",
+      "value":"Aluminum (Gray)"
+    },
+    {
+      "key":"black",
+      "value":"Black"
+    },
+    {
+      "key":"white",
+      "value":"White"
+    },
+    {
+      "key":"blue",
+      "value":"Blue"
+    },
+    {
+      "key":"ltblue",
+      "value":"Light Blue"
+    },
+    {
+      "key":"green",
+      "value":"Green"
+    },
+    {
+      "key":"ltgreen",
+      "value":"Light Green"
+    },
+    {
+      "key":"pink",
+      "value":"Pink"
+    },
+    {
+      "key":"yellow",
+      "value":"Yellow"
+    },
+    {
+      "key":"red",
+      "value":"Red"
+    },
+    {
+      "key":"purple",
+      "value":"Purple"
+    },
+    {
+      "key":"orange",
+      "value":"Orange"
+    },
+    {
+      "key":"graphite",
+      "value":"Graphite"
+    },
+    {
+      "key":"gold",
+      "value":"Gold"
+    },
+    {
+      "key":"silver",
+      "value":"Silver"
+    },
+    {
+      "key":"sgray",
+      "value":"Space Gray"
+    },
+    {
+      "key":"rgold",
+      "value":"Rose Gold"
+    },
+    {
+      "key":"jblack",
+      "value":"Jet Black"
+    },
+    {
+      "key":"ssteel",
+      "value":"Stainless Steel"
+    }
+  ]
+}

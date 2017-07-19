@@ -9,11 +9,11 @@
         <Title>Title</Title>
         <Description>Description</Description>
         <PrimaryCategory>
-            <CategoryID>377</CategoryID>
+            <CategoryID>1</CategoryID>
         </PrimaryCategory>
         <StartPrice>1.0</StartPrice>
         <CategoryMappingAllowed>true</CategoryMappingAllowed>
-        <ConditionID>4000</ConditionID>
+        <ConditionID>7000</ConditionID>
         <Country>US</Country>
         <Currency>USD</Currency>
         <DispatchTimeMax>3</DispatchTimeMax>
@@ -28,7 +28,7 @@
             <ReturnsAcceptedOption>ReturnsAccepted</ReturnsAcceptedOption>
             <RefundOption>MoneyBack</RefundOption>
             <ReturnsWithinOption>Days_30</ReturnsWithinOption>
-            <Description>If you are not satisfied, return the book for refund.</Description>
+            <Description>If you are not satisfied, return the item for refund.</Description>
             <ShippingCostPaidByOption>Buyer</ShippingCostPaidByOption>
         </ReturnPolicy>
         <ShippingDetails>

@@ -1,0 +1,41 @@
+{
+  "ipod_generations":
+  [
+    {
+      "key":1,
+      "value":"1st Gen"
+    },
+    {
+      "key":2,
+      "value":"2nd Gen"
+    },
+    {
+      "key":3,
+      "value":"3rd Gen"
+    },
+    {
+      "key":4,
+      "value":"4th Gen"
+    },
+    {
+      "key":4.1,
+      "value":"4th Gen (Photo)"
+    },
+    {
+      "key":4.2,
+      "value":"4th Gen (Color)"
+    },
+    {
+      "key":5,
+      "value":"5th Gen"
+    },
+    {
+      "key":6,
+      "value":"6th Gen"
+    },
+    {
+      "key":7,
+      "value":"7th Gen"
+    }
+  ]
+}

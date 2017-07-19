@@ -1,0 +1,43 @@
+.btn.btn-outline {
+    background: none;
+    margin-bottom: 5px;
+}
+.btn.btn-outline.btn-filled {
+    background: #16a6ff;
+    color: #ffffff;
+}
+
+.button-spacing {
+    margin-right: 5px;
+}
+
+.extra-margin-bottom {
+    margin-bottom: 15px;
+}
+.first-button-section {
+    padding-top: 8px;
+}
+.new-button-section {
+    border-top: thin solid #bbbbbb;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.product-detail-label {
+    color: #989898;
+    font-size: 18px;
+    line-height: 45px;
+    vertical-align: middle;
+}
+.product-detail-text {
+    color: #777777;
+    font-size: 18px;
+    line-height: 35px;
+    vertical-align: middle;
+}
+.product-detail-buttons {
+    z-index: 1;
+    position: absolute;
+    left: 100px;
+    top: 10px;
+}

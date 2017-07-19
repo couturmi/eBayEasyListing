@@ -5,18 +5,83 @@
         </div>
         <div class="row">
             <h3 class="col-md-12 col-lg-12 col-sm-12">Product Details</h3>
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <div class="first-button-section">
+                    <div class="product-detail-label"><span>Type</span></div>
+                    <div class="product-detail-buttons">
+                        <input id="productType1" ng-click="selectProductType(73839)" type="button" class="btn btn-default btn-outline" value="iPod">
+                        <input id="productType2" ng-click="selectProductType(9355)" type="button" class="btn btn-default btn-outline" value="iPhone">
+                    </div>
+                </div>
+            </div>
+            <!-- Second Layers -->
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <div class="new-button-section">
+                    <div class="product-detail-label"><span>Model</span></div>
+                    <div class="product-detail-buttons">
+                        <input ng-if="currentListing.category.primary == 73839" ng-repeat="model in ipod_models" id="{{'model'+model.key}}" ng-click="selectModel(model)" type="button" class="btn btn-default btn-outline button-spacing" value="{{model.value}}">
+                        <input ng-if="currentListing.category.primary == 9355" ng-repeat="model2 in iphone_models" id="{{'model'+model2.key}}" ng-click="selectModel(model2)" type="button" class="btn btn-default btn-outline button-spacing" value="{{model2.value}}">
+                    </div>
+                </div>
+            </div>
+            <!-- end Second Layers -->
+            <!-- Third Layers -->
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <div class="new-button-section">
+                    <div class="product-detail-label"><span>Gen</span></div>
+                    <div class="product-detail-buttons">
+                        <span ng-if="currentListing.category.primary == 9355" class="product-detail-text">N/A</span>
+                        <input ng-if="currentListing.category.primary != 9355 && currentListing.category.model" ng-repeat="generation in ipod_generations | filter:filterGeneration" id="{{'generation'+generation.key}}" ng-click="selectGeneration(generation)" type="button" class="btn btn-default btn-outline button-spacing" value="{{generation.value}}">
+                    </div>
+                </div>
+            </div>
+            <!-- end Third Layers -->
+            <!-- Fourth Layers -->
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <div class="new-button-section">
+                    <div class="product-detail-label"><span>Capacity</span></div>
+                    <div class="product-detail-buttons">
+                        <input ng-if="currentListing.category.generation" ng-repeat="size in storage_sizes | filter:filterModelCapacity" id="{{'size'+size.key}}" ng-click="selectCapacity(size)" type="button" class="btn btn-default btn-outline button-spacing" value="{{size.value}}">
+                    </div>
+                </div>
+            </div>
+            <!-- end Fourth Layers -->
+            <!-- Fifth Layers -->
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <div class="new-button-section">
+                    <div class="product-detail-label"><span>Color</span></div>
+                    <div class="product-detail-buttons">
+                        <input ng-if="currentListing.category.capacity" ng-repeat="color in product_colors | filter:filterProductColor" id="{{'color'+color.key}}" ng-click="selectColor(color)" type="button" class="btn btn-default btn-outline button-spacing" value="{{color.value}}">
+                    </div>
+                </div>
+            </div>
+            <!-- end Fifth Layers -->
+            <!-- Sixth Layers -->
+            <div class="col-md-12 col-lg-12 col-sm-12 extra-margin-bottom">
+                <div class="new-button-section">
+                    <div class="product-detail-label"><span>Carrier</span></div>
+                    <div class="product-detail-buttons">
+                        <span ng-if="currentListing.category.primary == 73839" class="product-detail-text">N/A</span>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end Sixth Layers -->
             <div class="col-md-6 col-lg-6 col-sm-6 form-group">
                 <h4 class="col-form-label col-form-label-lg">Title:</h4>
-                <input name="title" ng-model="currentListing.title" type="text" class="form-control" required>
+                <input name="title" ng-model="currentListing.title.full" type="text" class="form-control" required>
             </div>
             <div class="col-md-6 col-lg-6 col-sm-6 form-group">
                 <h4 class="col-form-label col-form-label-lg">Category:</h4>
-                <input name="category" ng-model="currentListing.category" type="text" class="form-control" required>
+                <input disabled style="margin-bottom:10px;" ng-model="currentListing.category.text" type="text" class="form-control">
             </div>
         </div>
         <div class="row" ng-show="formSectionIndex > 1">
-            <div class="col-md-4 col-lg-4 col-sm-4 form-group">
+            <div class="col-md-4 col-lg-4 col-sm-4">
                 <h4 class="col-form-label col-form-label-lg">Product Condition:</h4>
+                <div class="form-group">
+                    <input ng-repeat="condition in listingConditions" id="{{'condition'+condition.key}}" ng-click="selectCondition(condition)" type="button" class="btn btn-default btn-outline button-spacing" value="{{condition.value}}">
+                </div>
             </div>
             <div class="col-md-8 col-lg-8 col-sm-8 form-group">
                 <h4 class="col-form-label col-form-label-lg">Description:</h4>

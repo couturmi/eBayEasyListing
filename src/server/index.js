@@ -11,6 +11,7 @@ const port = 8080;
 /* Starting page */
 app.use('/', express.static('./src' + '/'));
 app.use('/ebayApiSandbox', proxy('https://api.sandbox.ebay.com'));
+app.use('/ebayApiProd', proxy('https://api.ebay.com'));
 
 app.listen(port, (err) => {
     if (err) {

@@ -3,7 +3,16 @@
  */
 var app = angular.module('myApp');
 app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
+    /************************************************************************
+     * Global Variables
+     ************************************************************************/
+    $scope.tradingAPIDLL_Sandbox = '/ebayApiSandbox/ws/api.dll';
+    $scope.tradingAPIDLL_Prod = '/ebayApiProd/ws/api.dll';
 
+
+    /******************************************
+     * Form functions
+     ******************************************/
     /* Initialize form control variables */
     $scope.updateShippingInfo = false;
     $scope.updateShippingText = "Change";
@@ -11,6 +20,8 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
 
     /* Initialize current listing */
     $scope.currentListing = {
+        title: {},
+        category: {},
         price:0.00,
         paymentMethods:{
             pm_payPal: true
@@ -22,12 +33,34 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
         shippingLocationCityState:"Test City, Michigan"
     };
 
-    /* Listing options variables */
-    $scope.listingTypeList = ["FixedPriceItem"];
+    /* Get JSON data */
+    $http.get('properties/listingDetails/iPodModels.json').success(function(data) {
+        $scope.ipod_models=data.ipod_models;
+    });
+    $http.get('properties/listingDetails/iPhoneModels.json').success(function(data) {
+        $scope.iphone_models=data.iphone_models;
+    });
+    $http.get('properties/listingDetails/iPodGenerations.json').success(function(data) {
+        $scope.ipod_generations=data.ipod_generations;
+    });
+    $http.get('properties/listingDetails/storageSizes.json').success(function(data) {
+        $scope.storage_sizes=data.storage_sizes;
+    });
+    $http.get('properties/listingDetails/productColors.json').success(function(data) {
+        $scope.product_colors=data.product_colors;
+    });
+    $http.get('properties/listingDetails/listingTypeList.json').success(function(data) {
+        $scope.listingTypeList=data.listingTypeList;
+    });
     $scope.listingDurationList = ["3 days","5 days","7 days","10 days","30 days","Good Til' Cancelled"];
+    $http.get('properties/listingDetails/listingConditions.json').success(function(data) {
+        $scope.listingConditions=data.listingConditions;
+    });
     $scope.domesticShippingList = ["Flat: same cost to all buyers","Calculated: Cost varies by buyer location","Freight: large items over 150 lbs","No shipping: Local pickup only"];
+    $scope.listingFilters = {};
 
-    /* Format functions */
+
+    /* Format/Filter functions */
     $scope.formatPrice = function(){
         if(parseFloat($scope.currentListing.price) < 0){
             $scope.currentListing.price = 0;
@@ -36,6 +69,36 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
         document.getElementById("priceInput").value = $scope.currentListing.price.toFixed(2);
     };
 
+    $scope.filterGeneration = function(gen){
+        if($scope.listingFilters.generationList) {
+            for (let i = 0; i < $scope.listingFilters.generationList.length; i++) {
+                if ($scope.listingFilters.generationList[i] == gen.key)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    $scope.filterModelCapacity = function(size){
+        if($scope.listingFilters.capacityList) {
+            for (let i = 0; i < $scope.listingFilters.capacityList.length; i++) {
+                if ($scope.listingFilters.capacityList[i] == size.key)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    $scope.filterProductColor = function(color){
+        if($scope.listingFilters.colorList) {
+            for (let i = 0; i < $scope.listingFilters.colorList.length; i++) {
+                if ($scope.listingFilters.colorList[i] == color.key)
+                    return true;
+            }
+        }
+        return false;
+    }
+
     /* angularJS functions*/
     $scope.nextSection = function(){
         $scope.formSectionIndex++;
@@ -43,6 +106,176 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
             window.scrollTo(0,document.body.scrollHeight);
         }, 100);
     };
+
+    var createListingTitle = function(){
+        let fullTitle = "";
+        fullTitle += $scope.currentListing.title.type;
+        if($scope.currentListing.title.model)
+            fullTitle += " "+$scope.currentListing.title.model;
+        if($scope.currentListing.title.generation)
+            fullTitle += " "+$scope.currentListing.title.generation;
+        if($scope.currentListing.title.color)
+            fullTitle += " "+$scope.currentListing.title.color;
+        if($scope.currentListing.title.capacity)
+            fullTitle += " "+$scope.currentListing.title.capacity;
+        return fullTitle;
+    }
+
+    $scope.selectProductType = function(option){
+        //clear model
+        $scope.currentListing.title.model = "";
+        $scope.currentListing.category = {};
+        //clear anything below if new option is chosen
+        if($scope.currentListing.category.primary != option){
+            $scope.selectModel(null, true);
+        }
+        //select option
+        if(option == 73839){
+            $scope.currentListing.category.primary = 73839; //Consumer Electronics > Portable Audio & Headphones > iPods & MP3 Players
+            document.getElementById('productType1').classList.add('btn-filled');
+            document.getElementById('productType2').classList.remove('btn-filled');
+            $scope.currentListing.title.type = "Apple iPod";
+            $scope.currentListing.title.full = createListingTitle();
+            $scope.currentListing.category.text = "Consumer Electronics > Portable Audio & Headphones";
+        } else if(option == 9355){
+            $scope.currentListing.category.primary = 9355; //Cell Phones & Accessories > Cell Phones & Smartphones
+            document.getElementById('productType1').classList.remove('btn-filled');
+            document.getElementById('productType2').classList.add('btn-filled');
+            $scope.currentListing.title.type = "Apple iPhone";
+            $scope.currentListing.title.full = createListingTitle();
+            $scope.currentListing.category.text = "Cell Phones & Accessories > Cell Phones & Smartphones";
+        }
+    }
+
+    $scope.selectModel = function(option, clear){
+        if(!clear) {
+            if($scope.currentListing.category.model != option.key){
+                $scope.selectGeneration(null, true);
+            }
+            $scope.currentListing.category.model = option.key;
+            $scope.listingFilters.capacityList = option.capacityList;
+            $scope.listingFilters.colorList = option.colorList;
+            $scope.listingFilters.generationList = option.generationList;
+            //Generation is n/a for iPhone, so set to true and skip
+            if($scope.currentListing.category.primary == 9355){
+                $scope.currentListing.category.generation = true;
+            }
+            var models = $scope.currentListing.category.primary == 73839 ? $scope.ipod_models : $scope.iphone_models;
+            for (let i = 0; i < models.length; i++) {
+                if (models[i].key == option.key) {
+                    document.getElementById('model' + models[i].key).classList.add('btn-filled');
+                    $scope.currentListing.title.model = models[i].value;
+                    $scope.currentListing.title.full = createListingTitle();
+                }
+                else
+                    document.getElementById('model' + models[i].key).classList.remove('btn-filled');
+            }
+        } else { //clear data below Model
+            $scope.currentListing.title.model = null;
+            $scope.currentListing.category.model = null;
+            $scope.selectGeneration(null, true);
+        }
+    }
+
+    $scope.selectGeneration = function(option, clear) {
+        if(!clear) {
+            if($scope.currentListing.category.generation != option.key){
+                $scope.selectCapacity(null, true);
+            }
+            $scope.currentListing.category.generation = option.key;
+            for (let i = 0; i < $scope.ipod_generations.length; i++) {
+                if ($scope.ipod_generations[i].key == option.key) {
+                    document.getElementById('generation' + $scope.ipod_generations[i].key).classList.add('btn-filled');
+                    $scope.currentListing.title.generation = $scope.ipod_generations[i].value;
+                    $scope.currentListing.title.full = createListingTitle();
+                }
+                else {
+                    if (document.getElementById('generation' + $scope.ipod_generations[i].key))
+                        document.getElementById('generation' + $scope.ipod_generations[i].key).classList.remove('btn-filled');
+                }
+            }
+        } else { //clear data below Capacity
+            $scope.currentListing.title.generation = null;
+            $scope.currentListing.category.generation = null;
+            if($scope.currentListing.category.model && $scope.currentListing.category.primary != 9355) {
+                for (let i = 0; i < $scope.ipod_generations.length; i++) {
+                    if(document.getElementById('generation' + $scope.ipod_generations[i].key))
+                        document.getElementById('generation' + $scope.ipod_generations[i].key).classList.remove('btn-filled');
+                }
+            }
+            $scope.selectCapacity(null, true);
+        }
+    }
+
+    $scope.selectCapacity = function(option, clear) {
+        if(!clear) {
+            if($scope.currentListing.category.capacity != option.key){
+                $scope.selectColor(null, true);
+            }
+            $scope.currentListing.category.capacity = option.key;
+            for (let i = 0; i < $scope.storage_sizes.length; i++) {
+                if ($scope.storage_sizes[i].key == option.key) {
+                    document.getElementById('size' + $scope.storage_sizes[i].key).classList.add('btn-filled');
+                    $scope.currentListing.title.capacity = $scope.storage_sizes[i].value;
+                    $scope.currentListing.title.full = createListingTitle();
+                }
+                else {
+                    if (document.getElementById('size' + $scope.storage_sizes[i].key))
+                        document.getElementById('size' + $scope.storage_sizes[i].key).classList.remove('btn-filled');
+                }
+            }
+        } else { //clear data below Capacity
+            $scope.currentListing.title.capacity = null;
+            $scope.currentListing.category.capacity = null;
+            if($scope.currentListing.category.generation) {
+                for (let i = 0; i < $scope.storage_sizes.length; i++) {
+                    if(document.getElementById('size' + $scope.storage_sizes[i].key))
+                        document.getElementById('size' + $scope.storage_sizes[i].key).classList.remove('btn-filled');
+                }
+            }
+            $scope.selectColor(null, true);
+        }
+    }
+
+    $scope.selectColor = function(option, clear) {
+        if(!clear) {
+            // if($scope.currentListing.category.color != option.key){
+            //     $scope.selectCarrier(null, true);
+            // }
+            $scope.currentListing.category.color = option.key;
+            for (let i = 0; i < $scope.product_colors.length; i++) {
+                if ($scope.product_colors[i].key == option.key) {
+                    document.getElementById('color' + $scope.product_colors[i].key).classList.add('btn-filled');
+                    $scope.currentListing.title.color = $scope.product_colors[i].value;
+                    $scope.currentListing.title.full = createListingTitle();
+                }
+                else {
+                    if (document.getElementById('color' + $scope.product_colors[i].key))
+                        document.getElementById('color' + $scope.product_colors[i].key).classList.remove('btn-filled');
+                }
+            }
+        } else { //clear data below Capacity
+            $scope.currentListing.title.color = null;
+            $scope.currentListing.category.color = null;
+            if($scope.currentListing.category.capacity) {
+                for (let i = 0; i < $scope.product_colors.length; i++) {
+                    if(document.getElementById('color' + $scope.product_colors[i].key))
+                        document.getElementById('color' + $scope.product_colors[i].key).classList.remove('btn-filled');
+                }
+            }
+            // $scope.selectCarrier(null, true);
+        }
+    }
+
+    $scope.selectCondition = function(option){
+        $scope.currentListing.condition = option.key;
+        for(let i = 0; i < $scope.listingConditions.length; i++){
+            if($scope.listingConditions[i].key == option.key)
+                document.getElementById('condition'+$scope.listingConditions[i].key).classList.add('btn-filled');
+            else
+                document.getElementById('condition'+$scope.listingConditions[i].key).classList.remove('btn-filled');
+        }
+    }
 
     $scope.allPaymentMenthodsChecked = function() {
         if(!$scope.currentListing.paymentMethods.pm_payPal ||
@@ -76,9 +309,10 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
 
         /* Populate XML Request with input from listing form */
         if($scope.currentListing.title)
-            addItemRequest.getElementsByTagName("Title")[0].childNodes[0].nodeValue = $scope.currentListing.title;
-        if($scope.currentListing.category)
-            //TODO: Primary Category
+            addItemRequest.getElementsByTagName("Title")[0].childNodes[0].nodeValue = $scope.currentListing.title.full;
+        if($scope.currentListing.category.primary) {
+            addItemRequest.getElementsByTagName("CategoryID")[0].childNodes[0].nodeValue = $scope.currentListing.category.primary;
+        }
         if($scope.currentListing.condition)
             addItemRequest.getElementsByTagName("ConditionID")[0].childNodes[0].nodeValue = $scope.currentListing.condition;
         if($scope.currentListing.desc)
@@ -160,7 +394,6 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
         xhttp.open("GET", "xmlRequests/AddItemRequest.xml", true);
         xhttp.send();
     }
-    $scope.performAddItemRequest();
 
     /******************************************
      * HTTP functions
@@ -181,7 +414,7 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
 
     $scope.submitListing = function(xmlRequest){
         console.log(xmlRequest);
-        $http.post('/ebayApiSandbox/ws/api.dll', xmlRequest, AddItemConfig).then( function(response){
+        $http.post($scope.tradingAPIDLL_Sandbox, xmlRequest, AddItemConfig).then( function(response){
             console.log(response.data);
             var ebayResponse = XMLParser.parseFromString(response.data,"text/xml");
             console.log("========RESPONSE RESULT========");
