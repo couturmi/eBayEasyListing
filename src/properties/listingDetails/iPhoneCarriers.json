@@ -1,0 +1,153 @@
+{
+  "iphone_carriers":
+  [
+    {
+      "key":"verizon",
+      "value":"Verizon"
+    },
+    {
+      "key":"sprint",
+      "value":"Sprint"
+    },
+    {
+      "key":"tmobile",
+      "value":"T-Mobile"
+    },
+    {
+      "key":"att",
+      "value":"AT&T"
+    },
+    {
+      "key":"unlocked",
+      "value":"Unlocked"
+    },
+    {
+      "key":"factory",
+      "value":"Factory Unlocked"
+    },
+    {
+      "key":"boost",
+      "value":"Boost Mobile"
+    },
+    {
+      "key":"koodo",
+      "value":"Koodo Mobile"
+    },
+    {
+      "key":"bell",
+      "value":"Bell Mobility"
+    },
+    {
+      "key":"straighttalk",
+      "value":"Straight Talk"
+    },
+    {
+      "key":"fido",
+      "value":"Fido"
+    },
+    {
+      "key":"rogers",
+      "value":"Rogers Wireless"
+    },
+    {
+      "key":"telus",
+      "value":"Telus"
+    },
+    {
+      "key":"ntelos",
+      "value":"nTelos"
+    },
+    {
+      "key":"videotron",
+      "value":"Videotron"
+    },
+    {
+      "key":"virgin",
+      "value":"Virgin Mobile"
+    },
+    {
+      "key":"virginca",
+      "value":"Virgin Mobile (CA)"
+    },
+    {
+      "key":"sasktel",
+      "value":"SaskTel"
+    },
+    {
+      "key":"china",
+      "value":"China Unicom"
+    },
+    {
+      "key":"cspire",
+      "value":"C-Spire"
+    },
+    {
+      "key":"appalachian",
+      "value":"Appalachian Wireless"
+    },
+    {
+      "key":"mts",
+      "value":"MTS"
+    },
+    {
+      "key":"cellcom",
+      "value":"Cellcom"
+    },
+    {
+      "key":"alaska",
+      "value":"Alaska Communications"
+    },
+    {
+      "key":"gci",
+      "value":"GCI"
+    },
+    {
+      "key":"cricket",
+      "value":"Cricket"
+    },
+    {
+      "key":"mta",
+      "value":"MTA"
+    },
+    {
+      "key":"bluegrass",
+      "value":"Bluegrass Cellular"
+    },
+    {
+      "key":"nextech",
+      "value":"Nex-Tech Wireless"
+    },
+    {
+      "key":"windmobile",
+      "value":"Wind Mobile"
+    },
+    {
+      "key":"net10",
+      "value":"Net10"
+    },
+    {
+      "key":"alltel",
+      "value":"Alltel"
+    },
+    {
+      "key":"westcentral",
+      "value":"West Central Wireless"
+    },
+    {
+      "key":"aio",
+      "value":"Aio Wireless"
+    },
+    {
+      "key":"uscellular",
+      "value":"U.S. Cellular"
+    },
+    {
+      "key":"tbaytel",
+      "value":"Tbaytel"
+    },
+    {
+      "key":"ice",
+      "value":"Ice Wireless"
+    }
+  ]
+}

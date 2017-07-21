@@ -1,14 +1,14 @@
 <div class="container col-md-12 col-lg-12 col-sm-12" ng-controller="listingCtrl">
     <form name="listingForm" ng-submit="performAddItemRequest()">
         <div class="page-header text-center">
-            <h1>New Listing</h1>
+            <h1>Create Listing</h1>
         </div>
         <div class="row">
             <h3 class="col-md-12 col-lg-12 col-sm-12">Product Details</h3>
             <div class="col-md-12 col-lg-12 col-sm-12">
                 <div class="first-button-section">
                     <div class="product-detail-label"><span>Type</span></div>
-                    <div class="product-detail-buttons">
+                    <div class="product-detail-buttons scroll-style">
                         <input id="productType1" ng-click="selectProductType(73839)" type="button" class="btn btn-default btn-outline" value="iPod">
                         <input id="productType2" ng-click="selectProductType(9355)" type="button" class="btn btn-default btn-outline" value="iPhone">
                     </div>
@@ -18,7 +18,7 @@
             <div class="col-md-12 col-lg-12 col-sm-12">
                 <div class="new-button-section">
                     <div class="product-detail-label"><span>Model</span></div>
-                    <div class="product-detail-buttons">
+                    <div class="product-detail-buttons scroll-style">
                         <input ng-if="currentListing.category.primary == 73839" ng-repeat="model in ipod_models" id="{{'model'+model.key}}" ng-click="selectModel(model)" type="button" class="btn btn-default btn-outline button-spacing" value="{{model.value}}">
                         <input ng-if="currentListing.category.primary == 9355" ng-repeat="model2 in iphone_models" id="{{'model'+model2.key}}" ng-click="selectModel(model2)" type="button" class="btn btn-default btn-outline button-spacing" value="{{model2.value}}">
                     </div>
@@ -29,7 +29,7 @@
             <div class="col-md-12 col-lg-12 col-sm-12">
                 <div class="new-button-section">
                     <div class="product-detail-label"><span>Gen</span></div>
-                    <div class="product-detail-buttons">
+                    <div class="product-detail-buttons scroll-style">
                         <span ng-if="currentListing.category.primary == 9355" class="product-detail-text">N/A</span>
                         <input ng-if="currentListing.category.primary != 9355 && currentListing.category.model" ng-repeat="generation in ipod_generations | filter:filterGeneration" id="{{'generation'+generation.key}}" ng-click="selectGeneration(generation)" type="button" class="btn btn-default btn-outline button-spacing" value="{{generation.value}}">
                     </div>
@@ -40,8 +40,8 @@
             <div class="col-md-12 col-lg-12 col-sm-12">
                 <div class="new-button-section">
                     <div class="product-detail-label"><span>Capacity</span></div>
-                    <div class="product-detail-buttons">
-                        <input ng-if="currentListing.category.generation" ng-repeat="size in storage_sizes | filter:filterModelCapacity" id="{{'size'+size.key}}" ng-click="selectCapacity(size)" type="button" class="btn btn-default btn-outline button-spacing" value="{{size.value}}">
+                    <div class="product-detail-buttons scroll-style">
+                        <input ng-if="currentListing.category.model" ng-repeat="size in storage_sizes | filter:filterModelCapacity" id="{{'size'+size.key}}" ng-click="selectCapacity(size)" type="button" class="btn btn-default btn-outline button-spacing" value="{{size.value}}">
                     </div>
                 </div>
             </div>
@@ -50,8 +50,8 @@
             <div class="col-md-12 col-lg-12 col-sm-12">
                 <div class="new-button-section">
                     <div class="product-detail-label"><span>Color</span></div>
-                    <div class="product-detail-buttons">
-                        <input ng-if="currentListing.category.capacity" ng-repeat="color in product_colors | filter:filterProductColor" id="{{'color'+color.key}}" ng-click="selectColor(color)" type="button" class="btn btn-default btn-outline button-spacing" value="{{color.value}}">
+                    <div class="product-detail-buttons scroll-style">
+                        <input ng-if="currentListing.category.model" ng-repeat="color in product_colors | filter:filterProductColor" id="{{'color'+color.key}}" ng-click="selectColor(color)" type="button" class="btn btn-default btn-outline button-spacing" value="{{color.value}}">
                     </div>
                 </div>
             </div>
@@ -60,16 +60,22 @@
             <div class="col-md-12 col-lg-12 col-sm-12 extra-margin-bottom">
                 <div class="new-button-section">
                     <div class="product-detail-label"><span>Carrier</span></div>
-                    <div class="product-detail-buttons">
-                        <span ng-if="currentListing.category.primary == 73839" class="product-detail-text">N/A</span>
-
+                    <div class="product-detail-buttons scroll-style">
+                        <span ng-if="currentListing.category.primary == iPodID" class="product-detail-text">N/A</span>
+                        <input ng-if="currentListing.category.primary != iPodID && currentListing.category.model" ng-repeat="carrier in iphone_carriers" id="{{'carrier'+carrier.key}}" ng-click="selectCarrier(carrier)" type="button" class="btn btn-default btn-outline button-spacing" value="{{carrier.value}}">
                     </div>
                 </div>
             </div>
             <!-- end Sixth Layers -->
+            <div class="col-md-12 col-lg-12 col-sm-12 form-group text-center" ng-controller="findProductCtrl">
+                <input class="btn btn-submit" type="button" value="Find Product" ng-click="performFindProductsRequest()" ng-disabled="!currentListing.category.primary">
+            </div>
             <div class="col-md-6 col-lg-6 col-sm-6 form-group">
                 <h4 class="col-form-label col-form-label-lg">Title:</h4>
                 <input name="title" ng-model="currentListing.title.full" type="text" class="form-control" required>
+                <div ng-show="currentListing.productId != null" id="product-id-label">
+                    <label>ProductId:</label><span> {{currentListing.productId}}</span>
+                </div>
             </div>
             <div class="col-md-6 col-lg-6 col-sm-6 form-group">
                 <h4 class="col-form-label col-form-label-lg">Category:</h4>
@@ -96,7 +102,7 @@
         </div>
         <div class="row" ng-show="formSectionIndex > 2">
             <h3 class="col-md-12 col-lg-12 col-sm-12">Selling Details</h3>
-            <div class="col-md-2 col-lg-2 col-sm-2 form-group">
+            <div class="col-md-3 col-lg-3 col-sm-3 form-group">
                 <h4 class="col-form-label col-form-label-lg">Listing Type:</h4>
                 <select name="listingType" class="form-control" ng-model="currentListing.listingType" ng-options="type for type in listingTypeList"></select>
             </div>
@@ -198,7 +204,7 @@
         </div>
         <div class="row" ng-if="formSectionIndex >= 4">
             <div class="col-md-12 col-lg-12 col-sm-12 form-group text-center">
-                <input ng-disabled="false" class="btn btn-primary" type="submit" value="Submit Listing">
+                <input ng-disabled="false" class="btn btn-submit" type="submit" value="Submit Listing">
             </div>
         </div>
     </form>

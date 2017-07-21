@@ -15,6 +15,7 @@
 
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.3.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>-->
 
@@ -24,13 +25,18 @@
     <!-- Project specific files -->
     <link rel="stylesheet" href="css/mainStylesheet.css">
     <link rel="stylesheet" href="css/formStylesheet.css">
+    <link rel="stylesheet" href="css/modalStylesheet.css">
     <script src="js/mainController.js"></script>
     <script src="js/listingController.js"></script>
     <script src="js/loginController.js"></script>
+    <script src="js/APIRequestControllers/findProductRequestController.js"></script>
+    <script src="js/modalControllers/selectProductModalController.js"></script>
+    <script src="js/modalControllers/selectProductMultipleModalController.js"></script>
+    <script src="js/modalControllers/noProductModalController.js"></script>
 
     <title>eBay Easy Listing!</title>
 </head>
-<body ng-app="myApp" ng-controller="mainCtrl">
+<body ng-app="easyListing" ng-controller="mainCtrl">
 
     <div ng-include="'html/listing.html'"></div>
 

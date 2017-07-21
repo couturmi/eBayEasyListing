@@ -1,13 +1,20 @@
 /**
  * Created by mitchcout on 5/14/2017.
  */
-var app = angular.module('myApp');
+var app = angular.module('easyListing');
 app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
     /************************************************************************
      * Global Variables
      ************************************************************************/
     $scope.tradingAPIDLL_Sandbox = '/ebayApiSandbox/ws/api.dll';
+    $scope.shoppingAPI_Sandbox = '/ebayShoppingApiSandbox/shopping?callname=FindProducts&responseencoding=XML&appid=Mitchell-eBayEasy-SBX-f09141381-69d9c08c&siteid=0&QueryKeywords=Apple&version=863';
     $scope.tradingAPIDLL_Prod = '/ebayApiProd/ws/api.dll';
+
+    $scope.addItemRequestURL = "xmlRequests/AddItemRequest.xml";
+    $scope.findProductsRequestURL = "xmlRequests/findProductsRequest.xml";
+
+    $scope.iPhoneID = 9355;
+    $scope.iPodID = 73839;
 
 
     /******************************************
@@ -30,7 +37,7 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
         listingDuration:"Good Til' Cancelled",
         shippingLocationCountry:"United States",
         shippingLocationZIP:"48162",
-        shippingLocationCityState:"Test City, Michigan"
+        shippingLocationCityState:"Grand Rapids, Michigan"
     };
 
     /* Get JSON data */
@@ -55,6 +62,9 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.listingDurationList = ["3 days","5 days","7 days","10 days","30 days","Good Til' Cancelled"];
     $http.get('properties/listingDetails/listingConditions.json').success(function(data) {
         $scope.listingConditions=data.listingConditions;
+    });
+    $http.get('properties/listingDetails/iPhoneCarriers.json').success(function(data) {
+        $scope.iphone_carriers=data.iphone_carriers;
     });
     $scope.domesticShippingList = ["Flat: same cost to all buyers","Calculated: Cost varies by buyer location","Freight: large items over 150 lbs","No shipping: Local pickup only"];
     $scope.listingFilters = {};
@@ -100,6 +110,8 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
     }
 
     /* angularJS functions*/
+
+    //scroll the page down to the next section
     $scope.nextSection = function(){
         $scope.formSectionIndex++;
         setTimeout(function(){
@@ -114,10 +126,14 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
             fullTitle += " "+$scope.currentListing.title.model;
         if($scope.currentListing.title.generation)
             fullTitle += " "+$scope.currentListing.title.generation;
+        if($scope.currentListing.title.capacity && $scope.currentListing.category.primary == $scope.iPhoneID)
+            fullTitle += " - "+$scope.currentListing.title.capacity+" -";
         if($scope.currentListing.title.color)
             fullTitle += " "+$scope.currentListing.title.color;
-        if($scope.currentListing.title.capacity)
-            fullTitle += " "+$scope.currentListing.title.capacity;
+        if($scope.currentListing.title.capacity && $scope.currentListing.category.primary == $scope.iPodID)
+            fullTitle += " ("+$scope.currentListing.title.capacity+")";
+        if($scope.currentListing.title.carrier)
+            fullTitle += " ("+$scope.currentListing.title.carrier+")";
         return fullTitle;
     }
 
@@ -130,15 +146,15 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
             $scope.selectModel(null, true);
         }
         //select option
-        if(option == 73839){
-            $scope.currentListing.category.primary = 73839; //Consumer Electronics > Portable Audio & Headphones > iPods & MP3 Players
+        if(option == $scope.iPodID){
+            $scope.currentListing.category.primary = $scope.iPodID; //Consumer Electronics > Portable Audio & Headphones > iPods & MP3 Players
             document.getElementById('productType1').classList.add('btn-filled');
             document.getElementById('productType2').classList.remove('btn-filled');
             $scope.currentListing.title.type = "Apple iPod";
             $scope.currentListing.title.full = createListingTitle();
             $scope.currentListing.category.text = "Consumer Electronics > Portable Audio & Headphones";
-        } else if(option == 9355){
-            $scope.currentListing.category.primary = 9355; //Cell Phones & Accessories > Cell Phones & Smartphones
+        } else if(option == $scope.iPhoneID){
+            $scope.currentListing.category.primary = $scope.iPhoneID; //Cell Phones & Accessories > Cell Phones & Smartphones
             document.getElementById('productType1').classList.remove('btn-filled');
             document.getElementById('productType2').classList.add('btn-filled');
             $scope.currentListing.title.type = "Apple iPhone";
@@ -157,10 +173,10 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
             $scope.listingFilters.colorList = option.colorList;
             $scope.listingFilters.generationList = option.generationList;
             //Generation is n/a for iPhone, so set to true and skip
-            if($scope.currentListing.category.primary == 9355){
+            if($scope.currentListing.category.primary == $scope.iPhoneID){
                 $scope.currentListing.category.generation = true;
             }
-            var models = $scope.currentListing.category.primary == 73839 ? $scope.ipod_models : $scope.iphone_models;
+            var models = $scope.currentListing.category.primary == $scope.iPodID ? $scope.ipod_models : $scope.iphone_models;
             for (let i = 0; i < models.length; i++) {
                 if (models[i].key == option.key) {
                     document.getElementById('model' + models[i].key).classList.add('btn-filled');
@@ -186,7 +202,7 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
             for (let i = 0; i < $scope.ipod_generations.length; i++) {
                 if ($scope.ipod_generations[i].key == option.key) {
                     document.getElementById('generation' + $scope.ipod_generations[i].key).classList.add('btn-filled');
-                    $scope.currentListing.title.generation = $scope.ipod_generations[i].value;
+                    $scope.currentListing.title.generation = $scope.ipod_generations[i].longValue;
                     $scope.currentListing.title.full = createListingTitle();
                 }
                 else {
@@ -197,7 +213,7 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
         } else { //clear data below Capacity
             $scope.currentListing.title.generation = null;
             $scope.currentListing.category.generation = null;
-            if($scope.currentListing.category.model && $scope.currentListing.category.primary != 9355) {
+            if($scope.currentListing.category.model && $scope.currentListing.category.primary != $scope.iPhoneID) {
                 for (let i = 0; i < $scope.ipod_generations.length; i++) {
                     if(document.getElementById('generation' + $scope.ipod_generations[i].key))
                         document.getElementById('generation' + $scope.ipod_generations[i].key).classList.remove('btn-filled');
@@ -216,7 +232,10 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
             for (let i = 0; i < $scope.storage_sizes.length; i++) {
                 if ($scope.storage_sizes[i].key == option.key) {
                     document.getElementById('size' + $scope.storage_sizes[i].key).classList.add('btn-filled');
-                    $scope.currentListing.title.capacity = $scope.storage_sizes[i].value;
+                    if($scope.currentListing.category.primary == $scope.iPodID)
+                        $scope.currentListing.title.capacity = $scope.storage_sizes[i].spacedValue;
+                    if($scope.currentListing.category.primary == $scope.iPhoneID)
+                        $scope.currentListing.title.capacity = $scope.storage_sizes[i].value;
                     $scope.currentListing.title.full = createListingTitle();
                 }
                 else {
@@ -239,9 +258,6 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
 
     $scope.selectColor = function(option, clear) {
         if(!clear) {
-            // if($scope.currentListing.category.color != option.key){
-            //     $scope.selectCarrier(null, true);
-            // }
             $scope.currentListing.category.color = option.key;
             for (let i = 0; i < $scope.product_colors.length; i++) {
                 if ($scope.product_colors[i].key == option.key) {
@@ -263,7 +279,33 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
                         document.getElementById('color' + $scope.product_colors[i].key).classList.remove('btn-filled');
                 }
             }
-            // $scope.selectCarrier(null, true);
+            $scope.selectCarrier(null, true);
+        }
+    }
+
+    $scope.selectCarrier = function(option, clear) {
+        if(!clear) {
+            $scope.currentListing.category.carrier = option.key;
+            for (let i = 0; i < $scope.iphone_carriers.length; i++) {
+                if ($scope.iphone_carriers[i].key == option.key) {
+                    document.getElementById('carrier' + $scope.iphone_carriers[i].key).classList.add('btn-filled');
+                    $scope.currentListing.title.carrier = $scope.iphone_carriers[i].value;
+                    $scope.currentListing.title.full = createListingTitle();
+                }
+                else {
+                    if (document.getElementById('carrier' + $scope.iphone_carriers[i].key))
+                        document.getElementById('carrier' + $scope.iphone_carriers[i].key).classList.remove('btn-filled');
+                }
+            }
+        } else { //clear data below Capacity
+            $scope.currentListing.title.carrier = null;
+            $scope.currentListing.category.carrier = null;
+            if($scope.currentListing.category.color) {
+                for (let i = 0; i < $scope.iphone_carriers.length; i++) {
+                    if(document.getElementById('carrier' + $scope.iphone_carriers[i].key))
+                        document.getElementById('carrier' + $scope.iphone_carriers[i].key).classList.remove('btn-filled');
+                }
+            }
         }
     }
 
@@ -375,6 +417,15 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
                 ItemElement.appendChild(tempElement2);
             }
         }
+        if($scope.currentListing.productId){
+            let ItemElement = addItemRequest.getElementsByTagName("Item")[0];
+            let tempElement = addItemRequest.createElement("ProductListingDetails");
+            let tempChildElement = addItemRequest.createElement("ProductReferenceID");
+            let tempTextNode = addItemRequest.createTextNode($scope.currentListing.productId);
+            tempChildElement.appendChild(tempTextNode);
+            tempElement.appendChild(tempChildElement);
+            ItemElement.appendChild(tempElement);
+        }
         if($scope.currentListing.title)
             //TODO: Return Options
         if($scope.currentListing.title)
@@ -391,7 +442,7 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
                 createAddItemXML(this);
             }
         };
-        xhttp.open("GET", "xmlRequests/AddItemRequest.xml", true);
+        xhttp.open("GET", $scope.addItemRequestURL, true);
         xhttp.send();
     }
 
@@ -418,7 +469,7 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
             console.log(response.data);
             var ebayResponse = XMLParser.parseFromString(response.data,"text/xml");
             console.log("========RESPONSE RESULT========");
-            console.log(ebayResponse.getElementsByTagName("Ack")[0].childNodes[0].nodeValue);
+            console.log("VerifyAddItem Request: \n"+ebayResponse.getElementsByTagName("Ack")[0].childNodes[0].nodeValue);
             console.log("===============================");
         }, function(err){
             console.log("error.");

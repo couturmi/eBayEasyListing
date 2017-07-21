@@ -2,21 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fae03030-5541-4c40-b6b0-4accb4e9e6fe" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/css/formStylesheet.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/properties/listingDetails/iPhoneCarriers.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/properties/listingDetails/iPhoneModels.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/properties/listingDetails/iPodGenerations.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/properties/listingDetails/iPodModels.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/properties/listingDetails/listingConditions.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/properties/listingDetails/listingTypeList.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/properties/listingDetails/productColors.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/properties/listingDetails/storageSizes.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/css/modalStylesheet.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/html/modals/noProductModal.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/html/modals/selectProductModal.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/html/modals/selectProductMultipleModal.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/APIRequestControllers/findProductRequestController.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/modalControllers/noProductModalController.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/modalControllers/selectProductModalController.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/modalControllers/selectProductMultipleModalController.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/xmlRequests/FindProductsRequest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/css/formStylesheet.css" afterPath="$PROJECT_DIR$/src/css/formStylesheet.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/html/listing.html" afterPath="$PROJECT_DIR$/src/html/listing.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.html" afterPath="$PROJECT_DIR$/src/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/listingController.js" afterPath="$PROJECT_DIR$/src/js/listingController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/loginController.js" afterPath="$PROJECT_DIR$/src/js/loginController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/mainController.js" afterPath="$PROJECT_DIR$/src/js/mainController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/properties/listingDetails/iPhoneCarriers.json" afterPath="$PROJECT_DIR$/src/properties/listingDetails/iPhoneCarriers.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/properties/listingDetails/iPhoneModels.json" afterPath="$PROJECT_DIR$/src/properties/listingDetails/iPhoneModels.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/properties/listingDetails/iPodGenerations.json" afterPath="$PROJECT_DIR$/src/properties/listingDetails/iPodGenerations.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/properties/listingDetails/iPodModels.json" afterPath="$PROJECT_DIR$/src/properties/listingDetails/iPodModels.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/properties/listingDetails/storageSizes.json" afterPath="$PROJECT_DIR$/src/properties/listingDetails/storageSizes.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/server/index.js" afterPath="$PROJECT_DIR$/src/server/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/xmlRequests/AddItemRequest.xml" afterPath="$PROJECT_DIR$/src/xmlRequests/AddItemRequest.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,34 +36,24 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="57" lean-forward="false" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="listingController.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/js/listingController.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="186" column="67" lean-forward="false" selection-start-line="186" selection-start-column="67" selection-end-line="186" selection-end-column="67" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="listing.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="listing.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/html/listing.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="33" column="179" lean-forward="false" selection-start-line="33" selection-start-column="163" selection-end-line="33" selection-end-column="179" />
+            <state relative-caret-position="716">
+              <caret line="206" column="64" lean-forward="false" selection-start-line="206" selection-start-column="64" selection-end-line="206" selection-end-column="64" />
               <folding>
-                <element signature="n#style#0;n#input#0;n#div#7;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#8;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="listingController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/js/listingController.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="17" lean-forward="false" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="17" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -66,9 +63,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="tsconfig.json" />
+        <option value="CSS File" />
         <option value="HTML File" />
         <option value="JavaScript File" />
-        <option value="tsconfig.json" />
       </list>
     </option>
   </component>
@@ -83,6 +81,21 @@
       <find>value</find>
       <find>console</find>
       <find>capacityList</find>
+      <find>consol</find>
+      <find>nextSection</find>
+      <find>formSection</find>
+      <find>web</find>
+      <find>m</find>
+      <find>my</find>
+      <find>myA</find>
+      <find>myAp</find>
+      <find>myApp</find>
+      <find>mo</find>
+      <find>productStockPhotoURL</find>
+      <find>9355</find>
+      <find>mta</find>
+      <find>73839</find>
+      <find>selectCarrier</find>
     </findStrings>
     <replaceStrings>
       <replace>},\n</replace>
@@ -109,25 +122,36 @@
         <option value="$PROJECT_DIR$/src/tradingAPI/AddItem/AddListing.php" />
         <option value="$PROJECT_DIR$/src/html/file.html" />
         <option value="$PROJECT_DIR$/src/html/welcome.php" />
-        <option value="$PROJECT_DIR$/src/js/loginController.js" />
         <option value="$PROJECT_DIR$/src/html/login.html" />
         <option value="$PROJECT_DIR$/src/css/mainStylesheet.css" />
         <option value="$PROJECT_DIR$/src/proxy.config.json" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/src/index.html" />
-        <option value="$PROJECT_DIR$/src/xmlRequests/AddItemRequest.xml" />
-        <option value="$PROJECT_DIR$/src/server/index.js" />
-        <option value="$PROJECT_DIR$/src/js/mainController.js" />
         <option value="$PROJECT_DIR$/src/properties/listingDetails/listingTypeList.json" />
         <option value="$PROJECT_DIR$/src/properties/listingDetails/listingConditions.json" />
-        <option value="$PROJECT_DIR$/src/properties/listingDetails/storageSizes.json" />
-        <option value="$PROJECT_DIR$/src/properties/listingDetails/iPhoneModels.json" />
-        <option value="$PROJECT_DIR$/src/css/formStylesheet.css" />
         <option value="$PROJECT_DIR$/src/properties/listingDetails/productColors.json" />
-        <option value="$PROJECT_DIR$/src/html/listing.html" />
+        <option value="$PROJECT_DIR$/src/js/API Request Controllers/FindProductRequestController.js" />
+        <option value="$PROJECT_DIR$/src/properties/listingDetails/iPhoneModels.json" />
+        <option value="$PROJECT_DIR$/src/server/index.js" />
+        <option value="$PROJECT_DIR$/src/js/loginController.js" />
+        <option value="$PROJECT_DIR$/src/js/mainController.js" />
+        <option value="$PROJECT_DIR$/src/html/modals/selectProductModal.html" />
+        <option value="$PROJECT_DIR$/src/xmlRequests/AddItemRequest.xml" />
         <option value="$PROJECT_DIR$/src/properties/listingDetails/iPodGenerations.json" />
+        <option value="$PROJECT_DIR$/src/js/modalControllers/noProductModalController.js" />
+        <option value="$PROJECT_DIR$/src/index.html" />
         <option value="$PROJECT_DIR$/src/properties/listingDetails/iPodModels.json" />
+        <option value="$PROJECT_DIR$/src/properties/listingDetails/storageSizes.json" />
+        <option value="$PROJECT_DIR$/src/html/modals/noProductModal.html" />
+        <option value="$PROJECT_DIR$/src/js/modalControllers/selectProductMultipleModalController.js" />
+        <option value="$PROJECT_DIR$/src/js/modalControllers/selectProductModalController.js" />
+        <option value="$PROJECT_DIR$/src/js/APIRequestControllers/findProductRequestController.js" />
+        <option value="$PROJECT_DIR$/src/xmlRequests/FindProductsRequest.xml" />
+        <option value="$PROJECT_DIR$/src/html/modals/selectProductMultipleModal.html" />
+        <option value="$PROJECT_DIR$/src/properties/listingDetails/iPhoneCarriers.json" />
         <option value="$PROJECT_DIR$/src/js/listingController.js" />
+        <option value="$PROJECT_DIR$/src/html/listing.html" />
+        <option value="$PROJECT_DIR$/src/css/modalStylesheet.css" />
+        <option value="$PROJECT_DIR$/src/css/formStylesheet.css" />
       </list>
     </option>
   </component>
@@ -168,6 +192,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -208,7 +234,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="server" />
+              <option name="myItemId" value="xmlRequests" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -266,7 +292,73 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modalControllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eBayEasyListing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eBayEasyListing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="APIRequestControllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eBayEasyListing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eBayEasyListing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eBayEasyListing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eBayEasyListing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modals" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -290,8 +382,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -306,6 +396,7 @@
     <property name="JavaScriptPreferStrict" value="false" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -760,16 +851,18 @@
       <workItem from="1500155207020" duration="7668000" />
       <workItem from="1500241925443" duration="12162000" />
       <workItem from="1500337693551" duration="6063000" />
-      <workItem from="1500425831583" duration="305000" />
+      <workItem from="1500425831583" duration="6183000" />
+      <workItem from="1500509513253" duration="16002000" />
+      <workItem from="1500593550755" duration="17672000" />
+      <workItem from="1500668727693" duration="1985000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104243000" />
+    <option name="totallyTimeSpent" value="145780000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1913" y="85" width="974" height="1047" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -785,7 +878,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20772442" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.217119" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -817,56 +910,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/tradingAPI/AddItem/AddItem.php" />
-    <entry file="file://$PROJECT_DIR$/src/tradingAPI/get-common/eBaySession.php" />
-    <entry file="file://$PROJECT_DIR$/nodeServer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="29" lean-forward="false" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tradingAPI/get-common/keys.php" />
-    <entry file="file://$PROJECT_DIR$/src/tradingAPI/AddItem/AddItem.php" />
-    <entry file="file://$PROJECT_DIR$/src/tradingAPI/get-common/eBaySession.php" />
-    <entry file="file://$PROJECT_DIR$/nodeServer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="29" lean-forward="true" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="35" column="7" lean-forward="true" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tradingAPI/get-common/eBaySession.php" />
-    <entry file="file://$PROJECT_DIR$/src/tradingAPI/get-common/keys.php" />
-    <entry file="file://$PROJECT_DIR$/src/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tradingAPI/get-common/keys.php" />
     <entry file="file://$PROJECT_DIR$/src/tradingAPI/get-common/eBaySession.php" />
     <entry file="file://$PROJECT_DIR$/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -903,14 +946,6 @@
     <entry file="file://$PROJECT_DIR$/src/html/file.html" />
     <entry file="file://$PROJECT_DIR$/src/html/welcome.php" />
     <entry file="file://$PROJECT_DIR$/src/tradingAPI/get-common/eBaySession.php" />
-    <entry file="file://$PROJECT_DIR$/src/js/loginController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tsconfig.json" />
     <entry file="file://$PROJECT_DIR$/src/html/login.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -938,39 +973,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="32" lean-forward="false" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nodeServer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="29" lean-forward="true" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/css/mainStylesheet.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="19" lean-forward="true" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/mainController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="26" lean-forward="false" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -981,31 +987,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/xmlRequests/AddItemRequest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="32" lean-forward="false" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/properties/listingDetails/listingConditions.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="8" lean-forward="true" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/properties/listingDetails/storageSizes.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/css/formStylesheet.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="18" lean-forward="false" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -1016,59 +1001,207 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.html">
+    <entry file="file://$PROJECT_DIR$/src/js/API Request Controllers/FindProductRequestController.js" />
+    <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="57" lean-forward="false" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/html/listing.html">
+    <entry file="file://$PROJECT_DIR$/.idea/modules.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="179" lean-forward="false" selection-start-line="33" selection-start-column="163" selection-end-line="33" selection-end-column="179" />
-          <folding>
-            <element signature="n#style#0;n#input#0;n#div#7;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/properties/listingDetails/iPodModels.json">
+    <entry file="file://$PROJECT_DIR$/.idea/vcs.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="40" lean-forward="false" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/properties/listingDetails/iPodGenerations.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="5" lean-forward="false" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/properties/listingDetails/iPhoneModels.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="37" column="35" lean-forward="false" selection-start-line="37" selection-start-column="35" selection-end-line="37" selection-end-column="35" />
+        <state relative-caret-position="716">
+          <caret line="90" column="25" lean-forward="false" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/loginController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="37" lean-forward="false" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="37" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="29" lean-forward="true" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="32" lean-forward="false" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/mainController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="41" lean-forward="true" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/properties/listingDetails/iPodGenerations.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="46" column="22" lean-forward="false" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="34" column="46" lean-forward="false" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/properties/listingDetails/iPodModels.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="16" lean-forward="false" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/modalControllers/noProductModalController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="98" lean-forward="false" selection-start-line="3" selection-start-column="98" selection-end-line="3" selection-end-column="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/html/modals/noProductModal.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="38" lean-forward="false" selection-start-line="13" selection-start-column="38" selection-end-line="13" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/html/modals/selectProductModal.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="18" lean-forward="true" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/modalControllers/selectProductModalController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="46" lean-forward="false" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/modalControllers/selectProductMultipleModalController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="708">
+          <caret line="53" column="9" lean-forward="true" selection-start-line="50" selection-start-column="8" selection-end-line="53" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/properties/listingDetails/carrierList.json" />
+    <entry file="file://$PROJECT_DIR$/src/xmlRequests/FindProductsRequest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="24" lean-forward="false" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/xmlRequests/AddItemRequest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="36" lean-forward="false" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/properties/listingDetails/storageSizes.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="18" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="114" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/properties/listingDetails/iPhoneCarriers.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="17">
+          <caret line="1" column="18" lean-forward="false" selection-start-line="1" selection-start-column="3" selection-end-line="1" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/html/modals/selectProductMultipleModal.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="111" lean-forward="false" selection-start-line="13" selection-start-column="106" selection-end-line="13" selection-end-column="111" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/APIRequestControllers/findProductRequestController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="103" lean-forward="false" selection-start-line="4" selection-start-column="103" selection-end-line="4" selection-end-column="103" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/css/mainStylesheet.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-100">
+          <caret line="5" column="19" lean-forward="true" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/listingController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="186" column="67" lean-forward="false" selection-start-line="186" selection-start-column="67" selection-end-line="186" selection-end-column="67" />
+        <state relative-caret-position="272">
+          <caret line="16" column="17" lean-forward="false" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/css/modalStylesheet.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/css/formStylesheet.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="5" lean-forward="true" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/html/listing.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="716">
+          <caret line="206" column="64" lean-forward="false" selection-start-line="206" selection-start-column="64" selection-end-line="206" selection-end-column="64" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#div#8;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -34,43 +34,43 @@
     {
       "key":26,
       "value":"5",
-      "capacityList":[16,32,64],
+      "capacityList":[8,16,32,64],
       "colorList":["black","white"]
     },
     {
       "key":27,
       "value":"5C",
-      "capacityList":[16,32,64],
+      "capacityList":[8,16,32,64],
       "colorList":["blue","green","pink","white","yellow"]
     },
     {
       "key":28,
       "value":"5S",
-      "capacityList":[16,32,64],
+      "capacityList":[8,16,32,64],
       "colorList":["gold","silver","sgray"]
     },
     {
       "key":29,
       "value":"6",
-      "capacityList":[16,64,128],
+      "capacityList":[8,16,64,128],
       "colorList":["gold","silver","sgray"]
     },
     {
       "key":30,
       "value":"6 Plus",
-      "capacityList":[16,64,128],
+      "capacityList":[8,16,64,128],
       "colorList":["gold","silver","sgray"]
     },
     {
       "key":31,
       "value":"6S",
-      "capacityList":[16,64,128],
+      "capacityList":[8,16,64,128],
       "colorList":["gold","rgold","silver","sgray"]
     },
     {
       "key":32,
       "value":"6S Plus",
-      "capacityList":[16,64,128],
+      "capacityList":[8,16,64,128],
       "colorList":["gold","rgold","silver","sgray"]
     },
     {
@@ -82,13 +82,13 @@
     {
       "key":34,
       "value":"7",
-      "capacityList":[32,128,256],
+      "capacityList":[16,32,128,256],
       "colorList":["rgold","gold","silver","black","jblack"]
     },
     {
       "key":35,
       "value":"7 Plus",
-      "capacityList":[32,128,256],
+      "capacityList":[16,32,128,256],
       "colorList":["rgold","gold","silver","black","jblack"]
     }
   ]
