@@ -56,3 +56,66 @@ body {
 .radio-small-text {
     padding-left:15px;
 }
+
+/********************************************
+ * Listing page styles
+ ********************************************/
+
+/* All pages */
+.listing-status-block {
+    /*line-height: 45px;*/
+    vertical-align: middle;
+    font-family: "Lucida Sans Unicode";
+}
+
+/* Success page */
+.jumbotron.jumbotron-listing-success {
+    width: 100%;
+    background: #669e43;
+}
+.listing-success-link a:link{
+    color: #ffffff;
+}
+.listing-success-link a:hover{
+    color: #edf060;
+}
+
+/* Loading page */
+.jumbotron.jumbotron-listing-loading {
+    width: 100%;
+    background: #edf060;
+}
+
+/* Failed page */
+.jumbotron.jumbotron-listing-failed {
+    width: 100%;
+    background: #e84b3a;
+}
+.listing-failed-link a:link{
+    color: #ffffff;
+}
+.listing-failed-link a:hover{
+    color: #edf060;
+}
+
+/********************************************
+ * Listing page styles
+ ********************************************/
+
+.welcome-block {
+    /*line-height: 45px;*/
+    vertical-align: middle;
+    font-family: "Lucida Sans Unicode";
+}
+
+/* Welcome page */
+.jumbotron.jumbotron-welcome {
+    width: 100%;
+    background: #08b1e0;
+    color: #444444;
+}
+
+.btn-welcome-page {
+    background: #f0803c;
+    color: #ffffff;
+}
