@@ -1,0 +1,50 @@
+{
+  "ipod_generations":
+  [
+    {
+      "key":1,
+      "value":"1st Gen",
+      "longValue":"1st Generation"
+    },
+    {
+      "key":2,
+      "value":"2nd Gen",
+      "longValue":"2nd Generation"
+    },
+    {
+      "key":3,
+      "value":"3rd Gen",
+      "longValue":"3rd Generation"
+    },
+    {
+      "key":4,
+      "value":"4th Gen",
+      "longValue":"4th Generation"
+    },
+    {
+      "key":4.1,
+      "value":"4th Gen (Photo)",
+      "longValue":"4th Generation (Photo)"
+    },
+    {
+      "key":4.2,
+      "value":"4th Gen (Color)",
+      "longValue":"4th Generation (Color)"
+    },
+    {
+      "key":5,
+      "value":"5th Gen",
+      "longValue":"5th Generation"
+    },
+    {
+      "key":6,
+      "value":"6th Gen",
+      "longValue":"6th Generation"
+    },
+    {
+      "key":7,
+      "value":"7th Gen",
+      "longValue":"7th Generation"
+    }
+  ]
+}

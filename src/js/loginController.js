@@ -1,7 +1,7 @@
 /**
  * Created by mitchcout on 5/14/2017.
  */
-var app = angular.module('myApp');
+var app = angular.module('easyListing');
 app.controller('loginCtrl', ['$scope', function($scope) {
 
     $scope.openLoginModal = function() {

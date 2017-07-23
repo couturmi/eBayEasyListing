@@ -1,0 +1,37 @@
+.modal-card-container{
+    background:	#d8d8d8;
+}
+
+.modal-card-md {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.modal-card-md-multiple {
+    height: 580px;
+}
+
+.modal-card-image-fill {
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+.btn.btn-lg.btn-success {
+    background: #669e43;
+    color: #ffffff;
+}
+
+.btn.btn-lg.btn-danger {
+    background: #e84b3a;
+    color: #ffffff;
+}
+
+.btn.btn-lg.btn-confirm {
+    background: #08b1e0;
+    color: #ffffff;
+}
+
+#modal-body {
+    margin-right: 0px;
+    margin-left: 0px;
+}

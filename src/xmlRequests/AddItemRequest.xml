@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VerifyAddItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+    <RequesterCredentials>
+        <eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**b/FjWQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wFk4GkCpCBqQydj6x9nY+seQ**UDcEAA**AAMAAA**haPTP9tAd2O3TQv0sloQ4Rxe5S4b8mJnFSPjDTVNFC2TqGJGroTFbiyub0j2+YD+M2q+8+pvFn20bXDH7fZpcHTx7tu6WAc1FVn8YRh50su2VmVdooVhGfyDwVyDcNWwxxuAeC2b5UwhC5Q8FCtj/9lqYJb+ecj/JWnDinOrHoZSz28MRETZs/ZGGP8P1kK1tbKDgIw50HUey2TdguKcN4SOw0Fh2sx6HY5JsrVs/boBksOCuKuY97kigKVawnWsAZzAxYfe1gM7QHhLQJP8aypawwlXr5bOcGsF8M0dN7WikvbdKfeOmYMh3ar7L4J9MLt6ldAOU3PlVO5JAE1oIdo/eOKzVE/Uutq8BbmQ3n71nzsNV1dWhFsxYUiM1YAg7eG1PrZkpPDWhdku71Kv+z8o8I7m0kRTl8QChCHk24KV9K3DPO6k+uu563jR2jvwg+TxAliiCPmM+KzWKgbwwQb32ArToTD/Eti6DfGCI6LtuO92mCxC3+CEDH3ZEI06GI1zW5ZvrQuV0yjIjZ8PWLEcf0wDSmuIKteZx0frnswE8I4Kvu6L/Yv6t53j1vtBa9fGK9NQ8JDORxnC8e+sh3HnUnc/HXgYYzeYldIne3uhJbco+Kv6HexTwCEM5vTm7J6zD/zstyCC5puImiNsfl+9+J1M/Xz2eFeG+mQjxCsquKrv+rDI0F2nG78EnkohjBcJJwn3vjRXsJ0LPYQ4jYqhUMel8qd9plcDgEdk6RMYeKC5MzMmJvjrGKy1gpGW</eBayAuthToken>
+    </RequesterCredentials>
+    <ErrorLanguage>en_US</ErrorLanguage>
+    <WarningLevel>High</WarningLevel>
+    <Item>
+        <Title>Title</Title>
+        <Description>Description</Description>
+        <PrimaryCategory>
+            <CategoryID>1</CategoryID>
+        </PrimaryCategory>
+        <StartPrice>1.0</StartPrice>
+        <CategoryMappingAllowed>true</CategoryMappingAllowed>
+        <ConditionID>7000</ConditionID>
+        <Country>US</Country>
+        <Currency>USD</Currency>
+        <DispatchTimeMax>3</DispatchTimeMax>
+        <ListingDuration>Days_7</ListingDuration>
+        <ListingType>FixedPriceItem</ListingType>
+        <PictureDetails>
+            <PictureURL>http://i1.sandbox.ebayimg.com/03/i/00/30/07/20_1.JPG?set_id=8800005007</PictureURL>
+        </PictureDetails>
+        <PostalCode>95125</PostalCode>
+        <Quantity>1</Quantity>
+        <ReturnPolicy>
+            <ReturnsAcceptedOption>ReturnsAccepted</ReturnsAcceptedOption>
+            <RefundOption>MoneyBack</RefundOption>
+            <ReturnsWithinOption>Days_30</ReturnsWithinOption>
+            <Description>If you are not satisfied, return the item for refund.</Description>
+            <ShippingCostPaidByOption>Buyer</ShippingCostPaidByOption>
+        </ReturnPolicy>
+        <ShippingDetails>
+            <ShippingServiceOptions>
+                <ShippingServicePriority>1</ShippingServicePriority>
+                <ShippingService>UPSGround</ShippingService>
+                <ShippingServiceCost>0.00</ShippingServiceCost>
+                <ShippingServiceAdditionalCost>0.00</ShippingServiceAdditionalCost>
+            </ShippingServiceOptions>
+        </ShippingDetails>
+        <Site>US</Site>
+    </Item>
+</VerifyAddItemRequest>

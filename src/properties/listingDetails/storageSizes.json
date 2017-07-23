@@ -1,0 +1,115 @@
+{
+  "storage_sizes":
+  [
+    {
+      "key":0.5,
+      "value":"512MB",
+      "spacedValue":"512 MB"
+    },
+    {
+      "key":1,
+      "value":"1GB",
+      "spacedValue":"1 GB"
+    },
+    {
+      "key":2,
+      "value":"2GB",
+      "spacedValue":"2 GB"
+    },
+    {
+      "key":4,
+      "value":"4GB",
+      "spacedValue":"4 GB"
+    },
+    {
+      "key":5,
+      "value":"5GB",
+      "spacedValue":"5 GB"
+    },
+    {
+      "key":6,
+      "value":"6GB",
+      "spacedValue":"6 GB"
+    },
+    {
+      "key":8,
+      "value":"8GB",
+      "spacedValue":"8 GB"
+    },
+    {
+      "key":10,
+      "value":"10GB",
+      "spacedValue":"10 GB"
+    },
+    {
+      "key":15
+    ,"value":"15GB",
+      "spacedValue":"15 GB"
+    },
+    {
+      "key":16,
+      "value":"16GB",
+      "spacedValue":"16 GB"
+    },
+    {
+      "key":20,
+      "value":"20GB",
+      "spacedValue":"20 GB"
+    },
+    {
+      "key":30,
+      "value":"30GB",
+      "spacedValue":"30 GB"
+    },
+    {
+      "key":32,
+      "value":"32GB",
+      "spacedValue":"32 GB"
+    },
+    {
+      "key":40,
+      "value":"40GB",
+      "spacedValue":"40 GB"
+    },
+    {
+      "key":60,
+      "value":"60GB",
+      "spacedValue":"60 GB"
+    },
+    {
+      "key":64,
+      "value":"64GB",
+      "spacedValue":"64 GB"
+    },
+    {
+      "key":80,
+      "value":"80GB",
+      "spacedValue":"80 GB"
+    },
+    {
+      "key":120,
+      "value":"120GB",
+      "spacedValue":"120 GB"
+    },
+    {
+      "key":128,
+      "value":"128GB",
+      "spacedValue":"128 GB"
+    },
+    {
+      "key":160,
+      "value":"160GB",
+      "spacedValue":"160 GB"
+    },
+    {
+      "key":256,
+      "value":"256GB",
+      "spacedValue":"256 GB"
+    },
+    {
+      "key":512,
+      "value":"512GB",
+      "spacedValue":"512 GB"
+    }
+  ]
+}
