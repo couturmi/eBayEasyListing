@@ -188,7 +188,7 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
             for (let i = 0; i < models.length; i++) {
                 if (models[i].key == option.key) {
                     document.getElementById('model' + models[i].key).classList.add('btn-filled');
-                    $scope.currentListing.title.model = models[i].value;
+                    $scope.currentListing.title.model = models[i].longValue != null ? models[i].longValue : models[i].value;
                     $scope.currentListing.title.full = createListingTitle();
                 }
                 else

@@ -4,7 +4,12 @@
 
 /* HEADER */
 .page-header {
-    height: 100px;
+    height: 105px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.page-header > h1 {
+    margin-top: 8px;
 }
 
 
