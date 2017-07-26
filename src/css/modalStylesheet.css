@@ -25,6 +25,10 @@
     background: #e84b3a;
     color: #ffffff;
 }
+.btn.btn-danger {
+    background: #e84b3a;
+    color: #ffffff;
+}
 
 .btn.btn-lg.btn-confirm {
     background: #08b1e0;

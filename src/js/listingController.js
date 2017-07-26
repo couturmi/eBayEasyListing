@@ -16,11 +16,19 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.iPhoneID = 9355;
     $scope.iPodID = 73839;
 
+    $scope.alertTypes = {
+        SUCCESS: "alertSuccess",
+        LOADING: "alertLoading",
+        ERROR: "alertError"
+    }
+
 
     /******************************************
      * Form functions
      ******************************************/
     /* Initialize form control variables */
+    $scope.chooseDetails = true;
+    $scope.findProductButtonTitle = "Find Product";
     $scope.updateShippingInfo = false;
     $scope.updateShippingText = "Change";
     $scope.formSectionIndex = 1;
