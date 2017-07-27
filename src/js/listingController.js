@@ -37,6 +37,7 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.currentListing = {
         title: {},
         category: {},
+        catalogInfo: {},
         price:0.00,
         paymentMethods:{
             pm_payPal: true
@@ -425,7 +426,7 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
                 ItemElement.appendChild(tempElement2);
             }
         }
-        if($scope.currentListing.productId){
+        if($scope.currentListing.catalogInfo.productId){
             let ItemElement = addItemRequest.getElementsByTagName("Item")[0];
             let tempElement = addItemRequest.createElement("ProductListingDetails");
             let tempChildElement = addItemRequest.createElement("ProductReferenceID");

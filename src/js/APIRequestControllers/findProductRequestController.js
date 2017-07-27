@@ -61,7 +61,8 @@ app.controller('findProductCtrl', ['$scope', '$http', '$uibModal', function($sco
      * Sets the productID on the parent scope
      */
     $scope.setProductId = function(product) {
-        $scope.$parent.currentListing.productId = product.productId;
+        $scope.$parent.currentListing.catalogInfo.productId = product.productId;
+        $scope.$parent.currentListing.catalogInfo.productName = product.productTitle;
         $scope.$parent.currentListing.title.full = product.productTitle;
         $scope.$parent.chooseDetails = false;
         $scope.$parent.findProductButtonTitle = "Choose New Details";

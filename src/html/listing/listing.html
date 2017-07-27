@@ -84,15 +84,23 @@
                     </div>
                     <!-- end Sixth Layers -->
                 </div>
+                <!-- Display Product Catalog Info once item is selected -->
+                <div ng-show="!chooseDetails" class="product-info-group text-center">
+                    <h4 class="col-form-label col-form-label-lg product-info-title"><b>Selected Product</b></h4>
+                    <div class="product-info-label">
+                        <label>Product Name:</label><span> {{currentListing.catalogInfo.productName}}</span>
+                    </div>
+                    <div class="product-info-label">
+                        <label>Product Id:</label><span> {{currentListing.catalogInfo.productId}}</span>
+                    </div>
+                </div>
+                <!-- end product info -->
                 <div class="col-md-12 col-lg-12 col-sm-12 form-group text-center" ng-controller="findProductCtrl">
                     <input class="btn btn-submit" type="button" value="{{findProductButtonTitle}}" ng-click="chooseDetails ? performFindProductsRequest() : chooseNewDetails()" ng-disabled="!currentListing.category.primary">
                 </div>
                 <div class="col-md-6 col-lg-6 col-sm-6 form-group">
                     <h4 class="col-form-label col-form-label-lg">Title:</h4>
                     <input name="title" ng-model="currentListing.title.full" type="text" class="form-control" required>
-                    <div ng-show="currentListing.productId != null" id="product-id-label">
-                        <label>Product Id:</label><span> {{currentListing.productId}}</span>
-                    </div>
                 </div>
                 <div class="col-md-6 col-lg-6 col-sm-6 form-group">
                     <h4 class="col-form-label col-form-label-lg">Category:</h4>
@@ -100,11 +108,16 @@
                 </div>
             </div>
             <div class="row" ng-show="formSectionIndex > 1">
-                <div class="col-md-4 col-lg-4 col-sm-4">
+                <div class="col-md-12 col-lg-12 col-sm-12">
                     <h4 class="col-form-label col-form-label-lg">Product Condition:</h4>
                     <div class="form-group">
                         <input ng-repeat="condition in listingConditions" id="{{'condition'+condition.key}}" ng-click="selectCondition(condition)" type="button" class="btn btn-default btn-outline button-spacing" value="{{condition.value}}">
                     </div>
+                </div>
+            </div>
+            <div class="row" ng-show="formSectionIndex > 1">
+                <div class="col-md-4 col-lg-4 col-sm-4 form-group">
+                    <h4 class="col-form-label col-form-label-lg">Defects:</h4>
                 </div>
                 <div class="col-md-8 col-lg-8 col-sm-8 form-group">
                     <h4 class="col-form-label col-form-label-lg">Description:</h4>

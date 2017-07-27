@@ -78,9 +78,18 @@
     background-color: #5EC4E0;
 }
 
-#product-id-label {
+.product-info-title {
+    text-decoration: underline;
+    margin-bottom: 5px;
+}
+.product-info-label {
     color: #777777;
-    padding-top:8px;
+}
+.product-info-group {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: 8px;
+    background: #eeeeee;
 }
 
 /* ADD PHOTOS */
