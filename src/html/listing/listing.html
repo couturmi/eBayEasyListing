@@ -99,7 +99,12 @@
                     <input class="btn btn-submit" type="button" value="{{findProductButtonTitle}}" ng-click="chooseDetails ? performFindProductsRequest() : chooseNewDetails()" ng-disabled="!currentListing.category.primary">
                 </div>
                 <div class="col-md-6 col-lg-6 col-sm-6 form-group">
-                    <h4 class="col-form-label col-form-label-lg">Title:</h4>
+                    <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6" style="padding-left:0px;">
+                        <h4 class="col-form-label col-form-label-lg">Title:</h4>
+                    </div>
+                    <div class="checkbox col-md-6 col-lg-6 col-sm-6 col-xs-6" style="padding-right:0px;">
+                        <label class="pull-right"><input type="checkbox" ng-model="currentListing.title.bundle" ng-change="refreshListingTitle()"> Bundle?</label>
+                    </div>
                     <input name="title" ng-model="currentListing.title.full" type="text" class="form-control" required>
                 </div>
                 <div class="col-md-6 col-lg-6 col-sm-6 form-group">

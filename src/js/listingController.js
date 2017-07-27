@@ -130,20 +130,39 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
 
     var createListingTitle = function(){
         let fullTitle = "";
-        fullTitle += $scope.currentListing.title.type;
-        if($scope.currentListing.title.model)
-            fullTitle += " "+$scope.currentListing.title.model;
-        if($scope.currentListing.title.generation)
-            fullTitle += " "+$scope.currentListing.title.generation;
-        if($scope.currentListing.title.capacity && $scope.currentListing.category.primary == $scope.iPhoneID)
-            fullTitle += " - "+$scope.currentListing.title.capacity+" -";
-        if($scope.currentListing.title.color)
-            fullTitle += " "+$scope.currentListing.title.color;
-        if($scope.currentListing.title.capacity && $scope.currentListing.category.primary == $scope.iPodID)
-            fullTitle += " ("+$scope.currentListing.title.capacity+")";
-        if($scope.currentListing.title.carrier)
-            fullTitle += " ("+$scope.currentListing.title.carrier+")";
+        if($scope.chooseDetails) {
+            if ($scope.currentListing.title.type)
+                fullTitle += $scope.currentListing.title.type;
+            if ($scope.currentListing.title.model)
+                fullTitle += " " + $scope.currentListing.title.model;
+            if ($scope.currentListing.title.generation)
+                fullTitle += " " + $scope.currentListing.title.generation;
+            if ($scope.currentListing.title.capacity && $scope.currentListing.category.primary == $scope.iPhoneID)
+                fullTitle += " - " + $scope.currentListing.title.capacity + " -";
+            if ($scope.currentListing.title.color)
+                fullTitle += " " + $scope.currentListing.title.color;
+            if ($scope.currentListing.title.capacity && $scope.currentListing.category.primary == $scope.iPodID)
+                fullTitle += " (" + $scope.currentListing.title.capacity + ")";
+            if ($scope.currentListing.title.carrier)
+                fullTitle += " (" + $scope.currentListing.title.carrier + ")";
+            if ($scope.currentListing.title.bundle)
+                fullTitle += " Bundle";
+        } else {
+            if ($scope.currentListing.catalogInfo.productName)
+                fullTitle += $scope.currentListing.catalogInfo.productName;
+            if ($scope.currentListing.title.bundle) {
+                if(fullTitle[fullTitle.length - 1] != " ") {
+                    fullTitle += " ";
+                }
+                fullTitle += "Bundle";
+            }
+        }
+        console.log($scope.currentListing.title.bundle);
         return fullTitle;
+    }
+
+    $scope.refreshListingTitle = function() {
+        $scope.currentListing.title.full = createListingTitle();
     }
 
     $scope.selectProductType = function(option){
