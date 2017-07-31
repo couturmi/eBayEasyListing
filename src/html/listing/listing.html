@@ -120,13 +120,31 @@
                     </div>
                 </div>
             </div>
-            <div class="row" ng-show="formSectionIndex > 1">
-                <div class="col-md-4 col-lg-4 col-sm-4 form-group">
+            <div class="row" ng-show="formSectionIndex > 1" ng-controller="defectsCtrl">
+                <div class="col-md-5 col-lg-5 col-sm-5 form-group">
                     <h4 class="col-form-label col-form-label-lg">Defects:</h4>
+                    <label class="manual-data-label">Wait until all selections have been made to enter manual information.</label>
+                    <div ng-repeat="defect in product_defects" class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                        <label class="defects-label defects-label-bold"><input type="checkbox" ng-model="selectedDefectList[defect.key].checked" ng-click="generateDescription()"> {{defect.value}}</label>
+                        <div ng-if="selectedDefectList[defect.key].checked">
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                                <label class="defects-label" ng-repeat="level in defect.levels"><input type="radio" value="{{level.key}}" ng-model="selectedDefectList[defect.key].level" ng-click="generateDescription()"> {{level.value}}</label>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                                <!-- checkbox -->
+                                <label ng-if="defect.subDefectsType=='checkbox'" class="defects-label" ng-repeat="subDefect in defect.subDefects"><input type="checkbox" value="{{subDefect.key}}" ng-model="selectedDefectList[defect.key].subDefectList[subDefect.key]" ng-click="generateDescription()"> {{subDefect.value}}</label>
+                                <!-- radio -->
+                                <label ng-if="defect.subDefectsType=='radio'" class="defects-label" ng-repeat="subDefect in defect.subDefects"><input type="radio" name="subDefects" value="{{subDefect.key}}" ng-model="selectedDefectList[defect.key].subDefectsRadioIndex" ng-click="generateDescription()"> {{subDefect.value}}</label>
+                                <!-- label -->
+                                <label ng-if="defect.manualData == true" class="manual-data-label">Some info must be entered manually.</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-8 col-lg-8 col-sm-8 form-group">
+                <div class="col-md-7 col-lg-7 col-sm-7 form-group">
                     <h4 class="col-form-label col-form-label-lg">Description:</h4>
-                    <textarea name="desc" ng-model="currentListing.desc" rows=8 class="form-control" required></textarea>
+                    <label class="manual-data-label">Changes can be made to the generated description.</label>
+                    <textarea name="desc" ng-model="currentListing.desc" rows=12 class="form-control" required></textarea>
                 </div>
             </div>
             <div class="row" ng-show="formSectionIndex > 1">

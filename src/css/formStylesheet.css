@@ -134,6 +134,21 @@
     cursor: pointer;
 }
 
+/* DEFECTS */
+.defects-label {
+    width:100%;
+    font-size:12px;
+    font-weight: normal;
+    margin-bottom: 0px;
+}
+.defects-label-bold {
+    font-weight: bold;
+}
+.manual-data-label {
+    color: #777777;
+    font-size:12px;
+}
+
 /* ALERT BOXES */
 .alert.alert-info.alert-found {
     z-index: 2;

@@ -65,6 +65,10 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
     $http.get('properties/listingDetails/productColors.json').success(function(data) {
         $scope.product_colors=data.product_colors;
     });
+    $http.get('properties/listingDetails/productDefects.json').success(function(data) {
+        $scope.product_defects=data.product_defects;
+        $scope.blankSelectedDefectList();   //create empty list on startup
+    });
     $http.get('properties/listingDetails/listingTypeList.json').success(function(data) {
         $scope.listingTypeList=data.listingTypeList;
     });
