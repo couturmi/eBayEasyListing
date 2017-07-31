@@ -2,7 +2,7 @@
  * Created by mitchcout on 5/14/2017.
  */
 var app = angular.module('easyListing');
-app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
+app.controller('listingCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
     /************************************************************************
      * Global Variables
      ************************************************************************/
@@ -22,6 +22,14 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
         ERROR: "alertError"
     }
 
+    /******************************************
+     * String functions
+     ******************************************/
+    //replace all instances of text in a string
+    String.prototype.replaceAll = function(search, replacement) {
+        var target = this;
+        return target.replace(new RegExp(search, 'g'), replacement);
+    };
 
     /******************************************
      * Form functions
@@ -391,8 +399,18 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
             addItemRequest.getElementsByTagName("ConditionID")[0].childNodes[0].nodeValue = $scope.currentListing.condition;
         if($scope.currentListing.desc)
             addItemRequest.getElementsByTagName("Description")[0].childNodes[0].nodeValue = $scope.currentListing.desc;
-        if($scope.currentListing.title)
-            //TODO: Photos
+        if($scope.currentListing.photoList) {
+            var PictureDetailsElement = addItemRequest.getElementsByTagName("PictureDetails")[0];
+            $scope.currentListing.photoList.forEach(function (photoURL) {
+                //replace empty space in url with %20
+                let tempURL = photoURL.replaceAll(" ", "%20");
+                //create xml element
+                let tempElement = addItemRequest.createElement("PictureURL");
+                let tempTextNode = addItemRequest.createTextNode($location.absUrl() + tempURL);
+                tempElement.appendChild(tempTextNode);
+                PictureDetailsElement.appendChild(tempElement);
+            });
+        }
         if($scope.currentListing.listingType)
             addItemRequest.getElementsByTagName("ListingType")[0].childNodes[0].nodeValue = $scope.currentListing.listingType;
         if($scope.currentListing.listingDuration){

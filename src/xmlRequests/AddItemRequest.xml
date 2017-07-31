@@ -19,9 +19,7 @@
         <DispatchTimeMax>3</DispatchTimeMax>
         <ListingDuration>Days_7</ListingDuration>
         <ListingType>FixedPriceItem</ListingType>
-        <PictureDetails>
-            <PictureURL>http://i1.sandbox.ebayimg.com/03/i/00/30/07/20_1.JPG?set_id=8800005007</PictureURL>
-        </PictureDetails>
+        <PictureDetails></PictureDetails>
         <PostalCode>95125</PostalCode>
         <Quantity>1</Quantity>
         <ReturnPolicy>
