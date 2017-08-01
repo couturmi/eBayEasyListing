@@ -1,0 +1,323 @@
+{
+  "product_defects":
+  [
+    {
+      "key":0  ,
+      "value":"None / Perfect Condition",
+      "longValue":"The {{productType}} is in perfect working condition",
+      "levels":[],
+      "subDefectsType":"checkbox",
+      "subDefects":[],
+      "manualData":false
+    },
+    {
+      "key":1  ,
+      "value":"Physical Condition",
+      "longValue":"The {{productType}} is in",
+      "levels":[
+        {
+          "key":0,
+          "value":"excellent",
+          "longValue":" excellent physical condition"
+        },
+        {
+          "key":1,
+          "value":"good",
+          "longValue":" good physical condition"
+        },
+        {
+          "key":2,
+          "value":"decent",
+          "longValue":" decent physical condition"
+        },
+        {
+          "key":3,
+          "value":"poor",
+          "longValue":" poor physical condition"
+        }
+      ],
+      "subDefectsType":"radio",
+      "subDefects":[
+        {
+          "key":0,
+          "value":"(none)",
+          "longValue":""
+        },
+        {
+          "key":1,
+          "value":"typical signs of use",
+          "longValue":" with typical signs of use"
+        },
+        {
+          "key":2,
+          "value":"light signs of use",
+          "longValue":" with only light signs of use"
+        },
+        {
+          "key":3,
+          "value":"heavy signs of use",
+          "longValue":" with heavy signs of use"
+        }
+      ],
+      "manualData":false
+    },
+    {
+      "key":2,
+      "value":"Cracked Screen",
+      "longValue":"The {{productType}} has a cracked screen",
+      "levels":[
+        {
+          "key":0,
+          "value":"(none)",
+          "longValue":""
+        },
+        {
+          "key":1,
+          "value":"middle",
+          "longValue":" in the middle"
+        },
+        {
+          "key":2,
+          "value":"top",
+          "longValue":" running along the top"
+        },
+        {
+          "key":3,
+          "value":"bottom",
+          "longValue":" running along the bottom"
+        },
+        {
+          "key":4,
+          "value":"left",
+          "longValue":" on the left side"
+        },
+        {
+          "key":5,
+          "value":"right",
+          "longValue":" on the right side"
+        },
+        {
+          "key":6,
+          "value":"bottom left corner",
+          "longValue":" in the bottom left corner"
+        },
+        {
+          "key":7,
+          "value":"bottom right corner",
+          "longValue":" in the bottom right corner"
+        },
+        {
+          "key":8,
+          "value":"top left corner",
+          "longValue":" in the top left corner"
+        },
+        {
+          "key":9,
+          "value":"top right corner",
+          "longValue":" in the top right corner"
+        }
+      ],
+      "subDefectsType":"checkbox",
+      "subDefects":[
+        {
+          "key":0,
+          "value":"dead pixels",
+          "longValue":" along with some dead pixels"
+        }
+      ],
+      "manualData":false
+    },
+    {
+      "key":3,
+      "value":"Signs of Use",
+      "longValue":"The {{productType}}",
+      "levels":[
+        {
+          "key":0,
+          "value":"typical",
+          "longValue":" shows typical signs of use"
+        },
+        {
+          "key":1,
+          "value":"light",
+          "longValue":" shows light signs of use but nothing major"
+        },
+        {
+          "key":2,
+          "value":"heavy",
+          "longValue":" shows heavy signs of use"
+        },
+        {
+          "key":3,
+          "value":"new from Apple",
+          "longValue":" is a replacement directly from Apple and has not been used"
+        }
+      ],
+      "subDefectsType":"checkbox",
+      "subDefects":[],
+      "manualData":false
+    },
+    {
+      "key":4,
+      "value":"Screen Damage",
+      "longValue":"There is an issue with the screen so it is tough to see",
+      "levels":[
+        {
+          "key":0,
+          "value":"1/4th of screen",
+          "longValue":" about 1/4th of the screen"
+        },
+        {
+          "key":1,
+          "value":"1/3rd of screen",
+          "longValue":" about 1/3rd of the screen"
+        },
+        {
+          "key":2,
+          "value":"1/2 of screen",
+          "longValue":" about 1/2 of the screen"
+        },
+        {
+          "key":3,
+          "value":"most of screen",
+          "longValue":" most of the screen"
+        }
+      ],
+      "subDefectsType":"checkbox",
+      "subDefects":[],
+      "manualData":false
+    },
+    {
+      "key":5,
+      "value":"Button Damage",
+      "longValue":"The [BUTTON NAME] button",
+      "levels":[
+        {
+          "key":0,
+          "value":"does not work",
+          "longValue":" does not work"
+        },
+        {
+          "key":1,
+          "value":"works sometimes",
+          "longValue":" works on and off"
+        },
+        {
+          "key":2,
+          "value":"pushed hard",
+          "longValue":" has to be pushed a bit harder to use"
+        }
+      ],
+      "subDefectsType":"checkbox",
+      "subDefects":[],
+      "manualData":true
+    },
+    {
+      "key":6,
+      "value":"Headphone Jack Damage",
+      "longValue":"The headphone jack",
+      "levels":[
+        {
+          "key":0,
+          "value":"does not work",
+          "longValue":" does not work"
+        },
+        {
+          "key":1,
+          "value":"sound isn't clear",
+          "longValue":" doesn't work properly, so the sound isn't very clear"
+        },
+        {
+          "key":2,
+          "value":"sound is barely altered",
+          "longValue":" doesn't work properly, so the sound isn't 100% clear, but still sounds fine"
+        }
+      ],
+      "subDefectsType":"checkbox",
+      "subDefects":[],
+      "manualData":false
+    },
+    {
+      "key":7,
+      "value":"Cloudy LCD",
+      "longValue":"The LCD for the {{productType}} is cloudy",
+      "levels":[],
+      "subDefectsType":"checkbox",
+      "subDefects":[],
+      "manualData":false
+    },
+    {
+      "key":8,
+      "value":"Touch Screen Response",
+      "longValue":"The {{productType}}'s screen does not respond to touch",
+      "levels":[],
+      "subDefectsType":"checkbox",
+      "subDefects":[],
+      "manualData":false
+    },
+    {
+      "key":9,
+      "value":"Missing Pieces",
+      "longValue":"The {{productType}} is missing [ENTER MISSING ITEM]",
+      "levels":[],
+      "subDefectsType":"checkbox",
+      "subDefects":[],
+      "manualData":true
+    },
+    {
+      "key":10,
+      "value":"Broken Touch ID",
+      "longValue":"The Touch ID does not work",
+      "levels":[],
+      "subDefectsType":"checkbox",
+      "subDefects":[],
+      "manualData":false
+    },
+    {
+      "key":11,
+      "value":"Battery",
+      "longValue":"The {{productType}}'s battery",
+      "levels":[
+        {
+          "key":0,
+          "value":"does not charge",
+          "longValue":" does not hold a charge"
+        },
+        {
+          "key":1,
+          "value":"works sometimes",
+          "longValue":" works on and off"
+        }
+      ],
+      "subDefectsType":"checkbox",
+      "subDefects":[],
+      "manualData":false
+    },
+    {
+      "key":12,
+      "value":"Product Reset",
+      "longValue":"The {{productType}}",
+      "levels":[
+        {
+          "key":0,
+          "value":"reset to factory",
+          "longValue":" was reset to factory settings"
+        }
+      ],
+      "subDefectsType":"radio",
+      "subDefects":[
+        {
+          "key":0,
+          "value":"taken through setup",
+          "longValue":" and just taken through setup"
+        },
+        {
+          "key":1,
+          "value":"iCloud account removed",
+          "longValue":" and the iCloud account has been removed so it is ready for a new owner"
+        }
+      ],
+      "manualData":false
+    }
+  ]
+}

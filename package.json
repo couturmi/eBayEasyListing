@@ -18,7 +18,9 @@
   "homepage": "https://github.com/couturmi/eBayEasyListing#readme",
   "dependencies": {
     "express": "^4.15.3",
+    "express-fileupload": "^0.1.4",
     "express-http-proxy": "^1.0.5",
+    "find-remove": "^1.0.1",
     "http-proxy": "^1.16.2"
   }
 }

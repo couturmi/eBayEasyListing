@@ -3,9 +3,10 @@
   [
     {
       "key":21,
-      "value":"2G",
+      "value":"1st Gen",
+      "longValue":"1st Generation",
       "capacityList":[4,8,16],
-      "colorList":["gray"]
+      "colorList":["gray","black","white"]
     },
     {
       "key":22,

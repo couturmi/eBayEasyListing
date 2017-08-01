@@ -14,31 +14,30 @@
         <StartPrice>1.0</StartPrice>
         <CategoryMappingAllowed>true</CategoryMappingAllowed>
         <ConditionID>7000</ConditionID>
-        <Country>US</Country>
         <Currency>USD</Currency>
-        <DispatchTimeMax>3</DispatchTimeMax>
-        <ListingDuration>Days_7</ListingDuration>
+        <DispatchTimeMax>1</DispatchTimeMax>
+        <ListingDuration>Days_30</ListingDuration>
         <ListingType>FixedPriceItem</ListingType>
-        <PictureDetails>
-            <PictureURL>http://i1.sandbox.ebayimg.com/03/i/00/30/07/20_1.JPG?set_id=8800005007</PictureURL>
-        </PictureDetails>
-        <PostalCode>95125</PostalCode>
+        <PictureDetails></PictureDetails>
+        <Location>location</Location>
+        <PostalCode>postalCode</PostalCode>
+        <Country>US</Country>
         <Quantity>1</Quantity>
-        <ReturnPolicy>
-            <ReturnsAcceptedOption>ReturnsAccepted</ReturnsAcceptedOption>
-            <RefundOption>MoneyBack</RefundOption>
-            <ReturnsWithinOption>Days_30</ReturnsWithinOption>
-            <Description>If you are not satisfied, return the item for refund.</Description>
-            <ShippingCostPaidByOption>Buyer</ShippingCostPaidByOption>
-        </ReturnPolicy>
         <ShippingDetails>
             <ShippingServiceOptions>
+                <FreeShipping>true</FreeShipping>
                 <ShippingServicePriority>1</ShippingServicePriority>
-                <ShippingService>UPSGround</ShippingService>
+                <ShippingService>ShippingMethodStandard</ShippingService>
                 <ShippingServiceCost>0.00</ShippingServiceCost>
                 <ShippingServiceAdditionalCost>0.00</ShippingServiceAdditionalCost>
             </ShippingServiceOptions>
         </ShippingDetails>
+        <ReturnPolicy>
+            <ReturnsAcceptedOption>ReturnsAccepted</ReturnsAcceptedOption>
+            <RefundOption>MoneyBack</RefundOption>
+            <ReturnsWithinOption>Days_30</ReturnsWithinOption>
+            <ShippingCostPaidByOption>Buyer</ShippingCostPaidByOption>
+        </ReturnPolicy>
         <Site>US</Site>
     </Item>
 </VerifyAddItemRequest>

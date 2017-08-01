@@ -2,6 +2,18 @@
     /*!*background: #dddddd;*!*/
 /*}*/
 
+/* HEADER */
+.page-header {
+    height: 105px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.page-header > h1 {
+    margin-top: 8px;
+}
+
+
+/* BUTTONS */
 .btn.btn-outline {
     background: #ffffff;
     margin-bottom: 5px;
@@ -19,6 +31,7 @@
     margin-right: 5px;
 }
 
+/* TOP SECTION */
 .extra-margin-bottom {
     margin-bottom: 20px;
 }
@@ -65,7 +78,120 @@
     background-color: #5EC4E0;
 }
 
-#product-id-label {
+.product-info-title {
+    text-decoration: underline;
+    margin-bottom: 5px;
+}
+.product-info-label {
     color: #777777;
-    padding-top:8px;
+}
+.product-info-group {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: 8px;
+    background: #eeeeee;
+}
+
+/* ADD PHOTOS */
+.addPhoto {
+    margin-top:10px;
+    width: 110px;
+    line-height: 180px;
+    vertical-align: middle;
+    border-style: dashed;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: #bbbbbb;
+    color: #bbbbbb;
+    font-size: 40px;
+    font-weight: 200;
+    overflow: hidden;
+    position: relative;
+}
+.addPhoto:hover {
+    background: #eeeeee;
+    cursor: pointer;
+}
+.addPhoto [type=file]{
+    cursor: inherit;
+    opacity: 0;
+    position: absolute;
+}
+.photo {
+    margin-top:10px;
+    margin-right:5px;
+    max-width: 180px;
+    max-height: 180px;
+    line-height: 180px;
+    vertical-align: middle;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: #bbbbbb;
+}
+.photo:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+/* DEFECTS */
+.defects-label {
+    width:100%;
+    font-size:12px;
+    font-weight: normal;
+    margin-bottom: 0px;
+}
+.defects-label-bold {
+    font-weight: bold;
+}
+.manual-data-label {
+    color: #777777;
+    font-size:12px;
+}
+
+/* ALERT BOXES */
+.alert.alert-info.alert-found {
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+    background: #08b1e0;
+    color: #ffffff;
+    line-height: 80px;
+    vertical-align: middle;
+    font-size: 18px;
+    top:0;
+}
+
+.alert.alert-info.alert-loading {
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+    background: #edf060;
+    border-color: #dddddd;
+    color: #444444;
+    line-height: 80px;
+    vertical-align: middle;
+    font-size: 18px;
+    top:0;
+}
+
+.alert.alert-info.alert-error {
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+    background: #e84b3a;
+    border-color: #dddddd;
+    color: #ffffff;
+    line-height: 80px;
+    vertical-align: middle;
+    font-size: 18px;
+    top:0;
+}
+
+.close {
+    line-height: 80px;
+    vertical-align: middle;
+    margin-right: 10px;
+    opacity: .4;
+    font-size: 28px;
 }

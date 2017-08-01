@@ -2,7 +2,7 @@
  * Created by mitchcout on 5/14/2017.
  */
 var app = angular.module('easyListing');
-app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
+app.controller('listingCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
     /************************************************************************
      * Global Variables
      ************************************************************************/
@@ -13,34 +13,67 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.addItemRequestURL = "xmlRequests/AddItemRequest.xml";
     $scope.findProductsRequestURL = "xmlRequests/findProductsRequest.xml";
 
+    $scope.userDetails_shippingDetailsURL = "properties/userDetails/shippingDetails.json";
+
     $scope.iPhoneID = 9355;
     $scope.iPodID = 73839;
 
+    $scope.alertTypes = {
+        SUCCESS: "alertSuccess",
+        LOADING: "alertLoading",
+        ERROR: "alertError"
+    }
+
+    /******************************************
+     * String functions
+     ******************************************/
+    //replace all instances of text in a string
+    String.prototype.replaceAll = function(search, replacement) {
+        var target = this;
+        return target.replace(new RegExp(search, 'g'), replacement);
+    };
 
     /******************************************
      * Form functions
      ******************************************/
     /* Initialize form control variables */
+    $scope.chooseDetails = true;
+    $scope.findProductButtonTitle = "Find Product";
     $scope.updateShippingInfo = false;
     $scope.updateShippingText = "Change";
     $scope.formSectionIndex = 1;
+
+    /* Get user JSON data */
+    $http.get($scope.userDetails_shippingDetailsURL).success(function(data) {
+        $scope.currentListing.shippingLocationCountry=data.shippingLocationCountry;
+        $scope.currentListing.shippingLocationZIP=data.shippingLocationZIP;
+        $scope.currentListing.shippingLocationCityState=data.shippingLocationCityState;
+        //if user data has not yet been saved, request info from user
+        if($scope.currentListing.shippingLocationCountry == null || $scope.currentListing.shippingLocationCountry == "" ||
+            $scope.currentListing.shippingLocationZIP == null || $scope.currentListing.shippingLocationZIP == "" ||
+            $scope.currentListing.shippingLocationCityState == null || $scope.currentListing.shippingLocationCityState == ""){
+            $scope.updateShippingInfo = true;
+        }
+    });
 
     /* Initialize current listing */
     $scope.currentListing = {
         title: {},
         category: {},
+        catalogInfo: {},
         price:0.00,
         paymentMethods:{
             pm_payPal: true
         },
         listingType:"FixedPriceItem",
-        listingDuration:"Good Til' Cancelled",
-        shippingLocationCountry:"United States",
-        shippingLocationZIP:"48162",
-        shippingLocationCityState:"Grand Rapids, Michigan"
+        listingDuration:"30 days",
+        returnOption:"ReturnsAccepted",
+        shippingLocationCountry:"",
+        shippingLocationZIP:"",
+        shippingLocationCityState:""
     };
 
-    /* Get JSON data */
+    /* Get listing JSON data */
     $http.get('properties/listingDetails/iPodModels.json').success(function(data) {
         $scope.ipod_models=data.ipod_models;
     });
@@ -56,6 +89,10 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
     $http.get('properties/listingDetails/productColors.json').success(function(data) {
         $scope.product_colors=data.product_colors;
     });
+    $http.get('properties/listingDetails/productDefects.json').success(function(data) {
+        $scope.product_defects=data.product_defects;
+        $scope.blankSelectedDefectList();   //create empty list on startup
+    });
     $http.get('properties/listingDetails/listingTypeList.json').success(function(data) {
         $scope.listingTypeList=data.listingTypeList;
     });
@@ -68,7 +105,6 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
     });
     $scope.domesticShippingList = ["Flat: same cost to all buyers","Calculated: Cost varies by buyer location","Freight: large items over 150 lbs","No shipping: Local pickup only"];
     $scope.listingFilters = {};
-
 
     /* Format/Filter functions */
     $scope.formatPrice = function(){
@@ -121,20 +157,38 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
 
     var createListingTitle = function(){
         let fullTitle = "";
-        fullTitle += $scope.currentListing.title.type;
-        if($scope.currentListing.title.model)
-            fullTitle += " "+$scope.currentListing.title.model;
-        if($scope.currentListing.title.generation)
-            fullTitle += " "+$scope.currentListing.title.generation;
-        if($scope.currentListing.title.capacity && $scope.currentListing.category.primary == $scope.iPhoneID)
-            fullTitle += " - "+$scope.currentListing.title.capacity+" -";
-        if($scope.currentListing.title.color)
-            fullTitle += " "+$scope.currentListing.title.color;
-        if($scope.currentListing.title.capacity && $scope.currentListing.category.primary == $scope.iPodID)
-            fullTitle += " ("+$scope.currentListing.title.capacity+")";
-        if($scope.currentListing.title.carrier)
-            fullTitle += " ("+$scope.currentListing.title.carrier+")";
+        if($scope.chooseDetails) {
+            if ($scope.currentListing.title.type)
+                fullTitle += $scope.currentListing.title.type;
+            if ($scope.currentListing.title.model)
+                fullTitle += " " + $scope.currentListing.title.model;
+            if ($scope.currentListing.title.generation)
+                fullTitle += " " + $scope.currentListing.title.generation;
+            if ($scope.currentListing.title.capacity && $scope.currentListing.category.primary == $scope.iPhoneID)
+                fullTitle += " - " + $scope.currentListing.title.capacity + " -";
+            if ($scope.currentListing.title.color)
+                fullTitle += " " + $scope.currentListing.title.color;
+            if ($scope.currentListing.title.capacity && $scope.currentListing.category.primary == $scope.iPodID)
+                fullTitle += " (" + $scope.currentListing.title.capacity + ")";
+            if ($scope.currentListing.title.carrier)
+                fullTitle += " (" + $scope.currentListing.title.carrier + ")";
+            if ($scope.currentListing.title.bundle)
+                fullTitle += " Bundle";
+        } else {
+            if ($scope.currentListing.catalogInfo.productName)
+                fullTitle += $scope.currentListing.catalogInfo.productName;
+            if ($scope.currentListing.title.bundle) {
+                if(fullTitle[fullTitle.length - 1] != " ") {
+                    fullTitle += " ";
+                }
+                fullTitle += "Bundle";
+            }
+        }
         return fullTitle;
+    }
+
+    $scope.refreshListingTitle = function() {
+        $scope.currentListing.title.full = createListingTitle();
     }
 
     $scope.selectProductType = function(option){
@@ -180,7 +234,7 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
             for (let i = 0; i < models.length; i++) {
                 if (models[i].key == option.key) {
                     document.getElementById('model' + models[i].key).classList.add('btn-filled');
-                    $scope.currentListing.title.model = models[i].value;
+                    $scope.currentListing.title.model = models[i].longValue != null ? models[i].longValue : models[i].value;
                     $scope.currentListing.title.full = createListingTitle();
                 }
                 else
@@ -337,6 +391,34 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
         } else {
             $scope.updateShippingInfo = false;
             $scope.updateShippingText = "Change";
+            //update properties file
+            let shippingDetailsTemp = {
+                shippingLocationCountry:$scope.currentListing.shippingLocationCountry,
+                shippingLocationZIP:$scope.currentListing.shippingLocationZIP,
+                shippingLocationCityState:$scope.currentListing.shippingLocationCityState
+            };
+            let shippingDetailsString = JSON.stringify(shippingDetailsTemp);
+            $http({
+                method: 'POST',
+                url: "http://localhost:8080/updateUserShippingDetails",
+                headers: {'Content-Type': undefined},
+                data: {
+                    shippingDetails: shippingDetailsString
+                },
+                transformRequest: function (data, headersGetter) {
+                    var formData = new FormData();
+                    angular.forEach(data, function (value, key) {
+                        formData.append(key, value);
+                    });
+                    return formData;
+                }
+                })
+                .success(function (data) {
+                    console.log("successfully changed user shipping item location!");
+                })
+                .error(function (data, status) {
+                    console.log("ERROR: failure updating user shipping details");
+                });
         }
     }
 
@@ -359,8 +441,18 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
             addItemRequest.getElementsByTagName("ConditionID")[0].childNodes[0].nodeValue = $scope.currentListing.condition;
         if($scope.currentListing.desc)
             addItemRequest.getElementsByTagName("Description")[0].childNodes[0].nodeValue = $scope.currentListing.desc;
-        if($scope.currentListing.title)
-            //TODO: Photos
+        if($scope.currentListing.photoList) {
+            var PictureDetailsElement = addItemRequest.getElementsByTagName("PictureDetails")[0];
+            $scope.currentListing.photoList.forEach(function (photoURL) {
+                //replace empty space in url with %20
+                let tempURL = photoURL.replaceAll(" ", "%20");
+                //create xml element
+                let tempElement = addItemRequest.createElement("PictureURL");
+                let tempTextNode = addItemRequest.createTextNode($location.absUrl() + tempURL);
+                tempElement.appendChild(tempTextNode);
+                PictureDetailsElement.appendChild(tempElement);
+            });
+        }
         if($scope.currentListing.listingType)
             addItemRequest.getElementsByTagName("ListingType")[0].childNodes[0].nodeValue = $scope.currentListing.listingType;
         if($scope.currentListing.listingDuration){
@@ -417,19 +509,24 @@ app.controller('listingCtrl', ['$scope', '$http', function($scope, $http) {
                 ItemElement.appendChild(tempElement2);
             }
         }
-        if($scope.currentListing.productId){
+        if($scope.currentListing.catalogInfo.productId){
             let ItemElement = addItemRequest.getElementsByTagName("Item")[0];
             let tempElement = addItemRequest.createElement("ProductListingDetails");
             let tempChildElement = addItemRequest.createElement("ProductReferenceID");
-            let tempTextNode = addItemRequest.createTextNode($scope.currentListing.productId);
+            let tempTextNode = addItemRequest.createTextNode($scope.currentListing.catalogInfo.productId);
             tempChildElement.appendChild(tempTextNode);
             tempElement.appendChild(tempChildElement);
             ItemElement.appendChild(tempElement);
         }
-        if($scope.currentListing.title)
-            //TODO: Return Options
-        if($scope.currentListing.title)
-            //TODO: Shipping Options
+        if($scope.currentListing.returnOption)
+            addItemRequest.getElementsByTagName("ReturnsAcceptedOption")[0].childNodes[0].nodeValue = $scope.currentListing.returnOption;
+        if($scope.currentListing.shippingLocationCityState)
+            addItemRequest.getElementsByTagName("Location")[0].childNodes[0].nodeValue = $scope.currentListing.shippingLocationCityState;
+        if($scope.currentListing.shippingLocationZIP)
+            addItemRequest.getElementsByTagName("PostalCode")[0].childNodes[0].nodeValue = $scope.currentListing.shippingLocationZIP;
+        if($scope.currentListing.shippingLocationCountry) {
+            addItemRequest.getElementsByTagName("Country")[0].childNodes[0].nodeValue = 'US';
+        }
 
         /* Submit Listing */
         $scope.submitListing(serializer.serializeToString(addItemRequest));
