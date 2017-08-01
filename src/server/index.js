@@ -4,6 +4,7 @@
 
 const express = require('express');
 const fileUpload = require('express-fileupload');
+var fs = require('fs');
 var proxy = require('express-http-proxy');
 const opn = require('opn');
 var findRemoveSync = require('find-remove');
@@ -29,6 +30,24 @@ app.post('/upload', function(req, res) {
             return res.status(500).send(err);
 
         res.send('File uploaded!');
+    });
+});
+
+app.post('/updateUserShippingDetails', function(req, res) {
+    if (!req.body) {
+        return res.status(400).send('No data received.');
+    }
+
+    //get data
+    let shippingDetails = req.body.shippingDetails;
+
+    //write data to file
+    var writer = fs.createWriteStream('./src/properties/userDetails/shippingDetails.json');
+    writer.write(shippingDetails, function(err) {
+        if (err)
+            return res.status(500).send(err);
+
+        res.send('User Shipping Details updated!');
     });
 });
 

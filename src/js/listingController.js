@@ -13,6 +13,8 @@ app.controller('listingCtrl', ['$scope', '$http', '$location', function($scope, 
     $scope.addItemRequestURL = "xmlRequests/AddItemRequest.xml";
     $scope.findProductsRequestURL = "xmlRequests/findProductsRequest.xml";
 
+    $scope.userDetails_shippingDetailsURL = "properties/userDetails/shippingDetails.json";
+
     $scope.iPhoneID = 9355;
     $scope.iPodID = 73839;
 
@@ -41,6 +43,19 @@ app.controller('listingCtrl', ['$scope', '$http', '$location', function($scope, 
     $scope.updateShippingText = "Change";
     $scope.formSectionIndex = 1;
 
+    /* Get user JSON data */
+    $http.get($scope.userDetails_shippingDetailsURL).success(function(data) {
+        $scope.currentListing.shippingLocationCountry=data.shippingLocationCountry;
+        $scope.currentListing.shippingLocationZIP=data.shippingLocationZIP;
+        $scope.currentListing.shippingLocationCityState=data.shippingLocationCityState;
+        //if user data has not yet been saved, request info from user
+        if($scope.currentListing.shippingLocationCountry == null || $scope.currentListing.shippingLocationCountry == "" ||
+            $scope.currentListing.shippingLocationZIP == null || $scope.currentListing.shippingLocationZIP == "" ||
+            $scope.currentListing.shippingLocationCityState == null || $scope.currentListing.shippingLocationCityState == ""){
+            $scope.updateShippingInfo = true;
+        }
+    });
+
     /* Initialize current listing */
     $scope.currentListing = {
         title: {},
@@ -51,13 +66,14 @@ app.controller('listingCtrl', ['$scope', '$http', '$location', function($scope, 
             pm_payPal: true
         },
         listingType:"FixedPriceItem",
-        listingDuration:"Good Til' Cancelled",
-        shippingLocationCountry:"United States",
-        shippingLocationZIP:"48162",
-        shippingLocationCityState:"Grand Rapids, Michigan"
+        listingDuration:"30 days",
+        returnOption:"ReturnsAccepted",
+        shippingLocationCountry:"",
+        shippingLocationZIP:"",
+        shippingLocationCityState:""
     };
 
-    /* Get JSON data */
+    /* Get listing JSON data */
     $http.get('properties/listingDetails/iPodModels.json').success(function(data) {
         $scope.ipod_models=data.ipod_models;
     });
@@ -89,7 +105,6 @@ app.controller('listingCtrl', ['$scope', '$http', '$location', function($scope, 
     });
     $scope.domesticShippingList = ["Flat: same cost to all buyers","Calculated: Cost varies by buyer location","Freight: large items over 150 lbs","No shipping: Local pickup only"];
     $scope.listingFilters = {};
-
 
     /* Format/Filter functions */
     $scope.formatPrice = function(){
@@ -169,7 +184,6 @@ app.controller('listingCtrl', ['$scope', '$http', '$location', function($scope, 
                 fullTitle += "Bundle";
             }
         }
-        console.log($scope.currentListing.title.bundle);
         return fullTitle;
     }
 
@@ -377,6 +391,34 @@ app.controller('listingCtrl', ['$scope', '$http', '$location', function($scope, 
         } else {
             $scope.updateShippingInfo = false;
             $scope.updateShippingText = "Change";
+            //update properties file
+            let shippingDetailsTemp = {
+                shippingLocationCountry:$scope.currentListing.shippingLocationCountry,
+                shippingLocationZIP:$scope.currentListing.shippingLocationZIP,
+                shippingLocationCityState:$scope.currentListing.shippingLocationCityState
+            };
+            let shippingDetailsString = JSON.stringify(shippingDetailsTemp);
+            $http({
+                method: 'POST',
+                url: "http://localhost:8080/updateUserShippingDetails",
+                headers: {'Content-Type': undefined},
+                data: {
+                    shippingDetails: shippingDetailsString
+                },
+                transformRequest: function (data, headersGetter) {
+                    var formData = new FormData();
+                    angular.forEach(data, function (value, key) {
+                        formData.append(key, value);
+                    });
+                    return formData;
+                }
+                })
+                .success(function (data) {
+                    console.log("successfully changed user shipping item location!");
+                })
+                .error(function (data, status) {
+                    console.log("ERROR: failure updating user shipping details");
+                });
         }
     }
 
@@ -471,15 +513,20 @@ app.controller('listingCtrl', ['$scope', '$http', '$location', function($scope, 
             let ItemElement = addItemRequest.getElementsByTagName("Item")[0];
             let tempElement = addItemRequest.createElement("ProductListingDetails");
             let tempChildElement = addItemRequest.createElement("ProductReferenceID");
-            let tempTextNode = addItemRequest.createTextNode($scope.currentListing.productId);
+            let tempTextNode = addItemRequest.createTextNode($scope.currentListing.catalogInfo.productId);
             tempChildElement.appendChild(tempTextNode);
             tempElement.appendChild(tempChildElement);
             ItemElement.appendChild(tempElement);
         }
-        if($scope.currentListing.title)
-            //TODO: Return Options
-        if($scope.currentListing.title)
-            //TODO: Shipping Options
+        if($scope.currentListing.returnOption)
+            addItemRequest.getElementsByTagName("ReturnsAcceptedOption")[0].childNodes[0].nodeValue = $scope.currentListing.returnOption;
+        if($scope.currentListing.shippingLocationCityState)
+            addItemRequest.getElementsByTagName("Location")[0].childNodes[0].nodeValue = $scope.currentListing.shippingLocationCityState;
+        if($scope.currentListing.shippingLocationZIP)
+            addItemRequest.getElementsByTagName("PostalCode")[0].childNodes[0].nodeValue = $scope.currentListing.shippingLocationZIP;
+        if($scope.currentListing.shippingLocationCountry) {
+            addItemRequest.getElementsByTagName("Country")[0].childNodes[0].nodeValue = 'US';
+        }
 
         /* Submit Listing */
         $scope.submitListing(serializer.serializeToString(addItemRequest));

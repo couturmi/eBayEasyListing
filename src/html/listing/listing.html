@@ -170,12 +170,6 @@
                 </div>
             </div>
             <div class="row" ng-show="formSectionIndex > 2">
-                <div class="col-md-9 col-lg-9 col-sm-9 form-group">
-                    <input type="radio" name="durationStart" value="immediate" checked> <span>Start my listings when I submit them</span><br>
-                    <input type="radio" name="durationStart" value="scheduled"> <span>Schedule to start on: </span>
-                </div>
-            </div>
-            <div class="row" ng-show="formSectionIndex > 2">
                 <div class="col-md-2 col-lg-2 col-sm-2 form-group">
                     <h4 class="col-form-label col-form-label-lg">{{currentListing.listingType == "Auction" ? "Starting Price" : "Price"}}:</h4>
                     <div class="input-group">
@@ -187,7 +181,7 @@
             <div class="row" ng-show="formSectionIndex > 3">
                 <div class="col-md-6 col-lg-6 col-sm-6 form-group">
                     <h4 class="col-form-label col-form-label-lg">Payment Methods:</h4>
-                    <div class="checkbox {{true ? 'disabled' : ''}}">
+                    <div class="checkbox">
                         <label><input name="paymentMethod" ng-model="currentListing.paymentMethods.pm_payPal" type="checkbox" ng-checked="currentListing.paymentMethods.all || !listingForm.paymentMethod.$touched">
                             PayPal</label>
                     </div>
@@ -215,11 +209,11 @@
                 <div class="col-md-6 col-lg-6 col-sm-6 form-group">
                     <h4 class="col-form-label col-form-label-lg">Return Options:</h4>
                     <div class="form-check">
-                        <label class="form-check-label"><input type="radio" class="form-check-input" name="returnOptions" value="accepted">
+                        <label class="form-check-label"><input type="radio" class="form-check-input" name="returnOptions" value="ReturnsAccepted" ng-model="currentListing.returnOption">
                             Returns Accepted</label>
                     </div>
                     <div class="form-check">
-                        <label class="form-check-label"><input type="radio" class="form-check-input" name="returnOptions" value="notAccepted" checked>
+                        <label class="form-check-label"><input type="radio" class="form-check-input" name="returnOptions" value="ReturnsNotAccepted" ng-model="currentListing.returnOption">
                             No returns accepted
                         <br><small class="form-text text-muted radio-small-text">The item could still be returned if it doesn't match the listing's description.</small>
                         </label>
@@ -253,12 +247,12 @@
                     <a href="" ng-click="changeShippingDetails()">{{updateShippingText}}</a>
                 </div>
             </div>
-            <div class="row" ng-show="formSectionIndex < 4">
+            <div class="row" ng-show="formSectionIndex < 5">
                 <ul class="pager">
                     <li><a href="#" ng-click="nextSection()">Next</a></li>
                 </ul>
             </div>
-            <div class="row" ng-if="formSectionIndex >= 4">
+            <div class="row" ng-if="formSectionIndex >= 5">
                 <div class="col-md-12 col-lg-12 col-sm-12 form-group text-center">
                     <input ng-disabled="false" class="btn btn-submit" type="submit" value="Submit Listing">
                 </div>
