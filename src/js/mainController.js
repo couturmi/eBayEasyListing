@@ -3,6 +3,9 @@
  */
 var app = angular.module('easyListing', ['ui.bootstrap']);
 app.controller('mainCtrl', ['$scope', function($scope) {
+    /*************************************************************
+     * Global Variables
+     *************************************************************/
     // types of pages that display within the application
     $scope.applicationPages = {
         WELCOME: 0,
@@ -10,8 +13,11 @@ app.controller('mainCtrl', ['$scope', function($scope) {
         LOADING: 2,
         SUCCESS: 3,
         FAILED: 4
-    }
-
+    };
+    $scope.userLoggedIn = false;
+    /*************************************************************
+     * Functions
+     *************************************************************/
     //start the program with the welcome page
     $scope.currentPageDisplayed = $scope.applicationPages.WELCOME;
 
