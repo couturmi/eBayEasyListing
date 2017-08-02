@@ -2,7 +2,7 @@
  * Created by mitchcout on 5/14/2017.
  */
 var app = angular.module('easyListing', ['ui.bootstrap']);
-app.controller('mainCtrl', ['$scope', function($scope) {
+app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $rootScope, $http) {
     /*************************************************************
      * Global Variables
      *************************************************************/
@@ -15,6 +15,10 @@ app.controller('mainCtrl', ['$scope', function($scope) {
         FAILED: 4
     };
     $scope.userLoggedIn = false;
+    $http.get('properties/applicationDetails/applicationKeys.json').success(function(data) {
+        $rootScope.applicationKeys=data;
+    });
+
     /*************************************************************
      * Functions
      *************************************************************/

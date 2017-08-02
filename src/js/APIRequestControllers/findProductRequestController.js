@@ -151,7 +151,7 @@ app.controller('findProductCtrl', ['$scope', '$http', '$uibModal', function($sco
     var findProductsConfig = {
         headers: {
             'Content-Type':'text/xml',
-            'X-EBAY-API-APP-ID':'Mitchell-eBayEasy-SBX-f09141381-69d9c08c',
+            'X-EBAY-API-APP-ID': $scope.$parent.API_APP_NAME,
             'X-EBAY-API-SITE-ID':0,
             'X-EBAY-API-CALL-NAME':'FindProducts',
             'X-EBAY-API-VERSION':863,

@@ -2,7 +2,7 @@
  * Created by mitchcout on 5/14/2017.
  */
 var app = angular.module('easyListing');
-app.controller('listingCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
+app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', function($scope, $rootScope, $http, $location) {
     /************************************************************************
      * Global Variables
      ************************************************************************/
@@ -14,6 +14,11 @@ app.controller('listingCtrl', ['$scope', '$http', '$location', function($scope, 
     $scope.findProductsRequestURL = "xmlRequests/findProductsRequest.xml";
 
     $scope.userDetails_shippingDetailsURL = "properties/userDetails/shippingDetails.json";
+
+    $scope.API_DEV_NAME = $rootScope.applicationKeys.SANDBOX_API_DEV_NAME;
+    $scope.API_APP_NAME = $rootScope.applicationKeys.SANDBOX_API_APP_NAME;
+    $scope.API_CERT_NAME = $rootScope.applicationKeys.SANDBOX_API_CERT_NAME;
+    $scope.API_COMPATIBILITY_LEVEL = $rootScope.applicationKeys.API_COMPATIBILITY_LEVEL;
 
     $scope.iPhoneID = 9355;
     $scope.iPodID = 73839;
@@ -549,10 +554,10 @@ app.controller('listingCtrl', ['$scope', '$http', '$location', function($scope, 
     var AddItemConfig = {
             headers: {
                 'Content-Type':'text/xml',
-                'X-EBAY-API-COMPATIBILITY-LEVEL': 915,
-                'X-EBAY-API-DEV-NAME': '6387f409-1f6a-416c-88f4-4ed3f0791984',
-                'X-EBAY-API-APP-NAME': 'Mitchell-eBayEasy-SBX-f09141381-69d9c08c',
-                'X-EBAY-API-CERT-NAME': 'SBX-09141381a927-4830-414d-acb5-1173',
+                'X-EBAY-API-COMPATIBILITY-LEVEL': $scope.API_COMPATIBILITY_LEVEL,
+                'X-EBAY-API-DEV-NAME': $scope.API_DEV_NAME,
+                'X-EBAY-API-APP-NAME': $scope.API_APP_NAME,
+                'X-EBAY-API-CERT-NAME': $scope.API_CERT_NAME,
                 'X-EBAY-API-CALL-NAME': 'VerifyAddItem',
                 'X-EBAY-API-SITEID': 0
             }
