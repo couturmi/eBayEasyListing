@@ -1,4 +1,4 @@
-<div class="jumbotron jumbotron-welcome text-center">
+<div class="jumbotron jumbotron-welcome text-center" ng-controller="loginCtrl">
     <div class="welcome-block">
         <h1 class="welcome-title"><b>Welcome to</b></h1>
         <img src="img/logos/ApplicationLogo_Transparent_Large.png" alt="eBay Easy Listing!">
@@ -6,7 +6,8 @@
         <h2>Ready to get started?</h2>
         <br>
         <input ng-if="userLoggedIn" type="button" ng-click="startNewListing()" class="btn btn-lg btn-welcome-page" value="Start New Listing">
-        <input ng-if="!userLoggedIn" type="button" ng-click="" class="btn btn-lg btn-welcome-page" value="Log In">
-        <br>
+        <input ng-if="!userLoggedIn" type="button" ng-click="loginUser()" class="btn btn-lg btn-welcome-page" value="Log In">
+        <br><i ng-show="loading" class="fa fa-spinner fa-spin fa-4x" aria-hidden="true"></i>
+        <br><h4 ng-show="loginFailed" class="login-failed">Login failed. Try again.</h4>
     </div>
 </div>

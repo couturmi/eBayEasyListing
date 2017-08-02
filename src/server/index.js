@@ -51,12 +51,17 @@ app.post('/updateUserShippingDetails', function(req, res) {
     });
 });
 
-/* Starting page */
+/* proxy values */
 app.use('/', express.static('./src' + '/'));
 app.use('/ebayApiSandbox', proxy('https://api.sandbox.ebay.com'));
 app.use('/ebayShoppingApiSandbox', proxy('http://open.api.sandbox.ebay.com'));
-app.use('/ebayApiProd', proxy('https://api.ebay.com'));
+app.use('/ebayApiSignInSandbox', proxy('https://signin.sandbox.ebay.com'));
 
+app.use('/ebayApiProd', proxy('https://api.ebay.com'));
+app.use('/ebayShoppingApiProd', proxy('http://open.api.ebay.com'));
+app.use('/ebayApiSignInProd', proxy('https://signin.ebay.com'));
+
+/* Starting page */
 app.listen(port, (err) => {
     if (err) {
         return console.log('ERROR: Could not start server', err);

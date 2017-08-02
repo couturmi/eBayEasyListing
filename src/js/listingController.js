@@ -6,19 +6,12 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
     /************************************************************************
      * Global Variables
      ************************************************************************/
-    $scope.tradingAPIDLL_Sandbox = '/ebayApiSandbox/ws/api.dll';
     $scope.shoppingAPI_Sandbox = '/ebayShoppingApiSandbox/shopping?callname=FindProducts&responseencoding=XML&appid=Mitchell-eBayEasy-SBX-f09141381-69d9c08c&siteid=0&QueryKeywords=Apple&version=863';
-    $scope.tradingAPIDLL_Prod = '/ebayApiProd/ws/api.dll';
 
     $scope.addItemRequestURL = "xmlRequests/AddItemRequest.xml";
     $scope.findProductsRequestURL = "xmlRequests/findProductsRequest.xml";
 
     $scope.userDetails_shippingDetailsURL = "properties/userDetails/shippingDetails.json";
-
-    $scope.API_DEV_NAME = $rootScope.applicationKeys.SANDBOX_API_DEV_NAME;
-    $scope.API_APP_NAME = $rootScope.applicationKeys.SANDBOX_API_APP_NAME;
-    $scope.API_CERT_NAME = $rootScope.applicationKeys.SANDBOX_API_CERT_NAME;
-    $scope.API_COMPATIBILITY_LEVEL = $rootScope.applicationKeys.API_COMPATIBILITY_LEVEL;
 
     $scope.iPhoneID = 9355;
     $scope.iPodID = 73839;
@@ -436,6 +429,9 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
         /* Get XML DOM object */
         var addItemRequest = response.responseXML;
 
+        /* Add Auth Token */
+        if($rootScope.AuthToken)
+            addItemRequest.getElementsByTagName("eBayAuthToken")[0].childNodes[0].nodeValue = $rootScope.AuthToken;
         /* Populate XML Request with input from listing form */
         if($scope.currentListing.title)
             addItemRequest.getElementsByTagName("Title")[0].childNodes[0].nodeValue = $scope.currentListing.title.full;
@@ -554,10 +550,10 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
     var AddItemConfig = {
             headers: {
                 'Content-Type':'text/xml',
-                'X-EBAY-API-COMPATIBILITY-LEVEL': $scope.API_COMPATIBILITY_LEVEL,
-                'X-EBAY-API-DEV-NAME': $scope.API_DEV_NAME,
-                'X-EBAY-API-APP-NAME': $scope.API_APP_NAME,
-                'X-EBAY-API-CERT-NAME': $scope.API_CERT_NAME,
+                'X-EBAY-API-COMPATIBILITY-LEVEL': $rootScope.API_COMPATIBILITY_LEVEL,
+                'X-EBAY-API-DEV-NAME': $rootScope.API_DEV_NAME,
+                'X-EBAY-API-APP-NAME': $rootScope.API_APP_NAME,
+                'X-EBAY-API-CERT-NAME': $rootScope.API_CERT_NAME,
                 'X-EBAY-API-CALL-NAME': 'VerifyAddItem',
                 'X-EBAY-API-SITEID': 0
             }
@@ -567,7 +563,7 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
 
     $scope.submitListing = function(xmlRequest){
         console.log(xmlRequest);
-        $http.post($scope.tradingAPIDLL_Sandbox, xmlRequest, AddItemConfig).then( function(response){
+        $http.post($rootScope.tradingAPIDLL, xmlRequest, AddItemConfig).then( function(response){
             console.log(response.data);
             var ebayResponse = XMLParser.parseFromString(response.data,"text/xml");
             console.log("========RESPONSE RESULT========");

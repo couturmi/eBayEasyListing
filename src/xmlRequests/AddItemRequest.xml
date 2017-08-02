@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VerifyAddItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">
     <RequesterCredentials>
-        <eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**b/FjWQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wFk4GkCpCBqQydj6x9nY+seQ**UDcEAA**AAMAAA**haPTP9tAd2O3TQv0sloQ4Rxe5S4b8mJnFSPjDTVNFC2TqGJGroTFbiyub0j2+YD+M2q+8+pvFn20bXDH7fZpcHTx7tu6WAc1FVn8YRh50su2VmVdooVhGfyDwVyDcNWwxxuAeC2b5UwhC5Q8FCtj/9lqYJb+ecj/JWnDinOrHoZSz28MRETZs/ZGGP8P1kK1tbKDgIw50HUey2TdguKcN4SOw0Fh2sx6HY5JsrVs/boBksOCuKuY97kigKVawnWsAZzAxYfe1gM7QHhLQJP8aypawwlXr5bOcGsF8M0dN7WikvbdKfeOmYMh3ar7L4J9MLt6ldAOU3PlVO5JAE1oIdo/eOKzVE/Uutq8BbmQ3n71nzsNV1dWhFsxYUiM1YAg7eG1PrZkpPDWhdku71Kv+z8o8I7m0kRTl8QChCHk24KV9K3DPO6k+uu563jR2jvwg+TxAliiCPmM+KzWKgbwwQb32ArToTD/Eti6DfGCI6LtuO92mCxC3+CEDH3ZEI06GI1zW5ZvrQuV0yjIjZ8PWLEcf0wDSmuIKteZx0frnswE8I4Kvu6L/Yv6t53j1vtBa9fGK9NQ8JDORxnC8e+sh3HnUnc/HXgYYzeYldIne3uhJbco+Kv6HexTwCEM5vTm7J6zD/zstyCC5puImiNsfl+9+J1M/Xz2eFeG+mQjxCsquKrv+rDI0F2nG78EnkohjBcJJwn3vjRXsJ0LPYQ4jYqhUMel8qd9plcDgEdk6RMYeKC5MzMmJvjrGKy1gpGW</eBayAuthToken>
+        <eBayAuthToken>AuthToken</eBayAuthToken>
     </RequesterCredentials>
     <ErrorLanguage>en_US</ErrorLanguage>
     <WarningLevel>High</WarningLevel>
