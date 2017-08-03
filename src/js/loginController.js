@@ -15,7 +15,6 @@ app.controller('loginCtrl', ['$scope', '$rootScope', '$http', function($scope, $
     $scope.getFetchTokenRequestURL = "xmlRequests/fetchTokenRequest.xml";
 
     $scope.sessionID = "";
-    $rootScope.AuthToken = "";
     $scope.loading = false;
     $scope.loginFailed = false;
 
@@ -174,7 +173,12 @@ app.controller('loginCtrl', ['$scope', '$rootScope', '$http', function($scope, $
     };
 
     $scope.loginSuccess = function(){
+        //switch application state to logged in
         $rootScope.userLoggedIn = true;
+        //store token in session
+        if(typeof(Storage) !== "undefined"){
+            sessionStorage.authToken = $scope.AuthToken;
+        }
     }
 
 }]);

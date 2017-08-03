@@ -18,7 +18,7 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
         SUCCESS: 3,
         FAILED: 4
     };
-    $rootScope.userLoggedIn = false;
+    // application keys
     $http.get('properties/applicationDetails/applicationKeys.json').success(function(data) {
         $rootScope.applicationKeys=data;
         $rootScope.API_DEV_NAME = $rootScope.applicationKeys.SANDBOX_API_DEV_NAME;
@@ -26,6 +26,13 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
         $rootScope.API_CERT_NAME = $rootScope.applicationKeys.SANDBOX_API_CERT_NAME;
         $rootScope.API_COMPATIBILITY_LEVEL = $rootScope.applicationKeys.API_COMPATIBILITY_LEVEL;
     });
+    // check if authToken exists in session. If not, user must log in
+    $rootScope.userLoggedIn = false;
+    $rootScope.AuthToken = "";
+    if(sessionStorage.authToken){
+        $rootScope.userLoggedIn = true;
+        $rootScope.AuthToken = sessionStorage.authToken;
+    }
 
     /*************************************************************
      * Functions
