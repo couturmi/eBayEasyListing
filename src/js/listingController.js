@@ -110,7 +110,7 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             $scope.currentListing.price = 0;
         }
         $scope.currentListing.price = parseFloat($scope.currentListing.price.toFixed(2));
-        document.getElementById("priceInput").value = $scope.currentListing.price.toFixed(2);
+        document.getElementById("priceInput"+"-tab"+$rootScope.currentTab).value = $scope.currentListing.price.toFixed(2);
     };
 
     $scope.filterGeneration = function(gen){
@@ -149,7 +149,7 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
     $scope.nextSection = function(){
         $scope.formSectionIndex++;
         setTimeout(function(){
-            window.scrollTo(0,document.body.scrollHeight);
+            $("#listingWindow").scrollTop($("#listingWindow")[0].scrollHeight);
         }, 100);
     };
 
@@ -200,15 +200,15 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
         //select option
         if(option == $scope.iPodID){
             $scope.currentListing.category.primary = $scope.iPodID; //Consumer Electronics > Portable Audio & Headphones > iPods & MP3 Players
-            document.getElementById('productType1').classList.add('btn-filled');
-            document.getElementById('productType2').classList.remove('btn-filled');
+            document.getElementById('productType1'+"-tab"+$rootScope.currentTab).classList.add('btn-filled');
+            document.getElementById('productType2'+"-tab"+$rootScope.currentTab).classList.remove('btn-filled');
             $scope.currentListing.title.type = "Apple iPod";
             $scope.currentListing.title.full = createListingTitle();
             $scope.currentListing.category.text = "Consumer Electronics > Portable Audio & Headphones";
         } else if(option == $scope.iPhoneID){
             $scope.currentListing.category.primary = $scope.iPhoneID; //Cell Phones & Accessories > Cell Phones & Smartphones
-            document.getElementById('productType1').classList.remove('btn-filled');
-            document.getElementById('productType2').classList.add('btn-filled');
+            document.getElementById('productType1'+"-tab"+$rootScope.currentTab).classList.remove('btn-filled');
+            document.getElementById('productType2'+"-tab"+$rootScope.currentTab).classList.add('btn-filled');
             $scope.currentListing.title.type = "Apple iPhone";
             $scope.currentListing.title.full = createListingTitle();
             $scope.currentListing.category.text = "Cell Phones & Accessories > Cell Phones & Smartphones";
@@ -231,12 +231,12 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             var models = $scope.currentListing.category.primary == $scope.iPodID ? $scope.ipod_models : $scope.iphone_models;
             for (let i = 0; i < models.length; i++) {
                 if (models[i].key == option.key) {
-                    document.getElementById('model' + models[i].key).classList.add('btn-filled');
+                    document.getElementById('model' + models[i].key+"-tab"+$rootScope.currentTab).classList.add('btn-filled');
                     $scope.currentListing.title.model = models[i].longValue != null ? models[i].longValue : models[i].value;
                     $scope.currentListing.title.full = createListingTitle();
                 }
                 else
-                    document.getElementById('model' + models[i].key).classList.remove('btn-filled');
+                    document.getElementById('model' + models[i].key+"-tab"+$rootScope.currentTab).classList.remove('btn-filled');
             }
         } else { //clear data below Model
             $scope.currentListing.title.model = null;
@@ -253,13 +253,13 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             $scope.currentListing.category.generation = option.key;
             for (let i = 0; i < $scope.ipod_generations.length; i++) {
                 if ($scope.ipod_generations[i].key == option.key) {
-                    document.getElementById('generation' + $scope.ipod_generations[i].key).classList.add('btn-filled');
+                    document.getElementById('generation' + $scope.ipod_generations[i].key+"-tab"+$rootScope.currentTab).classList.add('btn-filled');
                     $scope.currentListing.title.generation = $scope.ipod_generations[i].longValue;
                     $scope.currentListing.title.full = createListingTitle();
                 }
                 else {
-                    if (document.getElementById('generation' + $scope.ipod_generations[i].key))
-                        document.getElementById('generation' + $scope.ipod_generations[i].key).classList.remove('btn-filled');
+                    if (document.getElementById('generation' + $scope.ipod_generations[i].key+"-tab"+$rootScope.currentTab))
+                        document.getElementById('generation' + $scope.ipod_generations[i].key+"-tab"+$rootScope.currentTab).classList.remove('btn-filled');
                 }
             }
         } else { //clear data below Capacity
@@ -267,8 +267,8 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             $scope.currentListing.category.generation = null;
             if($scope.currentListing.category.model && $scope.currentListing.category.primary != $scope.iPhoneID) {
                 for (let i = 0; i < $scope.ipod_generations.length; i++) {
-                    if(document.getElementById('generation' + $scope.ipod_generations[i].key))
-                        document.getElementById('generation' + $scope.ipod_generations[i].key).classList.remove('btn-filled');
+                    if(document.getElementById('generation' + $scope.ipod_generations[i].key+"-tab"+$rootScope.currentTab))
+                        document.getElementById('generation' + $scope.ipod_generations[i].key+"-tab"+$rootScope.currentTab).classList.remove('btn-filled');
                 }
             }
             $scope.selectCapacity(null, true);
@@ -283,7 +283,7 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             $scope.currentListing.category.capacity = option.key;
             for (let i = 0; i < $scope.storage_sizes.length; i++) {
                 if ($scope.storage_sizes[i].key == option.key) {
-                    document.getElementById('size' + $scope.storage_sizes[i].key).classList.add('btn-filled');
+                    document.getElementById('size' + $scope.storage_sizes[i].key+"-tab"+$rootScope.currentTab).classList.add('btn-filled');
                     if($scope.currentListing.category.primary == $scope.iPodID)
                         $scope.currentListing.title.capacity = $scope.storage_sizes[i].spacedValue;
                     if($scope.currentListing.category.primary == $scope.iPhoneID)
@@ -291,8 +291,8 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
                     $scope.currentListing.title.full = createListingTitle();
                 }
                 else {
-                    if (document.getElementById('size' + $scope.storage_sizes[i].key))
-                        document.getElementById('size' + $scope.storage_sizes[i].key).classList.remove('btn-filled');
+                    if (document.getElementById('size' + $scope.storage_sizes[i].key+"-tab"+$rootScope.currentTab))
+                        document.getElementById('size' + $scope.storage_sizes[i].key+"-tab"+$rootScope.currentTab).classList.remove('btn-filled');
                 }
             }
         } else { //clear data below Capacity
@@ -300,8 +300,8 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             $scope.currentListing.category.capacity = null;
             if($scope.currentListing.category.generation) {
                 for (let i = 0; i < $scope.storage_sizes.length; i++) {
-                    if(document.getElementById('size' + $scope.storage_sizes[i].key))
-                        document.getElementById('size' + $scope.storage_sizes[i].key).classList.remove('btn-filled');
+                    if(document.getElementById('size' + $scope.storage_sizes[i].key+"-tab"+$rootScope.currentTab))
+                        document.getElementById('size' + $scope.storage_sizes[i].key+"-tab"+$rootScope.currentTab).classList.remove('btn-filled');
                 }
             }
             $scope.selectColor(null, true);
@@ -313,13 +313,13 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             $scope.currentListing.category.color = option.key;
             for (let i = 0; i < $scope.product_colors.length; i++) {
                 if ($scope.product_colors[i].key == option.key) {
-                    document.getElementById('color' + $scope.product_colors[i].key).classList.add('btn-filled');
+                    document.getElementById('color' + $scope.product_colors[i].key+"-tab"+$rootScope.currentTab).classList.add('btn-filled');
                     $scope.currentListing.title.color = $scope.product_colors[i].value;
                     $scope.currentListing.title.full = createListingTitle();
                 }
                 else {
-                    if (document.getElementById('color' + $scope.product_colors[i].key))
-                        document.getElementById('color' + $scope.product_colors[i].key).classList.remove('btn-filled');
+                    if (document.getElementById('color' + $scope.product_colors[i].key+"-tab"+$rootScope.currentTab))
+                        document.getElementById('color' + $scope.product_colors[i].key+"-tab"+$rootScope.currentTab).classList.remove('btn-filled');
                 }
             }
         } else { //clear data below Capacity
@@ -327,8 +327,8 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             $scope.currentListing.category.color = null;
             if($scope.currentListing.category.capacity) {
                 for (let i = 0; i < $scope.product_colors.length; i++) {
-                    if(document.getElementById('color' + $scope.product_colors[i].key))
-                        document.getElementById('color' + $scope.product_colors[i].key).classList.remove('btn-filled');
+                    if(document.getElementById('color' + $scope.product_colors[i].key+"-tab"+$rootScope.currentTab))
+                        document.getElementById('color' + $scope.product_colors[i].key+"-tab"+$rootScope.currentTab).classList.remove('btn-filled');
                 }
             }
             $scope.selectCarrier(null, true);
@@ -340,13 +340,13 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             $scope.currentListing.category.carrier = option.key;
             for (let i = 0; i < $scope.iphone_carriers.length; i++) {
                 if ($scope.iphone_carriers[i].key == option.key) {
-                    document.getElementById('carrier' + $scope.iphone_carriers[i].key).classList.add('btn-filled');
+                    document.getElementById('carrier' + $scope.iphone_carriers[i].key+"-tab"+$rootScope.currentTab).classList.add('btn-filled');
                     $scope.currentListing.title.carrier = $scope.iphone_carriers[i].value;
                     $scope.currentListing.title.full = createListingTitle();
                 }
                 else {
-                    if (document.getElementById('carrier' + $scope.iphone_carriers[i].key))
-                        document.getElementById('carrier' + $scope.iphone_carriers[i].key).classList.remove('btn-filled');
+                    if (document.getElementById('carrier' + $scope.iphone_carriers[i].key+"-tab"+$rootScope.currentTab))
+                        document.getElementById('carrier' + $scope.iphone_carriers[i].key+"-tab"+$rootScope.currentTab).classList.remove('btn-filled');
                 }
             }
         } else { //clear data below Capacity
@@ -354,8 +354,8 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             $scope.currentListing.category.carrier = null;
             if($scope.currentListing.category.color) {
                 for (let i = 0; i < $scope.iphone_carriers.length; i++) {
-                    if(document.getElementById('carrier' + $scope.iphone_carriers[i].key))
-                        document.getElementById('carrier' + $scope.iphone_carriers[i].key).classList.remove('btn-filled');
+                    if(document.getElementById('carrier' + $scope.iphone_carriers[i].key+"-tab"+$rootScope.currentTab))
+                        document.getElementById('carrier' + $scope.iphone_carriers[i].key+"-tab"+$rootScope.currentTab).classList.remove('btn-filled');
                 }
             }
         }
@@ -365,9 +365,9 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
         $scope.currentListing.condition = option.key;
         for(let i = 0; i < $scope.listingConditions.length; i++){
             if($scope.listingConditions[i].key == option.key)
-                document.getElementById('condition'+$scope.listingConditions[i].key).classList.add('btn-filled');
+                document.getElementById('condition'+$scope.listingConditions[i].key+"-tab"+$rootScope.currentTab).classList.add('btn-filled');
             else
-                document.getElementById('condition'+$scope.listingConditions[i].key).classList.remove('btn-filled');
+                document.getElementById('condition'+$scope.listingConditions[i].key+"-tab"+$rootScope.currentTab).classList.remove('btn-filled');
         }
     }
 
@@ -534,6 +534,12 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
     }
 
     $scope.performAddItemRequest = function() {
+        //switch page to loading
+        $rootScope.switchToLoading();
+        //remove listing from dom
+        var child = document.getElementById("listing"+$rootScope.currentTab);
+        child.parentNode.removeChild(child);
+        //get xml template
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -566,9 +572,15 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
         $http.post($rootScope.tradingAPIDLL, xmlRequest, AddItemConfig).then( function(response){
             console.log(response.data);
             var ebayResponse = XMLParser.parseFromString(response.data,"text/xml");
+            var responseCondition = ebayResponse.getElementsByTagName("Ack")[0].childNodes[0].nodeValue;
             console.log("========RESPONSE RESULT========");
-            console.log("VerifyAddItem Request: \n"+ebayResponse.getElementsByTagName("Ack")[0].childNodes[0].nodeValue);
+            console.log("VerifyAddItem Request: \n"+responseCondition);
             console.log("===============================");
+            if(responseCondition == "Failure") {
+                $rootScope.switchToFailed();
+            } else {
+                $rootScope.switchToSuccess();
+            }
         }, function(err){
             console.log("error.");
             console.log("Status: "+err.status+" : "+err.statusText);

@@ -2,7 +2,7 @@
  * Created by mitchcout on 7/23/2017.
  */
 var app = angular.module('easyListing');
-app.controller('addPhotoCtrl', ['$scope','$http', '$uibModal', function($scope, $http, $uibModal) {
+app.controller('addPhotoCtrl', ['$scope','$rootScope','$http', '$uibModal', function($scope, $rootScope, $http, $uibModal) {
     /** Global Variables **/
     const PHOTO_UPLOADS_PATH = "/img/temp/photoUploads/";
     const UPLOAD_URL = "http://localhost:8080/upload";
@@ -13,7 +13,7 @@ app.controller('addPhotoCtrl', ['$scope','$http', '$uibModal', function($scope, 
     /* Add photo to listing */
     $scope.addPhoto = function(){
         //get file information from input
-        var tempPhotoFile = document.getElementById("addPhotoInput").files[0];
+        var tempPhotoFile = document.getElementById("addPhotoInput"+"-tab"+$rootScope.currentTab).files[0];
         if($scope.$parent.currentListing.photoList.includes(PHOTO_UPLOADS_PATH + tempPhotoFile.name)){
             alert("Noooope! \nYou already added a file with the same name.");
             return;

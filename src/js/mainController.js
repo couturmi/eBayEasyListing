@@ -33,15 +33,87 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
         $rootScope.userLoggedIn = true;
         $rootScope.AuthToken = sessionStorage.authToken;
     }
+    /*************************************************************
+     * Tab Functions
+     *************************************************************/
+    //list of all tabs/pages
+    $rootScope.listingPages = [];
+    //count of pages added
+    $rootScope.pageCount = 0;
+    //the type of page currently displayed
+    $rootScope.currentPageDisplayed = $rootScope.applicationPages.WELCOME;
+    //the current tab that is open
+    $rootScope.currentTab = 0;
+    //true if a listing is already being edited
+    $rootScope.listingIsOpen = false;
+
+    //create a new blank page
+    $scope.newBlankPage = function(key){
+        var blankPage = {
+            key:key,
+            currentPage: $rootScope.applicationPages.WELCOME
+        };
+        return blankPage;
+    }
+
+    $scope.tabClicked = function(key) {
+        //remove active class from current tab
+        document.getElementById("tab"+$rootScope.currentTab).classList.remove('active');
+        $rootScope.currentPageDisplayed = $rootScope.listingPages[key].currentPage;
+        $rootScope.currentTab = key;
+        //add active class for current tab
+        document.getElementById("tab"+$rootScope.currentTab).classList.add('active');
+    }
+
+    $scope.newTabClicked = function() {
+        //remove active class from current tab
+        if(document.getElementById("tab"+$rootScope.currentTab)) {
+            document.getElementById("tab" + $rootScope.currentTab).classList.remove('active');
+        }
+        //create page
+        $rootScope.listingPages.push($scope.newBlankPage($rootScope.pageCount));
+        //display first page
+        $rootScope.currentPageDisplayed = $rootScope.listingPages[$rootScope.pageCount].currentPage;
+        //set this new tab to the current displayed tab
+        $rootScope.currentTab = $rootScope.pageCount;
+        //increment for next key
+        $rootScope.pageCount++;
+    }
+    //create first page on startup
+    $scope.newTabClicked();
 
     /*************************************************************
-     * Functions
+     * Page switch Functions
      *************************************************************/
-    //start the program with the welcome page
-    $rootScope.currentPageDisplayed = $rootScope.applicationPages.WELCOME;
-
     /* Start a new listing and switch to the listing page */
     $scope.startNewListing = function() {
+        $rootScope.listingPages[$rootScope.currentTab].currentPage = $rootScope.applicationPages.LISTING;
         $rootScope.currentPageDisplayed = $rootScope.applicationPages.LISTING;
+        $rootScope.listingIsOpen = true;
+    }
+    /* Start a new listing and switch to the listing page */
+    $rootScope.switchToLoading = function() {
+        $rootScope.listingPages[$rootScope.currentTab].currentPage = $rootScope.applicationPages.LOADING;
+        $rootScope.currentPageDisplayed = $rootScope.applicationPages.LOADING;
+        $rootScope.listingIsOpen = false;
+    }
+    /* Start a new listing and switch to the listing page */
+    $rootScope.switchToSuccess = function() {
+        $rootScope.listingPages[$rootScope.currentTab].currentPage = $rootScope.applicationPages.SUCCESS;
+        $rootScope.currentPageDisplayed = $rootScope.applicationPages.SUCCESS;
+    }
+    /* Start a new listing and switch to the listing page */
+    $rootScope.switchToFailed = function() {
+        $rootScope.listingPages[$rootScope.currentTab].currentPage = $rootScope.applicationPages.FAILED;
+        $rootScope.currentPageDisplayed = $rootScope.applicationPages.FAILED;
+    }
+
+    /*************************************************************
+     * Navbar Button Functions
+     *************************************************************/
+    $scope.logOutUser = function() {
+        $rootScope.userLoggedIn = false;
+        $rootScope.AuthToken = "";
+        sessionStorage.removeItem('authToken');
     }
 }]);

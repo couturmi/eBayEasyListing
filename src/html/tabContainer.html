@@ -1,7 +1,7 @@
 <div class="max-height">
-    <div class="max-height" ng-include="'html/welcome/welcomePage.html'" ng-if="currentPageDisplayed == applicationPages.WELCOME"></div>
-    <div class="max-height" ng-include="'html/listing/statusPageSuccess.html'" ng-if="currentPageDisplayed == applicationPages.SUCCESS"></div>
-    <div class="max-height" ng-include="'html/listing/statusPageLoading.html'" ng-if="currentPageDisplayed == applicationPages.LOADING"></div>
-    <div class="max-height" ng-include="'html/listing/statusPageFailed.html'" ng-if="currentPageDisplayed == applicationPages.FAILED"></div>
-    <div ng-include="'html/listing/listing.html'" ng-if="currentPageDisplayed == applicationPages.LISTING"></div>
+    <div class="max-height" ng-include="'html/welcome/welcomePage.html'" ng-show="currentPageDisplayed == applicationPages.WELCOME"></div>
+    <div class="max-height" ng-include="'html/listing/statusPageSuccess.html'" ng-show="currentPageDisplayed == applicationPages.SUCCESS"></div>
+    <div class="max-height" ng-include="'html/listing/statusPageLoading.html'" ng-show="currentPageDisplayed == applicationPages.LOADING"></div>
+    <div class="max-height" ng-include="'html/listing/statusPageFailed.html'" ng-show="currentPageDisplayed == applicationPages.FAILED"></div>
+    <div id="{{'listing'+currentTab}}" ng-include="'html/listing/listing.html'" ng-show="currentPageDisplayed == applicationPages.LISTING"></div>
 </div>

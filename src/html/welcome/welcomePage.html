@@ -5,9 +5,10 @@
         <br><br>
         <h2>Ready to get started?</h2>
         <br>
-        <input ng-if="userLoggedIn" type="button" ng-click="startNewListing()" class="btn btn-lg btn-welcome-page" value="Start New Listing">
+        <input ng-if="userLoggedIn" type="button" ng-click="startNewListing()" class="btn btn-lg btn-welcome-page" ng-disabled="listingIsOpen" value="Start New Listing">
         <input ng-if="!userLoggedIn" type="button" ng-click="loginUser()" class="btn btn-lg btn-welcome-page" value="Log In">
         <br><i ng-show="loading" class="fa fa-spinner fa-spin fa-4x" aria-hidden="true"></i>
         <br><h4 ng-show="loginFailed" class="login-failed">Login failed. Try again.</h4>
+        <h4 ng-show="listingIsOpen" class="welcome-listing-message">Only one listing can be edited at a time.</h4>
     </div>
 </div>

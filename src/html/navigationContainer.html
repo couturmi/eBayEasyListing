@@ -1,0 +1,14 @@
+<div class="max-height">
+    <div class="navbar-color nav-height">
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded nav-position">
+            <img class="logo-navbar" src="img/logos/ApplicationLogo_Transparent_Small.png" height="65px" alt="eBay Easy Listing!">
+            <button ng-if="userLoggedIn" class="btn btn-navbar pull-right" ng-click="logOutUser()">Log Out</button>
+            <button ng-if="userLoggedIn" class="btn btn-navbar pull-right">View Listings</button>
+            <ul class="nav nav-tabs">
+                <li ng-repeat="page in listingPages" id="{{'tab'+page.key}}" class="active" ng-click="tabClicked(page.key)"><a href="#">Listing {{page.key+1}}</a></li>
+                <li><a class="nav-tab-add" href="#" ng-click="newTabClicked()">+</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div ng-repeat="page in listingPages" ng-show="page.key == currentTab" id="listingWindow" class="body-height" ng-include="'html/tabContainer.html'"></div>
+</div>
