@@ -98,14 +98,18 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
         $rootScope.listingIsOpen = false;
     }
     /* Start a new listing and switch to the listing page */
-    $rootScope.switchToSuccess = function() {
-        $rootScope.listingPages[$rootScope.currentTab].currentPage = $rootScope.applicationPages.SUCCESS;
-        $rootScope.currentPageDisplayed = $rootScope.applicationPages.SUCCESS;
+    $rootScope.switchToSuccess = function(key) {
+        $rootScope.listingPages[key].currentPage = $rootScope.applicationPages.SUCCESS;
+        if(key == $rootScope.currentTab) {
+            $rootScope.currentPageDisplayed = $rootScope.applicationPages.SUCCESS;
+        }
     }
     /* Start a new listing and switch to the listing page */
-    $rootScope.switchToFailed = function() {
-        $rootScope.listingPages[$rootScope.currentTab].currentPage = $rootScope.applicationPages.FAILED;
-        $rootScope.currentPageDisplayed = $rootScope.applicationPages.FAILED;
+    $rootScope.switchToFailed = function(key) {
+        $rootScope.listingPages[key].currentPage = $rootScope.applicationPages.FAILED;
+        if(key == $rootScope.currentTab) {
+            $rootScope.currentPageDisplayed = $rootScope.applicationPages.FAILED;
+        }
     }
 
     /*************************************************************

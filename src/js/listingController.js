@@ -22,6 +22,8 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
         ERROR: "alertError"
     }
 
+    $scope.thisListingKey = $rootScope.currentTab;
+
     /******************************************
      * String functions
      ******************************************/
@@ -577,9 +579,11 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             console.log("VerifyAddItem Request: \n"+responseCondition);
             console.log("===============================");
             if(responseCondition == "Failure") {
-                $rootScope.switchToFailed();
+                $rootScope.switchToFailed($scope.thisListingKey);
+                document.getElementById('tablink'+$scope.thisListingKey).classList.add('nav-tabs-failure');
             } else {
-                $rootScope.switchToSuccess();
+                $rootScope.switchToSuccess($scope.thisListingKey);
+                document.getElementById('tablink'+$scope.thisListingKey).classList.add('nav-tabs-success');
             }
         }, function(err){
             console.log("error.");

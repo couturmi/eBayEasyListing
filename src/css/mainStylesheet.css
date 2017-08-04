@@ -35,8 +35,8 @@ body {
     border-bottom-color: #444444;
 }
 .nav-tabs li.active a, .nav-tabs li.active a:focus{
-    background: #669e43;
-    border-color: #669e43;
+    background: #08b1e0;
+    border-color: #08b1e0;
     color: #ffffff;
 }
 .nav-tabs li.active a:hover{
@@ -52,6 +52,16 @@ body {
     background: #edf060;
     border-color: #edf060;
     color: #444444;
+}
+.nav-tabs-success {
+    background: #669e43 !important;
+    border-color: #669e43 !important;
+    color: #ffffff !important;
+}
+.nav-tabs-failure {
+    background: #e84b3a !important;
+    border-color: #e84b3a !important;
+    color: #ffffff !important;
 }
 .nav-tab-add {
     font-weight: bold;
