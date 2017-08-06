@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<VerifyAddItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+<AddItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">
     <RequesterCredentials>
         <eBayAuthToken>AuthToken</eBayAuthToken>
     </RequesterCredentials>
@@ -40,4 +40,4 @@
         </ReturnPolicy>
         <Site>US</Site>
     </Item>
-</VerifyAddItemRequest>
+</AddItemRequest>

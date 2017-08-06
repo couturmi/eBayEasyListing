@@ -537,6 +537,7 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
 
     $scope.performAddItemRequest = function() {
         //switch page to loading
+        addToSubmittedListingsList(null);
         $rootScope.switchToLoading();
         //remove listing from dom
         var child = document.getElementById("listing"+$rootScope.currentTab);
@@ -562,7 +563,7 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
                 'X-EBAY-API-DEV-NAME': $rootScope.API_DEV_NAME,
                 'X-EBAY-API-APP-NAME': $rootScope.API_APP_NAME,
                 'X-EBAY-API-CERT-NAME': $rootScope.API_CERT_NAME,
-                'X-EBAY-API-CALL-NAME': 'VerifyAddItem',
+                'X-EBAY-API-CALL-NAME': 'AddItem',
                 'X-EBAY-API-SITEID': 0
             }
     };
@@ -576,13 +577,15 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             var ebayResponse = XMLParser.parseFromString(response.data,"text/xml");
             var responseCondition = ebayResponse.getElementsByTagName("Ack")[0].childNodes[0].nodeValue;
             console.log("========RESPONSE RESULT========");
-            console.log("VerifyAddItem Request: \n"+responseCondition);
+            console.log("AddItem Request: \n"+responseCondition);
             console.log("===============================");
             if(responseCondition == "Failure") {
                 $rootScope.switchToFailed($scope.thisListingKey);
                 document.getElementById('tablink'+$scope.thisListingKey).classList.add('nav-tabs-failure');
             } else {
                 $rootScope.switchToSuccess($scope.thisListingKey);
+                let itemID = ebayResponse.getElementsByTagName("ItemID")[0].childNodes[0].nodeValue;
+                addToSubmittedListingsList(itemID);
                 document.getElementById('tablink'+$scope.thisListingKey).classList.add('nav-tabs-success');
             }
         }, function(err){
@@ -590,5 +593,14 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             console.log("Status: "+err.status+" : "+err.statusText);
         });
     };
+
+    var addToSubmittedListingsList = function(itemID){
+        let newListing = {
+            key: $scope.thisListingKey,
+            title: $scope.currentListing.title.full,
+            itemID: itemID
+        };
+        $rootScope.submittedListings[$scope.thisListingKey] = newListing;
+    }
 
 }]);

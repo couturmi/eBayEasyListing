@@ -10,6 +10,9 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
     $scope.tradingAPIDLL_Prod = '/ebayApiProd/ws/api.dll';
     $rootScope.tradingAPIDLL = $scope.tradingAPIDLL_Sandbox;
 
+    //list of submitted listings
+    $rootScope.submittedListings = [];
+
     // types of pages that display within the application
     $rootScope.applicationPages = {
         WELCOME: 0,
@@ -78,6 +81,8 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
         $rootScope.currentTab = $rootScope.pageCount;
         //increment for next key
         $rootScope.pageCount++;
+        //set up to hold listing data
+        $rootScope.submittedListings.push({});
     }
     //create first page on startup
     $scope.newTabClicked();
