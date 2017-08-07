@@ -3,7 +3,7 @@
         <h1 class="welcome-title"><b>Welcome to</b></h1>
         <img src="img/logos/ApplicationLogo_Transparent_Large.png" alt="eBay Easy Listing!">
         <br><br>
-        <h2>Ready to get started?</h2>
+        <h2 ng-if="userLoggedIn">Ready to get started?</h2>
         <br>
         <input ng-if="userLoggedIn" type="button" ng-click="startNewListing()" class="btn btn-lg btn-welcome-page" ng-disabled="listingIsOpen" value="Start New Listing">
         <input ng-if="!userLoggedIn" type="button" ng-click="loginUser()" class="btn btn-lg btn-welcome-page" value="Log In">

@@ -62,12 +62,8 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
         category: {},
         catalogInfo: {},
         price:0.00,
-        paymentMethods:{
-            pm_payPal: true
-        },
         listingType:"FixedPriceItem",
         listingDuration:"30 days",
-        returnOption:"ReturnsAccepted",
         shippingLocationCountry:"",
         shippingLocationZIP:"",
         shippingLocationCityState:""
@@ -103,7 +99,6 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
     $http.get('properties/listingDetails/iPhoneCarriers.json').success(function(data) {
         $scope.iphone_carriers=data.iphone_carriers;
     });
-    $scope.domesticShippingList = ["Flat: same cost to all buyers","Calculated: Cost varies by buyer location","Freight: large items over 150 lbs","No shipping: Local pickup only"];
     $scope.listingFilters = {};
 
     /* Format/Filter functions */
@@ -373,17 +368,6 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
         }
     }
 
-    $scope.allPaymentMenthodsChecked = function() {
-        if(!$scope.currentListing.paymentMethods.pm_payPal ||
-            !$scope.currentListing.paymentMethods.pm_visaMaster ||
-            !$scope.currentListing.paymentMethods.pm_discover ||
-            !$scope.currentListing.paymentMethods.pm_amerExpr ||
-            !$scope.currentListing.paymentMethods.pm_pickup){
-            return false;
-        }
-        return true;
-    };
-
     $scope.changeShippingDetails = function() {
         if(!$scope.updateShippingInfo){
             $scope.updateShippingInfo = true;
@@ -434,16 +418,22 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
         /* Add Auth Token */
         if($rootScope.AuthToken)
             addItemRequest.getElementsByTagName("eBayAuthToken")[0].childNodes[0].nodeValue = $rootScope.AuthToken;
+
         /* Populate XML Request with input from listing form */
+        //Listing Title
         if($scope.currentListing.title)
             addItemRequest.getElementsByTagName("Title")[0].childNodes[0].nodeValue = $scope.currentListing.title.full;
+        //Listing Category
         if($scope.currentListing.category.primary) {
             addItemRequest.getElementsByTagName("CategoryID")[0].childNodes[0].nodeValue = $scope.currentListing.category.primary;
         }
+        //Item Condition
         if($scope.currentListing.condition)
             addItemRequest.getElementsByTagName("ConditionID")[0].childNodes[0].nodeValue = $scope.currentListing.condition;
+        //Item Description
         if($scope.currentListing.desc)
             addItemRequest.getElementsByTagName("Description")[0].childNodes[0].nodeValue = $scope.currentListing.desc;
+        //Galley Photos
         if($scope.currentListing.photoList) {
             var PictureDetailsElement = addItemRequest.getElementsByTagName("PictureDetails")[0];
             $scope.currentListing.photoList.forEach(function (photoURL) {
@@ -456,8 +446,10 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
                 PictureDetailsElement.appendChild(tempElement);
             });
         }
+        //Listing Type
         if($scope.currentListing.listingType)
             addItemRequest.getElementsByTagName("ListingType")[0].childNodes[0].nodeValue = $scope.currentListing.listingType;
+        //Listing Duration
         if($scope.currentListing.listingDuration){
             if($scope.currentListing.listingDuration == "Good Til' Cancelled")
                 addItemRequest.getElementsByTagName("ListingDuration")[0].childNodes[0].nodeValue = "GTC";
@@ -472,46 +464,13 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             else if($scope.currentListing.listingDuration == "30 days")
                 addItemRequest.getElementsByTagName("ListingDuration")[0].childNodes[0].nodeValue = "Days_30";
         }
+        //Price
         if($scope.currentListing.price)
             addItemRequest.getElementsByTagName("StartPrice")[0].childNodes[0].nodeValue = $scope.currentListing.price;
-        if($scope.currentListing.paymentMethods.all || $scope.currentListing.paymentMethods.pm_payPal || $scope.currentListing.paymentMethods.pm_visaMaster || $scope.currentListing.paymentMethods.pm_discover
-            || $scope.currentListing.paymentMethods.pm_amerExpr || $scope.currentListing.paymentMethods.pm_pickup) {
-            let ItemElement = addItemRequest.getElementsByTagName("Item")[0];
-            if($scope.currentListing.paymentMethods.all || $scope.currentListing.paymentMethods.pm_visaMaster){
-                let tempElement = addItemRequest.createElement("PaymentMethods");
-                let tempTextNode = addItemRequest.createTextNode("VisaMC");
-                tempElement.appendChild(tempTextNode);
-                ItemElement.appendChild(tempElement);
-            }
-            if($scope.currentListing.paymentMethods.all || $scope.currentListing.paymentMethods.pm_discover){
-                let tempElement = addItemRequest.createElement("PaymentMethods");
-                let tempTextNode = addItemRequest.createTextNode("Discover");
-                tempElement.appendChild(tempTextNode);
-                ItemElement.appendChild(tempElement);
-            }
-            if($scope.currentListing.paymentMethods.all || $scope.currentListing.paymentMethods.pm_amerExpr){
-                let tempElement = addItemRequest.createElement("PaymentMethods");
-                let tempTextNode = addItemRequest.createTextNode("AmEx");
-                tempElement.appendChild(tempTextNode);
-                ItemElement.appendChild(tempElement);
-            }
-            if($scope.currentListing.paymentMethods.all || $scope.currentListing.paymentMethods.pm_pickup){
-                let tempElement = addItemRequest.createElement("PaymentMethods");
-                let tempTextNode = addItemRequest.createTextNode("PayOnPickup");
-                tempElement.appendChild(tempTextNode);
-                ItemElement.appendChild(tempElement);
-            }
-            if($scope.currentListing.paymentMethods.all || $scope.currentListing.paymentMethods.pm_payPal){
-                let tempElement = addItemRequest.createElement("PaymentMethods");
-                let tempTextNode = addItemRequest.createTextNode("PayPal");
-                tempElement.appendChild(tempTextNode);
-                ItemElement.appendChild(tempElement);
-                let tempElement2 = addItemRequest.createElement("PayPalEmailAddress");
-                let tempTextNode2 = addItemRequest.createTextNode("mitchcout@gmail.com");
-                tempElement2.appendChild(tempTextNode2);
-                ItemElement.appendChild(tempElement2);
-            }
-        }
+        //Payment Methods
+        if($scope.currentListing.paymentOption)
+            addItemRequest.getElementsByTagName("PaymentProfileID")[0].childNodes[0].nodeValue = $scope.currentListing.paymentOption;
+        //Product Reference ID
         if($scope.currentListing.catalogInfo.productId){
             let ItemElement = addItemRequest.getElementsByTagName("Item")[0];
             let tempElement = addItemRequest.createElement("ProductListingDetails");
@@ -521,8 +480,13 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             tempElement.appendChild(tempChildElement);
             ItemElement.appendChild(tempElement);
         }
+        //Return Options
         if($scope.currentListing.returnOption)
-            addItemRequest.getElementsByTagName("ReturnsAcceptedOption")[0].childNodes[0].nodeValue = $scope.currentListing.returnOption;
+            addItemRequest.getElementsByTagName("ReturnProfileID")[0].childNodes[0].nodeValue = $scope.currentListing.returnOption;
+        //Shipping Options
+        if($scope.currentListing.shippingOption)
+            addItemRequest.getElementsByTagName("ShippingProfileID")[0].childNodes[0].nodeValue = $scope.currentListing.shippingOption;
+        //Shipping Location
         if($scope.currentListing.shippingLocationCityState)
             addItemRequest.getElementsByTagName("Location")[0].childNodes[0].nodeValue = $scope.currentListing.shippingLocationCityState;
         if($scope.currentListing.shippingLocationZIP)
@@ -581,6 +545,16 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             console.log("===============================");
             if(responseCondition == "Failure") {
                 $rootScope.switchToFailed($scope.thisListingKey);
+                var errMsg = "";
+                let i = 0;
+                while(ebayResponse.getElementsByTagName("SeverityCode")[i]){
+                    if(ebayResponse.getElementsByTagName("SeverityCode")[i].childNodes[0].nodeValue != "Warning"){
+                        errMsg = ebayResponse.getElementsByTagName("LongMessage")[i].childNodes[0].nodeValue;
+                        break;
+                    }
+                    i++;
+                }
+                addToSubmittedListingsList(null, errMsg);
                 document.getElementById('tablink'+$scope.thisListingKey).classList.add('nav-tabs-failure');
             } else {
                 $rootScope.switchToSuccess($scope.thisListingKey);
@@ -594,11 +568,12 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
         });
     };
 
-    var addToSubmittedListingsList = function(itemID){
+    var addToSubmittedListingsList = function(itemID, errorMsg){
         let newListing = {
             key: $scope.thisListingKey,
             title: $scope.currentListing.title.full,
-            itemID: itemID
+            itemID: itemID,
+            error: errorMsg
         };
         $rootScope.submittedListings[$scope.thisListingKey] = newListing;
     }

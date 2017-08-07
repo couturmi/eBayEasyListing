@@ -23,21 +23,17 @@
         <PostalCode>postalCode</PostalCode>
         <Country>US</Country>
         <Quantity>1</Quantity>
-        <ShippingDetails>
-            <ShippingServiceOptions>
-                <FreeShipping>true</FreeShipping>
-                <ShippingServicePriority>1</ShippingServicePriority>
-                <ShippingService>ShippingMethodStandard</ShippingService>
-                <ShippingServiceCost>0.00</ShippingServiceCost>
-                <ShippingServiceAdditionalCost>0.00</ShippingServiceAdditionalCost>
-            </ShippingServiceOptions>
-        </ShippingDetails>
-        <ReturnPolicy>
-            <ReturnsAcceptedOption>ReturnsAccepted</ReturnsAcceptedOption>
-            <RefundOption>MoneyBack</RefundOption>
-            <ReturnsWithinOption>Days_30</ReturnsWithinOption>
-            <ShippingCostPaidByOption>Buyer</ShippingCostPaidByOption>
-        </ReturnPolicy>
+        <SellerProfiles>
+            <SellerPaymentProfile>
+                <PaymentProfileID>0</PaymentProfileID>
+            </SellerPaymentProfile>
+            <SellerReturnProfile>
+                <ReturnProfileID>0</ReturnProfileID>
+            </SellerReturnProfile>
+            <SellerShippingProfile>
+                <ShippingProfileID>0</ShippingProfileID>
+            </SellerShippingProfile>
+        </SellerProfiles>
         <Site>US</Site>
     </Item>
 </AddItemRequest>

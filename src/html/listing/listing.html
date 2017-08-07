@@ -178,56 +178,30 @@
                     </div>
                 </div>
             </div>
-            <div class="row" ng-show="formSectionIndex > 3">
+            <div class="row" ng-show="formSectionIndex > 2">
                 <div class="col-md-6 col-lg-6 col-sm-6 form-group">
                     <h4 class="col-form-label col-form-label-lg">Payment Methods:</h4>
-                    <div class="checkbox">
-                        <label><input name="paymentMethod" ng-model="currentListing.paymentMethods.pm_payPal" type="checkbox" ng-checked="currentListing.paymentMethods.all || !listingForm.paymentMethod.$touched">
-                            PayPal</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input name="paymentMethod" ng-model="currentListing.paymentMethods.pm_visaMaster" type="checkbox" ng-checked="currentListing.paymentMethods.all">
-                            Visa / MasterCard</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input name="paymentMethod" ng-model="currentListing.paymentMethods.pm_discover" type="checkbox" ng-checked="currentListing.paymentMethods.all">
-                            Discover</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input name="paymentMethod" ng-model="currentListing.paymentMethods.pm_amerExpr" type="checkbox" ng-checked="currentListing.paymentMethods.all">
-                            American Express</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input name="paymentMethod" ng-model="currentListing.paymentMethods.pm_pickup" type="checkbox" ng-checked="currentListing.paymentMethods.all">
-                            Receive payment upon pickup</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input name="paymentMethod" ng-model="currentListing.paymentMethods.all" type="checkbox" ng-checked="allPaymentMenthodsChecked()">
-                            Any of above</label>
-                    </div>
+                    <select name="paymentPolicy" class="form-control" ng-model="currentListing.paymentOption">
+                        <option ng-repeat="policy in profiles.paymentProfiles" value="{{policy.profileID}}">{{policy.name}}</option>
+                    </select>
                 </div>
                 <div class="col-md-6 col-lg-6 col-sm-6 form-group">
-                    <h4 class="col-form-label col-form-label-lg">Return Options:</h4>
-                    <div class="form-check">
-                        <label class="form-check-label"><input type="radio" class="form-check-input" name="returnOptions" value="ReturnsAccepted" ng-model="currentListing.returnOption">
-                            Returns Accepted</label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label"><input type="radio" class="form-check-input" name="returnOptions" value="ReturnsNotAccepted" ng-model="currentListing.returnOption">
-                            No returns accepted
-                        <br><small class="form-text text-muted radio-small-text">The item could still be returned if it doesn't match the listing's description.</small>
-                        </label>
-                    </div>
+                    <h4 class="col-form-label col-form-label-lg">Return Policies:</h4>
+                    <select name="returnPolicy" class="form-control" ng-model="currentListing.returnOption">
+                        <option ng-repeat="policy in profiles.returnProfiles" value="{{policy.profileID}}">{{policy.name}}</option>
+                    </select>
                 </div>
             </div>
-            <div class="row" ng-show="formSectionIndex > 4">
+            <div class="row" ng-show="formSectionIndex > 3">
                 <h3 class="col-md-12 col-lg-12 col-sm-12">Shipping Details</h3>
-                <div class="col-md-4 col-lg-4 col-sm-4 form-group">
-                    <h4 class="col-form-label col-form-label-lg">Domestic Shipping:</h4>
-                    <select name="domesticShipping" class="form-control" ng-model="currentListing.domesticShipping" ng-options="type for type in domesticShippingList"></select>
+                <div class="col-md-6 col-lg-6 col-sm-6 form-group">
+                    <h4 class="col-form-label col-form-label-lg">Shipping Policies:</h4>
+                    <select name="shippingPolicy" class="form-control" ng-model="currentListing.shippingOption">
+                        <option ng-repeat="policy in profiles.shippingProfiles" value="{{policy.profileID}}">{{policy.name}}</option>
+                    </select>
                 </div>
             </div>
-            <div class="row" ng-show="formSectionIndex > 4">
+            <div class="row" ng-show="formSectionIndex > 3">
                 <div class="col-md-12 col-lg-12 col-sm-12 form-group">
                     <h4 class="col-form-label col-form-label-lg">Item location:</h4>
                     <span ng-show="!updateShippingInfo">{{currentListing.shippingLocationCityState}}, {{currentListing.shippingLocationZIP}}, {{currentListing.shippingLocationCountry}}</span>
@@ -247,12 +221,12 @@
                     <a href="" ng-click="changeShippingDetails()">{{updateShippingText}}</a>
                 </div>
             </div>
-            <div class="row" ng-show="formSectionIndex < 5">
+            <div class="row" ng-show="formSectionIndex < 4">
                 <ul class="pager">
                     <li><a href="#" ng-click="nextSection()">Next</a></li>
                 </ul>
             </div>
-            <div class="row" ng-if="formSectionIndex >= 5">
+            <div class="row" ng-if="formSectionIndex >= 4">
                 <div class="col-md-12 col-lg-12 col-sm-12 form-group text-center">
                     <input ng-disabled="false" class="btn btn-submit" type="submit" value="Submit Listing">
                 </div>

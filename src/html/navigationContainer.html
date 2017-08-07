@@ -6,7 +6,7 @@
             <button ng-if="userLoggedIn" class="btn btn-navbar pull-right">View Listings</button>
             <ul class="nav nav-tabs">
                 <li ng-repeat="page in listingPages" id="{{'tab'+page.key}}" class="active" ng-click="tabClicked(page.key)"><a href="#" id="{{'tablink'+page.key}}">Listing {{page.key+1}}</a></li>
-                <li><a class="nav-tab-add" href="#" ng-click="newTabClicked()">+</a></li>
+                <li ng-if="userLoggedIn"><a class="nav-tab-add" href="#" ng-click="newTabClicked()">+</a></li>
             </ul>
         </nav>
     </div>

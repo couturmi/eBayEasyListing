@@ -6,9 +6,18 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
     /*************************************************************
      * Global Variables
      *************************************************************/
+    /** CURRENT ENVIRONMENT **/
+    $rootScope.ENV = "SANDBOX";
+    /**---------------------**/
+
     $scope.tradingAPIDLL_Sandbox = '/ebayApiSandbox/ws/api.dll';
     $scope.tradingAPIDLL_Prod = '/ebayApiProd/ws/api.dll';
-    $rootScope.tradingAPIDLL = $scope.tradingAPIDLL_Sandbox;
+    //set urls according to current environment
+    if($rootScope.ENV == "SANDBOX") {
+        $rootScope.tradingAPIDLL = $scope.tradingAPIDLL_Sandbox;
+    } else if($rootScope.ENV == "PROD"){
+        $rootScope.tradingAPIDLL = $scope.tradingAPIDLL_Prod;
+    }
 
     //list of submitted listings
     $rootScope.submittedListings = [];
@@ -24,9 +33,15 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
     // application keys
     $http.get('properties/applicationDetails/applicationKeys.json').success(function(data) {
         $rootScope.applicationKeys=data;
-        $rootScope.API_DEV_NAME = $rootScope.applicationKeys.SANDBOX_API_DEV_NAME;
-        $rootScope.API_APP_NAME = $rootScope.applicationKeys.SANDBOX_API_APP_NAME;
-        $rootScope.API_CERT_NAME = $rootScope.applicationKeys.SANDBOX_API_CERT_NAME;
+        if($rootScope.ENV == "SANDBOX") {
+            $rootScope.API_DEV_NAME = $rootScope.applicationKeys.SANDBOX_API_DEV_NAME;
+            $rootScope.API_APP_NAME = $rootScope.applicationKeys.SANDBOX_API_APP_NAME;
+            $rootScope.API_CERT_NAME = $rootScope.applicationKeys.SANDBOX_API_CERT_NAME;
+        } else if($rootScope.ENV == "PROD"){
+            $rootScope.API_DEV_NAME = $rootScope.applicationKeys.PROD_API_DEV_NAME;
+            $rootScope.API_APP_NAME = $rootScope.applicationKeys.PROD_API_APP_NAME;
+            $rootScope.API_CERT_NAME = $rootScope.applicationKeys.PROD_API_CERT_NAME;
+        }
         $rootScope.API_COMPATIBILITY_LEVEL = $rootScope.applicationKeys.API_COMPATIBILITY_LEVEL;
     });
     // check if authToken exists in session. If not, user must log in
@@ -34,7 +49,12 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
     $rootScope.AuthToken = "";
     if(sessionStorage.authToken){
         $rootScope.userLoggedIn = true;
+        //set auth token
         $rootScope.AuthToken = sessionStorage.authToken;
+        //set user profiles
+        $http.get('properties/userDetails/userProfiles.json').success(function(data) {
+            $rootScope.profiles=data;
+        });
     }
     /*************************************************************
      * Tab Functions

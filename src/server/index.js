@@ -13,6 +13,7 @@ const port = 8080;
 
 //cleanup old temp files
 findRemoveSync('./src/img/temp/photoUploads', {files: ['*.*']})
+findRemoveSync('./src/properties/userDetails', {files: ['userProfiles.json']})
 
 //for uploading images
 app.use(fileUpload());
@@ -48,6 +49,24 @@ app.post('/updateUserShippingDetails', function(req, res) {
             return res.status(500).send(err);
 
         res.send('User Shipping Details updated!');
+    });
+});
+
+app.post('/updateUserProfiles', function(req, res) {
+    if (!req.body) {
+        return res.status(400).send('No data received.');
+    }
+
+    //get data
+    let userProfiles = req.body.userProfiles;
+
+    //write data to file
+    var writer = fs.createWriteStream('./src/properties/userDetails/userProfiles.json');
+    writer.write(userProfiles, function(err) {
+        if (err)
+            return res.status(500).send(err);
+
+        res.send('User Profiles updated!');
     });
 });
 
