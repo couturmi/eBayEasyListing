@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GetUserPreferencesRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+    <RequesterCredentials>
+        <eBayAuthToken>ABC...123</eBayAuthToken>
+    </RequesterCredentials>
+    <ShowSellerProfilePreferences>true</ShowSellerProfilePreferences>
+    <ShowSellerPaymentPreferences>true</ShowSellerPaymentPreferences>
+</GetUserPreferencesRequest>

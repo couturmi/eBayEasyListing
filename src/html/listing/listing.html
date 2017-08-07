@@ -24,8 +24,8 @@
                         <div class="first-button-section">
                             <div class="product-detail-label"><span>Type</span></div>
                             <div class="product-detail-buttons scroll-style">
-                                <input id="productType1" ng-click="selectProductType(73839)" type="button" class="btn btn-default btn-outline" value="iPod">
-                                <input id="productType2" ng-click="selectProductType(9355)" type="button" class="btn btn-default btn-outline" value="iPhone">
+                                <input id="{{'productType1'+'-tab'+currentTab}}" ng-click="selectProductType(73839)" type="button" class="btn btn-default btn-outline" value="iPod">
+                                <input id="{{'productType2'+'-tab'+currentTab}}" ng-click="selectProductType(9355)" type="button" class="btn btn-default btn-outline" value="iPhone">
                             </div>
                         </div>
                     </div>
@@ -35,8 +35,8 @@
                         <div class="new-button-section">
                             <div class="product-detail-label"><span>Model</span></div>
                             <div class="product-detail-buttons scroll-style">
-                                <input ng-if="currentListing.category.primary == 73839" ng-repeat="model in ipod_models" id="{{'model'+model.key}}" ng-click="selectModel(model)" type="button" class="btn btn-default btn-outline button-spacing" value="{{model.value}}">
-                                <input ng-if="currentListing.category.primary == 9355" ng-repeat="model2 in iphone_models" id="{{'model'+model2.key}}" ng-click="selectModel(model2)" type="button" class="btn btn-default btn-outline button-spacing" value="{{model2.value}}">
+                                <input ng-if="currentListing.category.primary == 73839" ng-repeat="model in ipod_models" id="{{'model'+model.key+'-tab'+currentTab}}" ng-click="selectModel(model)" type="button" class="btn btn-default btn-outline button-spacing" value="{{model.value}}">
+                                <input ng-if="currentListing.category.primary == 9355" ng-repeat="model2 in iphone_models" id="{{'model'+model2.key+'-tab'+currentTab}}" ng-click="selectModel(model2)" type="button" class="btn btn-default btn-outline button-spacing" value="{{model2.value}}">
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                             <div class="product-detail-label"><span>Gen</span></div>
                             <div class="product-detail-buttons scroll-style">
                                 <span ng-if="currentListing.category.primary == 9355" class="product-detail-text">N/A</span>
-                                <input ng-if="currentListing.category.primary != 9355 && currentListing.category.model" ng-repeat="generation in ipod_generations | filter:filterGeneration" id="{{'generation'+generation.key}}" ng-click="selectGeneration(generation)" type="button" class="btn btn-default btn-outline button-spacing" value="{{generation.value}}">
+                                <input ng-if="currentListing.category.primary != 9355 && currentListing.category.model" ng-repeat="generation in ipod_generations | filter:filterGeneration" id="{{'generation'+generation.key+'-tab'+currentTab}}" ng-click="selectGeneration(generation)" type="button" class="btn btn-default btn-outline button-spacing" value="{{generation.value}}">
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                         <div class="new-button-section">
                             <div class="product-detail-label"><span>Capacity</span></div>
                             <div class="product-detail-buttons scroll-style">
-                                <input ng-if="currentListing.category.model" ng-repeat="size in storage_sizes | filter:filterModelCapacity" id="{{'size'+size.key}}" ng-click="selectCapacity(size)" type="button" class="btn btn-default btn-outline button-spacing" value="{{size.value}}">
+                                <input ng-if="currentListing.category.model" ng-repeat="size in storage_sizes | filter:filterModelCapacity" id="{{'size'+size.key+'-tab'+currentTab}}" ng-click="selectCapacity(size)" type="button" class="btn btn-default btn-outline button-spacing" value="{{size.value}}">
                             </div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                         <div class="new-button-section">
                             <div class="product-detail-label"><span>Color</span></div>
                             <div class="product-detail-buttons scroll-style">
-                                <input ng-if="currentListing.category.model" ng-repeat="color in product_colors | filter:filterProductColor" id="{{'color'+color.key}}" ng-click="selectColor(color)" type="button" class="btn btn-default btn-outline button-spacing" value="{{color.value}}">
+                                <input ng-if="currentListing.category.model" ng-repeat="color in product_colors | filter:filterProductColor" id="{{'color'+color.key+'-tab'+currentTab}}" ng-click="selectColor(color)" type="button" class="btn btn-default btn-outline button-spacing" value="{{color.value}}">
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                             <div class="product-detail-label"><span>Carrier</span></div>
                             <div class="product-detail-buttons scroll-style">
                                 <span ng-if="currentListing.category.primary == iPodID" class="product-detail-text">N/A</span>
-                                <input ng-if="currentListing.category.primary != iPodID && currentListing.category.model" ng-repeat="carrier in iphone_carriers" id="{{'carrier'+carrier.key}}" ng-click="selectCarrier(carrier)" type="button" class="btn btn-default btn-outline button-spacing" value="{{carrier.value}}">
+                                <input ng-if="currentListing.category.primary != iPodID && currentListing.category.model" ng-repeat="carrier in iphone_carriers" id="{{'carrier'+carrier.key+'-tab'+currentTab}}" ng-click="selectCarrier(carrier)" type="button" class="btn btn-default btn-outline button-spacing" value="{{carrier.value}}">
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                 <div class="col-md-12 col-lg-12 col-sm-12">
                     <h4 class="col-form-label col-form-label-lg">Product Condition:</h4>
                     <div class="form-group">
-                        <input ng-repeat="condition in listingConditions" id="{{'condition'+condition.key}}" ng-click="selectCondition(condition)" type="button" class="btn btn-default btn-outline button-spacing" value="{{condition.value}}">
+                        <input ng-repeat="condition in listingConditions" id="{{'condition'+condition.key+'-tab'+currentTab}}" ng-click="selectCondition(condition)" type="button" class="btn btn-default btn-outline button-spacing" value="{{condition.value}}">
                     </div>
                 </div>
             </div>
@@ -152,7 +152,7 @@
                     <h4 class="col-form-label col-form-label-lg">Photos:</h4>
                     <img class="photo" ng-repeat="photo in currentListing.photoList" ng-src="{{photo}}" ng-click="confirmPhotoDelete(photo)">
                     <label class="addPhoto text-center">
-                        <input id="addPhotoInput" name="addPhoto" type="file" onchange="angular.element(this).scope().addPhoto()"><span>+</span>
+                        <input id="{{'addPhotoInput'+'-tab'+currentTab}}" name="addPhoto" type="file" onchange="angular.element(this).scope().addPhoto()"><span>+</span>
                     </label>
                 </div>
             </div>
@@ -174,60 +174,34 @@
                     <h4 class="col-form-label col-form-label-lg">{{currentListing.listingType == "Auction" ? "Starting Price" : "Price"}}:</h4>
                     <div class="input-group">
                         <div class="input-group-addon">$</div>
-                        <input id="priceInput" name="price" ng-model="currentListing.price" type="number" step="0.01" ng-blur="formatPrice()" class="form-control" required>
+                        <input id="{{'priceInput'+'-tab'+currentTab}}" name="price" ng-model="currentListing.price" type="number" step="0.01" ng-blur="formatPrice()" class="form-control" required>
                     </div>
+                </div>
+            </div>
+            <div class="row" ng-show="formSectionIndex > 2">
+                <div class="col-md-6 col-lg-6 col-sm-6 form-group">
+                    <h4 class="col-form-label col-form-label-lg">Payment Methods:</h4>
+                    <select name="paymentPolicy" class="form-control" ng-model="currentListing.paymentOption">
+                        <option ng-repeat="policy in profiles.paymentProfiles" value="{{policy.profileID}}">{{policy.name}}</option>
+                    </select>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-6 form-group">
+                    <h4 class="col-form-label col-form-label-lg">Return Policies:</h4>
+                    <select name="returnPolicy" class="form-control" ng-model="currentListing.returnOption">
+                        <option ng-repeat="policy in profiles.returnProfiles" value="{{policy.profileID}}">{{policy.name}}</option>
+                    </select>
                 </div>
             </div>
             <div class="row" ng-show="formSectionIndex > 3">
-                <div class="col-md-6 col-lg-6 col-sm-6 form-group">
-                    <h4 class="col-form-label col-form-label-lg">Payment Methods:</h4>
-                    <div class="checkbox">
-                        <label><input name="paymentMethod" ng-model="currentListing.paymentMethods.pm_payPal" type="checkbox" ng-checked="currentListing.paymentMethods.all || !listingForm.paymentMethod.$touched">
-                            PayPal</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input name="paymentMethod" ng-model="currentListing.paymentMethods.pm_visaMaster" type="checkbox" ng-checked="currentListing.paymentMethods.all">
-                            Visa / MasterCard</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input name="paymentMethod" ng-model="currentListing.paymentMethods.pm_discover" type="checkbox" ng-checked="currentListing.paymentMethods.all">
-                            Discover</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input name="paymentMethod" ng-model="currentListing.paymentMethods.pm_amerExpr" type="checkbox" ng-checked="currentListing.paymentMethods.all">
-                            American Express</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input name="paymentMethod" ng-model="currentListing.paymentMethods.pm_pickup" type="checkbox" ng-checked="currentListing.paymentMethods.all">
-                            Receive payment upon pickup</label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input name="paymentMethod" ng-model="currentListing.paymentMethods.all" type="checkbox" ng-checked="allPaymentMenthodsChecked()">
-                            Any of above</label>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-6 col-sm-6 form-group">
-                    <h4 class="col-form-label col-form-label-lg">Return Options:</h4>
-                    <div class="form-check">
-                        <label class="form-check-label"><input type="radio" class="form-check-input" name="returnOptions" value="ReturnsAccepted" ng-model="currentListing.returnOption">
-                            Returns Accepted</label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label"><input type="radio" class="form-check-input" name="returnOptions" value="ReturnsNotAccepted" ng-model="currentListing.returnOption">
-                            No returns accepted
-                        <br><small class="form-text text-muted radio-small-text">The item could still be returned if it doesn't match the listing's description.</small>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="row" ng-show="formSectionIndex > 4">
                 <h3 class="col-md-12 col-lg-12 col-sm-12">Shipping Details</h3>
-                <div class="col-md-4 col-lg-4 col-sm-4 form-group">
-                    <h4 class="col-form-label col-form-label-lg">Domestic Shipping:</h4>
-                    <select name="domesticShipping" class="form-control" ng-model="currentListing.domesticShipping" ng-options="type for type in domesticShippingList"></select>
+                <div class="col-md-6 col-lg-6 col-sm-6 form-group">
+                    <h4 class="col-form-label col-form-label-lg">Shipping Policies:</h4>
+                    <select name="shippingPolicy" class="form-control" ng-model="currentListing.shippingOption">
+                        <option ng-repeat="policy in profiles.shippingProfiles" value="{{policy.profileID}}">{{policy.name}}</option>
+                    </select>
                 </div>
             </div>
-            <div class="row" ng-show="formSectionIndex > 4">
+            <div class="row" ng-show="formSectionIndex > 3">
                 <div class="col-md-12 col-lg-12 col-sm-12 form-group">
                     <h4 class="col-form-label col-form-label-lg">Item location:</h4>
                     <span ng-show="!updateShippingInfo">{{currentListing.shippingLocationCityState}}, {{currentListing.shippingLocationZIP}}, {{currentListing.shippingLocationCountry}}</span>
@@ -247,12 +221,12 @@
                     <a href="" ng-click="changeShippingDetails()">{{updateShippingText}}</a>
                 </div>
             </div>
-            <div class="row" ng-show="formSectionIndex < 5">
+            <div class="row" ng-show="formSectionIndex < 4">
                 <ul class="pager">
                     <li><a href="#" ng-click="nextSection()">Next</a></li>
                 </ul>
             </div>
-            <div class="row" ng-if="formSectionIndex >= 5">
+            <div class="row" ng-if="formSectionIndex >= 4">
                 <div class="col-md-12 col-lg-12 col-sm-12 form-group text-center">
                     <input ng-disabled="false" class="btn btn-submit" type="submit" value="Submit Listing">
                 </div>

@@ -13,6 +13,7 @@ const port = 8080;
 
 //cleanup old temp files
 findRemoveSync('./src/img/temp/photoUploads', {files: ['*.*']})
+findRemoveSync('./src/properties/userDetails', {files: ['userProfiles.json']})
 
 //for uploading images
 app.use(fileUpload());
@@ -51,12 +52,35 @@ app.post('/updateUserShippingDetails', function(req, res) {
     });
 });
 
-/* Starting page */
+app.post('/updateUserProfiles', function(req, res) {
+    if (!req.body) {
+        return res.status(400).send('No data received.');
+    }
+
+    //get data
+    let userProfiles = req.body.userProfiles;
+
+    //write data to file
+    var writer = fs.createWriteStream('./src/properties/userDetails/userProfiles.json');
+    writer.write(userProfiles, function(err) {
+        if (err)
+            return res.status(500).send(err);
+
+        res.send('User Profiles updated!');
+    });
+});
+
+/* proxy values */
 app.use('/', express.static('./src' + '/'));
 app.use('/ebayApiSandbox', proxy('https://api.sandbox.ebay.com'));
 app.use('/ebayShoppingApiSandbox', proxy('http://open.api.sandbox.ebay.com'));
-app.use('/ebayApiProd', proxy('https://api.ebay.com'));
+app.use('/ebayApiSignInSandbox', proxy('https://signin.sandbox.ebay.com'));
 
+app.use('/ebayApiProd', proxy('https://api.ebay.com'));
+app.use('/ebayShoppingApiProd', proxy('http://open.api.ebay.com'));
+app.use('/ebayApiSignInProd', proxy('https://signin.ebay.com'));
+
+/* Starting page */
 app.listen(port, (err) => {
     if (err) {
         return console.log('ERROR: Could not start server', err);

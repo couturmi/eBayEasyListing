@@ -3,9 +3,9 @@
         <h1><b>Success!</b></h1>
         <br>
         <p>Your listing for</p>
-        <p><b>{{currentListing.title.full}}</b></p>
+        <p><b>{{submittedListings[currentTab].title}}</b></p>
         <p>has been posted.</p>
         <br>
-        <span class="listing-success-link"><a href="localhost:8080" target="_blank">View your listing here</a></span>
+        <span class="listing-success-link"><a href="{{'http://www.ebay.com/itm/'+submittedListings[currentTab].itemID}}" target="_blank">View your listing here</a></span>
     </div>
 </div>

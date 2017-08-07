@@ -1,52 +1,12 @@
-body {
-    background-color: white;
-}
-
-.easy-ebay-modal {
-    display: block;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
+html {
     height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-    padding-top:60px;
 }
-
-.easy-ebay-modal-content {
+body {
+    height: 100%;
     background-color: white;
-    margin: 5% auto 15% auto;
-    border: 1px solid #888;
-    width: 40%;
 }
-
-.easy-ebay-modal-header {
-    margin: 20px 0 0 0;
-    position: relative;
-}
-
-.easy-ebay-modal-body {
-    margin: 0 0 20px 0;
-}
-
-.easy-ebay-login-input {
-    width: 60%
-}
-
-.easy-ebay-close {
-    color: #898989;
-    font-size: 35px;
-    position: absolute;
-    right: 25px;
-    top: -30px;
-}
-.easy-ebay-close:hover,
-.easy-ebay-close:focus {
-    color: #000000;
-    cursor: pointer;
+.max-height {
+    height:100%;
 }
 
 .listing-input-md {
@@ -55,6 +15,84 @@ body {
 
 .radio-small-text {
     padding-left:15px;
+}
+
+.body-height {
+    padding-top:118px;
+    height:100%;
+    overflow-y: auto;
+}
+
+/********************************************
+ * Navbar
+ ********************************************/
+.navbar-color {
+    background: #444444;
+}
+.nav-tabs {
+    background: #444444;
+    padding-left: 2px;
+    border-bottom-color: #444444;
+}
+.nav-tabs li.active a, .nav-tabs li.active a:focus{
+    background: #08b1e0;
+    border-color: #08b1e0;
+    color: #ffffff;
+}
+.nav-tabs li.active a:hover{
+    background: #edf060;
+    border-color: #edf060;
+    color: #444444;
+}
+.nav-tabs li a, .nav-tabs li a:focus{
+    color: #08b1e0;
+    background: #444444;
+}
+.nav-tabs li a:hover{
+    background: #edf060;
+    border-color: #edf060;
+    color: #444444;
+}
+.nav-tabs-success {
+    background: #669e43 !important;
+    border-color: #669e43 !important;
+    color: #ffffff !important;
+}
+.nav-tabs-failure {
+    background: #e84b3a !important;
+    border-color: #e84b3a !important;
+    color: #ffffff !important;
+}
+.nav-tab-add {
+    font-weight: bold;
+}
+.nav-position {
+    top: 10px;
+}
+.nav-height {
+    z-index:5;
+    position:absolute;
+    width:100%;
+    height:118px;
+}
+.logo-navbar {
+    margin-left: 15px;
+}
+.btn-navbar {
+    background: #f0803c;
+    color: #ffffff;
+}
+.btn.btn-navbar.pull-right {
+    margin-right: 20px;
+    margin-top:11px;
+}
+
+/********************************************
+ * Login
+ ********************************************/
+.login-failed{
+    margin-top:0;
+    color: #e84b3a;
 }
 
 /********************************************
@@ -66,12 +104,16 @@ body {
     /*line-height: 45px;*/
     vertical-align: middle;
     font-family: "Lucida Sans Unicode";
+    padding-top: 100px;
 }
 
 /* Success page */
 .jumbotron.jumbotron-listing-success {
     width: 100%;
+    height: 100%;
     background: #669e43;
+    padding-bottom:0;
+    margin-bottom:0;
 }
 .listing-success-link a:link{
     color: #ffffff;
@@ -83,13 +125,19 @@ body {
 /* Loading page */
 .jumbotron.jumbotron-listing-loading {
     width: 100%;
+    height: 100%;
     background: #edf060;
+    padding-bottom:0;
+    margin-bottom:0;
 }
 
 /* Failed page */
 .jumbotron.jumbotron-listing-failed {
     width: 100%;
+    height: 100%;
     background: #e84b3a;
+    padding-bottom:0;
+    margin-bottom:0;
 }
 .listing-failed-link a:link{
     color: #ffffff;
@@ -103,19 +151,29 @@ body {
  ********************************************/
 
 .welcome-block {
-    /*line-height: 45px;*/
     vertical-align: middle;
     font-family: "Lucida Sans Unicode";
+    padding-top: 50px;
 }
 
 /* Welcome page */
 .jumbotron.jumbotron-welcome {
     width: 100%;
+    height: 100%;
     background: #08b1e0;
     color: #444444;
+    padding-bottom:0;
+    margin-bottom:0;
+}
+.welcome-title {
+    margin-top:0;
 }
 
 .btn-welcome-page {
     background: #f0803c;
     color: #ffffff;
+    margin-bottom:10px;
+}
+.welcome-listing-message {
+    color: #e84b3a;
 }

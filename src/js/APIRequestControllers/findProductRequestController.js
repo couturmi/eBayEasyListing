@@ -2,7 +2,7 @@
  * Created by mitchcout on 7/18/2017.
  */
 var app = angular.module('easyListing');
-app.controller('findProductCtrl', ['$scope', '$http', '$uibModal', function($scope, $http, $uibModal) {
+app.controller('findProductCtrl', ['$scope', '$rootScope', '$http', '$uibModal', function($scope, $rootScope, $http, $uibModal) {
 
     /**
      * Opens modal to select a product when only 1 matching product is found
@@ -151,7 +151,7 @@ app.controller('findProductCtrl', ['$scope', '$http', '$uibModal', function($sco
     var findProductsConfig = {
         headers: {
             'Content-Type':'text/xml',
-            'X-EBAY-API-APP-ID':'Mitchell-eBayEasy-SBX-f09141381-69d9c08c',
+            'X-EBAY-API-APP-ID': $rootScope.API_APP_NAME,
             'X-EBAY-API-SITE-ID':0,
             'X-EBAY-API-CALL-NAME':'FindProducts',
             'X-EBAY-API-VERSION':863,

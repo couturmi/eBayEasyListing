@@ -1,3 +1,6 @@
+.modal-backdrop.fade.ng-scope.in {
+    opacity: 0.95;
+}
 .modal-card-container{
     background:	#d8d8d8;
 }

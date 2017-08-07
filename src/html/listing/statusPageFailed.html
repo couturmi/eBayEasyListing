@@ -3,10 +3,12 @@
         <h1><b>Failed :(</b></h1>
         <br>
         <p>Your listing for</p>
-        <p><b>{{currentListing.title.full}}</b></p>
+        <p><b>{{submittedListings[currentTab].title}}</b></p>
         <p>could not be posted.</p>
         <br>
-        <p>Error:<b>{{currentListing.error}}</b></p>
-        <span class="listing-failed-link"><a href="localhost:8080" target="_blank">Try posting the listing on eBay instead.</a></span>
+        <p><b>Error</b></p>
+        <br><p>{{submittedListings[currentTab].error}}</p>
+        <span class="listing-failed-link"><a href="http://bulksell.ebay.com/ws/eBayISAPI.dll?SingleList&sellingMode=AddItem" target="_blank">Try posting the listing on eBay instead.</a></span>
+        <br><span class="listing-failed-link">Or try logging in again.</span>
     </div>
 </div>
