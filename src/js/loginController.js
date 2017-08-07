@@ -186,6 +186,7 @@ app.controller('loginCtrl', ['$scope', '$rootScope', '$http', function($scope, $
                 //get user preferences using token
                 $scope.performGetUserPreferencesRequest();
             } else {
+                $scope.loading = false;
                 $scope.loginFailed = true;
             }
         }, function(err){
@@ -225,17 +226,26 @@ app.controller('loginCtrl', ['$scope', '$rootScope', '$http', function($scope, $
         //open sign in page in new window
         $scope.signInPage = window.open($scope.AuthNAuthSignInURL+$scope.sessionID,'_blank');
         //watch for when the log in page is closed
-        $scope.$watch('signInPage.closed', function(){
+        $scope.signInWatch = $scope.$watch('signInPage.closed', function(){
             //attempt to fetch token if sing in page is closed
             if($scope.signInPage.closed == true) {
+                //fetch token
                 $scope.performFetchTokenRequest();
+                //clear this watch
+                $scope.signInWatch();
+                //clear the interval just in case
+                if($scope.checkInterval){
+                    clearInterval($scope.checkInterval);
+                }
             }
         });
         //add an interval that digests the scope every second until the sign in page is closed
         $scope.checkInterval = setInterval(function() {
             $scope.$digest();
             if($scope.signInPage.closed == true){
-                clearInterval($scope.checkInterval);
+                if($scope.checkInterval){
+                    clearInterval($scope.checkInterval);
+                }
             }
         }, 1000);
     };
