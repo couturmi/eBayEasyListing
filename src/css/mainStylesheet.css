@@ -66,6 +66,34 @@ body {
 .nav-tab-add {
     font-weight: bold;
 }
+.nav-close {
+    float: right;
+    line-height: 0.95; !important;
+    font-size: 21px;
+    font-weight: 700;
+    filter: alpha(opacity=20);
+    background: none;
+    border: none;
+    padding-left: 10px;
+    padding-right: 0;
+}
+.nav-close:focus {
+    border: none;
+    outline: none;
+}
+li .nav-close {
+    color: #08b1e0;
+    font-weight: 500;
+}
+li.active .nav-close {
+    color: #444444;
+}
+li a:hover .nav-close {
+    color: #444444;
+}
+a:hover .nav-close:hover {
+    color: #e84b3a; !important;
+}
 .nav-position {
     top: 10px;
 }

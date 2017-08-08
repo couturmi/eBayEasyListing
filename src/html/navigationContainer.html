@@ -5,7 +5,7 @@
             <button ng-if="userLoggedIn" class="btn btn-navbar pull-right" ng-click="logOutUser()">Log Out</button>
             <a ng-if="userLoggedIn" class="btn btn-navbar pull-right" href="http://my.ebay.com/ws/eBayISAPI.dll?MyEbayBeta&CurrentPage=MyeBayNextAllSelling" target="_blank">View Listings</a>
             <ul class="nav nav-tabs">
-                <li ng-repeat="page in listingPages" id="{{'tab'+page.key}}" class="active" ng-click="tabClicked(page.key)"><a href="#" id="{{'tablink'+page.key}}">Listing {{page.key+1}}</a></li>
+                <li ng-repeat="page in listingPages | filter:tabIsNotClosedFilter" id="{{'tab'+page.key}}" class="active" ng-click="tabClicked(page.key)"><a href="#" id="{{'tablink'+page.key}}"><button class="nav-close" type="button" ng-click="closeTab(page.key)" ng-show="pageCount - closedPageCount > 1">×</button>Listing {{page.key+1}}</a></li>
                 <li ng-if="userLoggedIn"><a class="nav-tab-add" href="#" ng-click="newTabClicked()">+</a></li>
             </ul>
         </nav>

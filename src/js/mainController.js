@@ -63,6 +63,8 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
     $rootScope.listingPages = [];
     //count of pages added
     $rootScope.pageCount = 0;
+    //count of pages closed
+    $rootScope.closedPageCount = 0;
     //the type of page currently displayed
     $rootScope.currentPageDisplayed = $rootScope.applicationPages.WELCOME;
     //the current tab that is open
@@ -74,14 +76,17 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
     $scope.newBlankPage = function(key){
         var blankPage = {
             key:key,
-            currentPage: $rootScope.applicationPages.WELCOME
+            currentPage: $rootScope.applicationPages.WELCOME,
+            closed:false
         };
         return blankPage;
     }
 
     $scope.tabClicked = function(key) {
         //remove active class from current tab
-        document.getElementById("tab"+$rootScope.currentTab).classList.remove('active');
+        if(document.getElementById("tab"+$rootScope.currentTab)) {
+            document.getElementById("tab" + $rootScope.currentTab).classList.remove('active');
+        }
         $rootScope.currentPageDisplayed = $rootScope.listingPages[key].currentPage;
         $rootScope.currentTab = key;
         //add active class for current tab
@@ -106,6 +111,33 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
     }
     //create first page on startup
     $scope.newTabClicked();
+
+    //close a tab
+    $scope.closeTab = function(pageKey){
+        $rootScope.listingPages[pageKey].closed = true;
+        //if an open listing, set listingIsOpen to false
+        if($rootScope.listingPages[pageKey].currentPage == $rootScope.applicationPages.LISTING){
+            $rootScope.listingIsOpen = false;
+        }
+        //set new currentTab if currentTab was closed
+        if($rootScope.currentTab == pageKey) {
+            for(let i = 0; i < $rootScope.listingPages.length; i++){
+                if($rootScope.listingPages[i].closed == false) {
+                    $scope.tabClicked($rootScope.listingPages[i].key);
+                    break;
+                }
+            }
+        }
+        //increment closed page count
+        $rootScope.closedPageCount++
+    }
+    //filter for displayed tabs
+    $scope.tabIsNotClosedFilter = function(item){
+        if(item.closed){
+            return false;
+        }
+        return true;
+    }
 
     /*************************************************************
      * Page switch Functions
@@ -144,5 +176,6 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
         $rootScope.userLoggedIn = false;
         $rootScope.AuthToken = "";
         sessionStorage.removeItem('authToken');
+        location.reload();
     }
 }]);
