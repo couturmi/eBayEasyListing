@@ -127,6 +127,9 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
         if($rootScope.listingPages[pageKey].currentPage == $rootScope.applicationPages.LISTING){
             $rootScope.listingIsOpen = false;
         }
+        //remove listing from dom
+        var child = document.getElementById("listing"+$rootScope.currentTab);
+        child.parentNode.removeChild(child);
         //set new currentTab if currentTab was closed
         if($rootScope.currentTab == pageKey) {
             for(let i = 0; i < $rootScope.listingPages.length; i++){
