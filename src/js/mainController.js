@@ -69,6 +69,8 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
     $rootScope.currentPageDisplayed = $rootScope.applicationPages.WELCOME;
     //the current tab that is open
     $rootScope.currentTab = 0;
+    //true when the max number of tabs has been reached
+    $rootScope.maxTabs = false;
     //true if a listing is already being edited
     $rootScope.listingIsOpen = false;
 
@@ -94,20 +96,26 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
     }
 
     $scope.newTabClicked = function() {
-        //remove active class from current tab
-        if(document.getElementById("tab"+$rootScope.currentTab)) {
-            document.getElementById("tab" + $rootScope.currentTab).classList.remove('active');
+        //can only add if 8 or less tabs open
+        if($rootScope.pageCount - $rootScope.closedPageCount < 8) {
+            //remove active class from current tab
+            if (document.getElementById("tab" + $rootScope.currentTab)) {
+                document.getElementById("tab" + $rootScope.currentTab).classList.remove('active');
+            }
+            //create page
+            $rootScope.listingPages.push($scope.newBlankPage($rootScope.pageCount));
+            //display first page
+            $rootScope.currentPageDisplayed = $rootScope.listingPages[$rootScope.pageCount].currentPage;
+            //set this new tab to the current displayed tab
+            $rootScope.currentTab = $rootScope.pageCount;
+            //increment for next key
+            $rootScope.pageCount++;
+            //set up to hold listing data
+            $rootScope.submittedListings.push({});
+            if($rootScope.pageCount - $rootScope.closedPageCount >= 8){
+                $rootScope.maxTabs = true;
+            }
         }
-        //create page
-        $rootScope.listingPages.push($scope.newBlankPage($rootScope.pageCount));
-        //display first page
-        $rootScope.currentPageDisplayed = $rootScope.listingPages[$rootScope.pageCount].currentPage;
-        //set this new tab to the current displayed tab
-        $rootScope.currentTab = $rootScope.pageCount;
-        //increment for next key
-        $rootScope.pageCount++;
-        //set up to hold listing data
-        $rootScope.submittedListings.push({});
     }
     //create first page on startup
     $scope.newTabClicked();
@@ -130,6 +138,8 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
         }
         //increment closed page count
         $rootScope.closedPageCount++
+        //maxTabs should no longer be true if a tab is closed
+        $rootScope.maxTabs = false;
     }
     //filter for displayed tabs
     $scope.tabIsNotClosedFilter = function(item){
