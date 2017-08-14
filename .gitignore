@@ -1,2 +1,10 @@
 
 \.idea/workspace\.xml
+
+#temp image files
+img/temp/
+
+#user profile data
+properties/userDetails/userProfiles.json
+
+

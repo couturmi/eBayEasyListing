@@ -92,4 +92,7 @@ app.listen(port, (err) => {
     console.log('Opening browser');
     opn('http://localhost:8080');
     console.log('Application opened successfully');
+    console.log('-------------------------------');
+    console.log('This window must be kept open!!');
+    console.log('-------------------------------');
 });

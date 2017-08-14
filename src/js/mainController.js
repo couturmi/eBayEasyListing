@@ -63,10 +63,14 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
     $rootScope.listingPages = [];
     //count of pages added
     $rootScope.pageCount = 0;
+    //count of pages closed
+    $rootScope.closedPageCount = 0;
     //the type of page currently displayed
     $rootScope.currentPageDisplayed = $rootScope.applicationPages.WELCOME;
     //the current tab that is open
     $rootScope.currentTab = 0;
+    //true when the max number of tabs has been reached
+    $rootScope.maxTabs = false;
     //true if a listing is already being edited
     $rootScope.listingIsOpen = false;
 
@@ -74,14 +78,17 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
     $scope.newBlankPage = function(key){
         var blankPage = {
             key:key,
-            currentPage: $rootScope.applicationPages.WELCOME
+            currentPage: $rootScope.applicationPages.WELCOME,
+            closed:false
         };
         return blankPage;
     }
 
     $scope.tabClicked = function(key) {
         //remove active class from current tab
-        document.getElementById("tab"+$rootScope.currentTab).classList.remove('active');
+        if(document.getElementById("tab"+$rootScope.currentTab)) {
+            document.getElementById("tab" + $rootScope.currentTab).classList.remove('active');
+        }
         $rootScope.currentPageDisplayed = $rootScope.listingPages[key].currentPage;
         $rootScope.currentTab = key;
         //add active class for current tab
@@ -89,23 +96,61 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
     }
 
     $scope.newTabClicked = function() {
-        //remove active class from current tab
-        if(document.getElementById("tab"+$rootScope.currentTab)) {
-            document.getElementById("tab" + $rootScope.currentTab).classList.remove('active');
+        //can only add if 8 or less tabs open
+        if($rootScope.pageCount - $rootScope.closedPageCount < 8) {
+            //remove active class from current tab
+            if (document.getElementById("tab" + $rootScope.currentTab)) {
+                document.getElementById("tab" + $rootScope.currentTab).classList.remove('active');
+            }
+            //create page
+            $rootScope.listingPages.push($scope.newBlankPage($rootScope.pageCount));
+            //display first page
+            $rootScope.currentPageDisplayed = $rootScope.listingPages[$rootScope.pageCount].currentPage;
+            //set this new tab to the current displayed tab
+            $rootScope.currentTab = $rootScope.pageCount;
+            //increment for next key
+            $rootScope.pageCount++;
+            //set up to hold listing data
+            $rootScope.submittedListings.push({});
+            if($rootScope.pageCount - $rootScope.closedPageCount >= 8){
+                $rootScope.maxTabs = true;
+            }
         }
-        //create page
-        $rootScope.listingPages.push($scope.newBlankPage($rootScope.pageCount));
-        //display first page
-        $rootScope.currentPageDisplayed = $rootScope.listingPages[$rootScope.pageCount].currentPage;
-        //set this new tab to the current displayed tab
-        $rootScope.currentTab = $rootScope.pageCount;
-        //increment for next key
-        $rootScope.pageCount++;
-        //set up to hold listing data
-        $rootScope.submittedListings.push({});
     }
     //create first page on startup
     $scope.newTabClicked();
+
+    //close a tab
+    $scope.closeTab = function(pageKey){
+        $rootScope.listingPages[pageKey].closed = true;
+        //if an open listing, set listingIsOpen to false
+        if($rootScope.listingPages[pageKey].currentPage == $rootScope.applicationPages.LISTING){
+            $rootScope.listingIsOpen = false;
+        }
+        //remove listing from dom
+        var child = document.getElementById("listing"+$rootScope.currentTab);
+        child.parentNode.removeChild(child);
+        //set new currentTab if currentTab was closed
+        if($rootScope.currentTab == pageKey) {
+            for(let i = 0; i < $rootScope.listingPages.length; i++){
+                if($rootScope.listingPages[i].closed == false) {
+                    $scope.tabClicked($rootScope.listingPages[i].key);
+                    break;
+                }
+            }
+        }
+        //increment closed page count
+        $rootScope.closedPageCount++
+        //maxTabs should no longer be true if a tab is closed
+        $rootScope.maxTabs = false;
+    }
+    //filter for displayed tabs
+    $scope.tabIsNotClosedFilter = function(item){
+        if(item.closed){
+            return false;
+        }
+        return true;
+    }
 
     /*************************************************************
      * Page switch Functions
@@ -144,5 +189,6 @@ app.controller('mainCtrl', ['$scope','$rootScope','$http', function($scope, $roo
         $rootScope.userLoggedIn = false;
         $rootScope.AuthToken = "";
         sessionStorage.removeItem('authToken');
+        location.reload();
     }
 }]);

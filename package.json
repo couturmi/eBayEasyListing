@@ -21,6 +21,7 @@
     "express-fileupload": "^0.1.4",
     "express-http-proxy": "^1.0.5",
     "find-remove": "^1.0.1",
-    "http-proxy": "^1.16.2"
+    "http-proxy": "^1.16.2",
+    "opn": "^5.1.0"
   }
 }

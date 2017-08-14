@@ -406,6 +406,17 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
         }
     }
 
+    $scope.completeListing = function(){
+        //switch page to loading
+        addToSubmittedListingsList(null);
+        $rootScope.switchToLoading();
+        //remove listing from dom
+        var child = document.getElementById("listing"+$rootScope.currentTab);
+        child.parentNode.removeChild(child);
+        //submit AddItem Request
+        $scope.performAddItemRequest();
+    }
+
     /******************************************
      * XML functions
      ******************************************/
@@ -500,12 +511,6 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
     }
 
     $scope.performAddItemRequest = function() {
-        //switch page to loading
-        addToSubmittedListingsList(null);
-        $rootScope.switchToLoading();
-        //remove listing from dom
-        var child = document.getElementById("listing"+$rootScope.currentTab);
-        child.parentNode.removeChild(child);
         //get xml template
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -544,18 +549,7 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             console.log("AddItem Request: \n"+responseCondition);
             console.log("===============================");
             if(responseCondition == "Failure") {
-                $rootScope.switchToFailed($scope.thisListingKey);
-                var errMsg = "";
-                let i = 0;
-                while(ebayResponse.getElementsByTagName("SeverityCode")[i]){
-                    if(ebayResponse.getElementsByTagName("SeverityCode")[i].childNodes[0].nodeValue != "Warning"){
-                        errMsg = ebayResponse.getElementsByTagName("LongMessage")[i].childNodes[0].nodeValue;
-                        break;
-                    }
-                    i++;
-                }
-                addToSubmittedListingsList(null, errMsg);
-                document.getElementById('tablink'+$scope.thisListingKey).classList.add('nav-tabs-failure');
+                submitFailed(ebayResponse);
             } else {
                 $rootScope.switchToSuccess($scope.thisListingKey);
                 let itemID = ebayResponse.getElementsByTagName("ItemID")[0].childNodes[0].nodeValue;
@@ -576,6 +570,21 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             error: errorMsg
         };
         $rootScope.submittedListings[$scope.thisListingKey] = newListing;
+    }
+
+    var submitFailed = function(ebayResponse){
+        $rootScope.switchToFailed($scope.thisListingKey);
+        var errMsg = "";
+        let i = 0;
+        while(ebayResponse.getElementsByTagName("SeverityCode")[i]){
+            if(ebayResponse.getElementsByTagName("SeverityCode")[i].childNodes[0].nodeValue != "Warning"){
+                errMsg = ebayResponse.getElementsByTagName("LongMessage")[i].childNodes[0].nodeValue;
+                break;
+            }
+            i++;
+        }
+        addToSubmittedListingsList(null, errMsg);
+        document.getElementById('tablink'+$scope.thisListingKey).classList.add('nav-tabs-failure');
     }
 
 }]);
