@@ -30,7 +30,9 @@
 <h4>Application Start</h4>
 <img src="https://github.com/couturmi/eBayEasyListing/blob/master/screenshots/StartPage.PNG" width="650">
 <h4>Log In</h4>
+<span>User Log In</span>
 <img src="https://github.com/couturmi/eBayEasyListing/blob/master/screenshots/LogIn.PNG" width="650">
+<span>Grant Access for application</span>
 <img src="https://github.com/couturmi/eBayEasyListing/blob/master/screenshots/GrantAccess.PNG" width="650">
 <h4>Application Ready</h4>
 <img src="https://github.com/couturmi/eBayEasyListing/blob/master/screenshots/AppReady.PNG" width="650">
