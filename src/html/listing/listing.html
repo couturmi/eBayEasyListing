@@ -151,8 +151,11 @@
                 <div class="col-md-12 col-lg-12 col-sm-12 form-group" ng-controller="addPhotoCtrl">
                     <h4 class="col-form-label col-form-label-lg">Photos:</h4>
                     <img class="photo" ng-repeat="photo in currentListing.photoList" ng-src="{{photo}}" ng-click="confirmPhotoDelete(photo)">
-                    <label class="addPhoto text-center">
-                        <input id="{{'addPhotoInput'+'-tab'+currentTab}}" name="addPhoto" type="file" onchange="angular.element(this).scope().addPhoto()"><span>+</span>
+                    <!--<label class="addPhoto text-center">-->
+                        <!--<input id="{{'addPhotoInput'+'-tab'+currentTab}}" name="addPhoto" type="file" onchange="angular.element(this).scope().addPhoto()"><span>+</span>-->
+                    <!--</label>-->
+                    <label ng-show="currentInputIndex == input.index" ng-repeat="input in photoInputCount" class="addPhoto text-center">
+                        <input id="{{'addPhotoInput'+'-tab'+currentTab+'-index'+input.index}}" name="addPhoto" type="file" onchange="angular.element(this).scope().addPhoto()"><span>+</span>
                     </label>
                 </div>
             </div>

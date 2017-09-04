@@ -141,7 +141,8 @@
     font-weight: bold;
 }
 .manual-data-label {
-    color: #777777;
+    /*color: #777777;*/
+    color: #08b1e0;
     font-size:12px;
 }
 

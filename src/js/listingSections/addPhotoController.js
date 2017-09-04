@@ -8,12 +8,14 @@ app.controller('addPhotoCtrl', ['$scope','$rootScope','$http', '$uibModal', func
     const UPLOAD_URL = "http://localhost:8080/upload";
 
     $scope.$parent.currentListing.photoList = [];
+    $scope.photoInputCount = [{index:0,deleted:false}]; //application starts with one photo input
+    $scope.currentInputIndex = 0;
 
     /** Form functions **/
     /* Add photo to listing */
     $scope.addPhoto = function(){
         //get file information from input
-        var tempPhotoFile = document.getElementById("addPhotoInput"+"-tab"+$rootScope.currentTab).files[0];
+        var tempPhotoFile = document.getElementById("addPhotoInput"+"-tab"+$rootScope.currentTab+"-index"+$scope.currentInputIndex).files[0];
         if($scope.$parent.currentListing.photoList.includes(PHOTO_UPLOADS_PATH + tempPhotoFile.name)){
             alert("Noooope! \nYou already added a file with the same name.");
             return;
@@ -38,6 +40,9 @@ app.controller('addPhotoCtrl', ['$scope','$rootScope','$http', '$uibModal', func
         .success(function (data) {
             // add name of file to list
             $scope.$parent.currentListing.photoList.push(PHOTO_UPLOADS_PATH + tempPhotoFile.name);
+            //add another photo input to the form
+            $scope.currentInputIndex++;
+            $scope.photoInputCount.push({index:$scope.currentInputIndex,deleted:false});
         })
         .error(function (data, status) {
             console.log("ERROR: failure uploading photo");
@@ -73,6 +78,8 @@ app.controller('addPhotoCtrl', ['$scope','$rootScope','$http', '$uibModal', func
                 if(index > -1){
                     $scope.$parent.currentListing.photoList.splice(index, 1);
                 }
+                //set corresponding photo input to 'deleted'
+                $scope.photoInputCount[index].deleted = true;
             }
         }, function () {
         });
