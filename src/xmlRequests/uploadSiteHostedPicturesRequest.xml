@@ -1,0 +1,20 @@
+--MIME_boundary
+Content-Disposition: form-data; name="XML Payload"
+Content-Type: text/xml;charset=utf-8
+
+<?xml version="1.0" encoding="utf-8"?>
+<UploadSiteHostedPicturesRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+    <RequesterCredentials>
+        <eBayAuthToken>eBayAuthTokenPlaceholder</eBayAuthToken>
+    </RequesterCredentials>
+    <!--<PictureData contentType="attachment"></PictureData>-->
+    <!--<ExternalPictureURL>url</ExternalPictureURL>-->
+    <PictureName>pictureNamePlaceholder</PictureName>
+</UploadSiteHostedPicturesRequest>
+--MIME_boundary
+Content-Disposition: form-data; name="imageNamePlaceholder"; filename="fileNamePlaceholder"
+Content-Transfer-Encoding: binary
+Content-Type: application/octet-stream
+
+imageBinaryPlaceholder
+--MIME_boundary--

@@ -10,6 +10,7 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
 
     $scope.addItemRequestURL = "xmlRequests/AddItemRequest.xml";
     $scope.findProductsRequestURL = "xmlRequests/findProductsRequest.xml";
+    $scope.uploadSiteHostedPicturesRequestURL = "xmlRequests/uploadSiteHostedPicturesRequest.xml";
 
     $scope.userDetails_shippingDetailsURL = "properties/userDetails/shippingDetails.json";
 
@@ -414,7 +415,8 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
         var child = document.getElementById("listing"+$rootScope.currentTab);
         child.parentNode.removeChild(child);
         //submit AddItem Request
-        $scope.performAddItemRequest();
+        // $scope.performAddItemRequest();
+        $scope.performUploadSiteHostedPicturesRequest();
     }
 
     /******************************************
@@ -510,6 +512,44 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
         $scope.submitListing(serializer.serializeToString(addItemRequest));
     }
 
+    var createUploadSiteHostedPicturesXML = function(response, index) {
+        /* Get XML DOM object */
+        var XMLString = response.responseText;
+        console.log(response);
+
+        /* Get file */
+        var file = $scope.photoInputObjects[index].files[0];
+
+        /* Populate XML Request with data */
+        if($rootScope.AuthToken)
+            XMLString = XMLString.replace("eBayAuthTokenPlaceholder", $rootScope.AuthToken);
+        console.log($scope.currentListing.photoList[index]);
+        console.log(index);
+        if($scope.currentListing.photoList[index]) {
+            // let tempURL = $scope.currentListing.photoList[index].replaceAll(" ", "%20");
+            XMLString = XMLString.replace("pictureNamePlaceholder", $scope.currentListing.title.full + index);
+        }
+
+        /* update MIME data */
+        let filename = file.name;
+        XMLString = XMLString.replace("fileNamePlaceholder",filename);
+        XMLString = XMLString.replace("imageNamePlaceholder", "addPhoto"+index);
+        let fileReader = new FileReader();
+        fileReader.onloadend = function(evt) {
+            if (evt.target.readyState == FileReader.DONE) {
+                var fileBinary = evt.target.result;
+                XMLString = XMLString.replace("imageBinaryPlaceholder", fileBinary);
+
+                /* upload photo once XMLString is set */
+                $scope.uploadSiteHostedPictures(XMLString);
+            }
+        };
+        let fileBlob = file.slice(0);
+        console.log(fileBlob);
+        fileReader.readAsBinaryString(fileBlob);
+    }
+
+    //sets up addItem request and pulls xml from file
     $scope.performAddItemRequest = function() {
         //get xml template
         var xhttp = new XMLHttpRequest();
@@ -519,6 +559,19 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
             }
         };
         xhttp.open("GET", $scope.addItemRequestURL, true);
+        xhttp.send();
+    }
+
+    //sets up uploadSiteHostedPictures request and pulls xml from file
+    $scope.performUploadSiteHostedPicturesRequest = function() {
+        //get xml template
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                createUploadSiteHostedPicturesXML(this, 0);
+            }
+        };
+        xhttp.open("GET", $scope.uploadSiteHostedPicturesRequestURL, true);
         xhttp.send();
     }
 
@@ -535,6 +588,18 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
                 'X-EBAY-API-CALL-NAME': 'AddItem',
                 'X-EBAY-API-SITEID': 0
             }
+    };
+    var UploadSiteHostedPicturesConfig = {
+        headers: {
+            'Content-Type':'multipart/form-data;boundary=MIME_boundary',
+            'X-EBAY-API-COMPATIBILITY-LEVEL': 967,
+            'X-EBAY-API-DEV-NAME': $rootScope.API_DEV_NAME,
+            'X-EBAY-API-APP-NAME': $rootScope.API_APP_NAME,
+            'X-EBAY-API-CERT-NAME': $rootScope.API_CERT_NAME,
+            'X-EBAY-API-CALL-NAME': 'UploadSiteHostedPictures',
+            'X-EBAY-API-SITEID': 0,
+            'MIME-Version': 1.0
+        }
     };
 
     var XMLParser = new DOMParser();
@@ -555,6 +620,27 @@ app.controller('listingCtrl', ['$scope', '$rootScope', '$http', '$location', fun
                 let itemID = ebayResponse.getElementsByTagName("ItemID")[0].childNodes[0].nodeValue;
                 addToSubmittedListingsList(itemID);
                 document.getElementById('tablink'+$scope.thisListingKey).classList.add('nav-tabs-success');
+            }
+        }, function(err){
+            console.log("error.");
+            console.log("Status: "+err.status+" : "+err.statusText);
+        });
+    };
+
+    $scope.uploadSiteHostedPictures = function(xmlRequest){
+        console.log(xmlRequest);
+        $http.post($rootScope.tradingAPIDLL, xmlRequest, UploadSiteHostedPicturesConfig).then( function(response){
+            var ebayResponse = XMLParser.parseFromString(response.data,"text/xml");
+            var responseCondition = ebayResponse.getElementsByTagName("Ack")[0].childNodes[0].nodeValue;
+            console.log("========RESPONSE RESULT========");
+            console.log("UploadSiteHostedPictures Request: \n"+responseCondition);
+            console.log("===============================");
+            console.log(response.data);
+            if(responseCondition!="Failure") {
+                //add url to $scope.currentListing
+                //if last picture, call additem
+            } else {
+                submitFailed(ebayResponse);
             }
         }, function(err){
             console.log("error.");

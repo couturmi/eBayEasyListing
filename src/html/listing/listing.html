@@ -155,7 +155,7 @@
                         <!--<input id="{{'addPhotoInput'+'-tab'+currentTab}}" name="addPhoto" type="file" onchange="angular.element(this).scope().addPhoto()"><span>+</span>-->
                     <!--</label>-->
                     <label ng-show="currentInputIndex == input.index" ng-repeat="input in photoInputCount" class="addPhoto text-center">
-                        <input id="{{'addPhotoInput'+'-tab'+currentTab+'-index'+input.index}}" name="addPhoto" type="file" onchange="angular.element(this).scope().addPhoto()"><span>+</span>
+                        <input id="{{'addPhotoInput'+'-tab'+currentTab+'-index'+input.index}}" name="{{'addPhoto'+input.index}}" type="file" onchange="angular.element(this).scope().addPhoto()"><span>+</span>
                     </label>
                 </div>
             </div>
